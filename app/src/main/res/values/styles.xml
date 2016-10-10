@@ -1,0 +1,15 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimaryDark">@color/md_deep_orange_400</item>
+    </style>
+
+    <!--启动闪屏页主题样式-->
+    <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimaryDark">@color/md_deep_orange_400</item>
+        <item name="android:windowBackground">@drawable/draw_splash</item>
+    </style>
+
+</resources>
