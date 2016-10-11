@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!-- 顶部搜索栏 -->
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/tb_home"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:background="@color/md_blue_400"
+        android:elevation="5dp"
+        android:minHeight="?android:attr/actionBarSize">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="这是ToolBar"
+            android:textColor="#ffffff" />
+
+    </android.support.v7.widget.Toolbar>
+
+    <!-- 下拉刷新 -->
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/srl_home"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- 中间的博文列表 -->
+        <ListView
+            android:id="@+id/lv_home"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="none" />
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+</LinearLayout>

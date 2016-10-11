@@ -2,7 +2,6 @@ package com.tinyblog.base;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.widget.Toast;
 
 import com.tinyblog.interfaces.UIInterface;
@@ -12,7 +11,9 @@ import com.tinyblog.interfaces.UIInterface;
  * @date 2016/10/10 9:18
  * @desc Activity 的基类
  */
-public abstract class BaseActivity extends AppCompatActivity implements View.OnClickListener,UIInterface {
+public abstract class BaseActivity extends AppCompatActivity implements UIInterface {
+
+    private Toast mBaseToast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,38 +28,21 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         initData();
 
         //绑定监听器与适配器
-        initEvens();
+        initEvents();
 
     }
 
     /**
-     * 处理点击事件
-     * @param v 点击的View
+     * 显示Toast
+     *
+     * @param str Toast内容
      */
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            default:
-                processClick(v);
-                break;
+    public void showBaseToast(String str) {
+        if (mBaseToast == null) {
+            mBaseToast = Toast.makeText(this, str, Toast.LENGTH_SHORT);
+        } else {
+            mBaseToast.setText(str);
         }
-    }
-
-    /**
-     * 显示一个Toast
-     *
-     * @param msg 吐司内容
-     */
-    protected void baseToast(String msg) {
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
-    }
-
-    /**
-     * 显示一个Toast
-     *
-     * @param msgId 吐司内容
-     */
-    protected void baseToast(int msgId) {
-        Toast.makeText(this, msgId, Toast.LENGTH_SHORT).show();
+        mBaseToast.show();
     }
 }

@@ -3,12 +3,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.tinyblog.ui.main.MainActivity">
+    android:orientation="vertical"
+    tools:context="com.tinyblog.activity.main.MainActivity">
 
+    <!-- 这个LinearLayout里放置Fragment -->
+    <FrameLayout
+        android:id="@+id/fl_fragment_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <!-- 底部导航栏 -->
     <com.ashokvarma.bottomnavigation.BottomNavigationBar
         android:id="@+id/bnb_main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom" />
+        android:layout_gravity="bottom"
+        android:elevation="5dp" />
 
 </LinearLayout>

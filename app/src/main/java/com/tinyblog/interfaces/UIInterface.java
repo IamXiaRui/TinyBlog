@@ -1,7 +1,5 @@
 package com.tinyblog.interfaces;
 
-import android.view.View;
-
 /**
  * UI接口
  */
@@ -27,13 +25,5 @@ public interface UIInterface {
     /**
      * 绑定监听器与适配器
      */
-    void initEvens();
-
-    /**
-     * 点击事件
-     *
-     * @param v 点击的View
-     */
-    void processClick(View v);
-
+    void initEvents();
 }

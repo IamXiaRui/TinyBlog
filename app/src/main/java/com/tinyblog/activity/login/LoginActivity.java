@@ -1,6 +1,4 @@
-package com.tinyblog.ui.login;
-
-import android.view.View;
+package com.tinyblog.activity.login;
 
 import com.tinyblog.R;
 import com.tinyblog.base.BaseActivity;
@@ -19,19 +17,14 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     public void initView() {
-
     }
 
     @Override
     public void initData() {
-
     }
 
     @Override
-    public void initEvens() {
+    public void initEvents() {
     }
 
-    @Override
-    public void processClick(View v) {
-    }
 }
