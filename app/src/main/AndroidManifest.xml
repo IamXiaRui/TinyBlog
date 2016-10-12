@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.tinyblog">
 
     <!-- 所需权限 -->
@@ -9,6 +10,7 @@
         android:allowBackup="true"
         android:icon="@mipmap/icon_logo"
         android:label="@string/app_name"
+        tools:replace="android:icon"
         android:supportsRtl="true">
         <activity
             android:name=".activity.splash.SplashActivity"

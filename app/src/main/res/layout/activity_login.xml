@@ -1,8 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.tinyblog.activity.login.LoginActivity">
 
-</RelativeLayout>
+    <!-- 登录页面 Logo 与 Slogan 部分-->
+    <RelativeLayout
+        android:id="@+id/rl_login_logo"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:transitionName="login">
+
+        <com.tinyblog.widget.StaticCircleImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:id="@+id/tv_login_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/str_login_logo"
+            android:textColor="@color/md_white_1000"
+            android:textSize="32sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_login_logo"
+            android:layout_centerHorizontal="true"
+            android:text="@string/str_login_slogan"
+            android:textColor="@color/md_white_1000"
+            android:textSize="12sp" />
+
+    </RelativeLayout>
+
+
+    <!-- 登录界面 输入框 与 登录按钮部分-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="8dp"
+        android:layout_weight="2">
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/met_login_user"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:hint="@string/str_login_user"
+            app:met_clearButton="true"
+            app:met_floatingLabel="normal"
+            app:met_primaryColor="@color/md_blue_400"
+            app:met_textColor="@color/md_blue_400" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/met_login_pwd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/met_login_user"
+            android:layout_margin="8dp"
+            android:hint="@string/str_login_pwd"
+            android:inputType="textPassword"
+            app:met_clearButton="true"
+            app:met_floatingLabel="normal"
+            app:met_primaryColor="@color/md_blue_400"
+            app:met_textColor="@color/md_blue_400" />
+
+        <Button
+            android:id="@+id/btn_login_login"
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/met_login_pwd"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="8dp"
+            android:background="@color/md_blue_400"
+            android:elevation="2dp"
+            android:text="@string/str_login_login"
+            android:textColor="@color/md_white_1000" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true">
+
+            <ImageButton
+                android:id="@+id/ib_login_register"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_alignParentStart="true"
+                android:background="@null"
+                android:scaleType="centerCrop"
+                android:src="@drawable/icon_login_register" />
+
+            <ImageButton
+                android:id="@+id/ib_login_tips"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_alignParentEnd="true"
+                android:background="@null"
+                android:scaleType="centerCrop"
+                android:src="@drawable/icon_login_tips" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

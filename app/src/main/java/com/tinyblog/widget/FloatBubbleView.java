@@ -21,7 +21,7 @@ public class FloatBubbleView extends SurfaceView implements SurfaceHolder.Callba
     private DrawThread mDrawThread;     //绘制线程
     private BubbleDrawer mPreDrawer;    //上一次绘制对象
     private BubbleDrawer mCurDrawer;    //当前绘制对象
-    private float curDrawerAlpha = 0f;  //当前透明度 (范围为0f~1f，因为 CircleBubble 中 convertAlphaColor 方法已经处理过了)
+    private float curDrawerAlpha = 0f;  //当前透明度 (范围为0f~1f，因为 DynamicCircleBubble 中 convertAlphaColor 方法已经处理过了)
     private int mWidth, mHeight;        //当前屏幕宽高
     private SurfaceHolder mSurface;
     private boolean mRunning, mActive, mQuit; //三种状态

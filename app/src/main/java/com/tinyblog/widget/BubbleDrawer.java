@@ -19,7 +19,7 @@ public class BubbleDrawer {
     private Paint mPaint; //抗锯齿画笔
 
     private int mWidth, mHeight;                //上下文对象
-    private ArrayList<CircleBubble> mBubbles; //存放气泡的集合
+    private ArrayList<DynamicCircleBubble> mBubbles; //存放气泡的集合
     private int[] mGradientColors;              //渐变颜色数组
 
     /**
@@ -56,11 +56,11 @@ public class BubbleDrawer {
      */
     private void initDefaultBubble(int width) {
         if (mBubbles.size() == 0) {
-            mBubbles.add(new CircleBubble(0.20f * width, -0.30f * width, 0.06f * width, 0.022f * width, 0.56f * width,
+            mBubbles.add(new DynamicCircleBubble(0.20f * width, -0.30f * width, 0.06f * width, 0.022f * width, 0.56f * width,
                     0.0150f, 0x56ffc7c7));
-            mBubbles.add(new CircleBubble(0.58f * width, -0.35f * width, -0.15f * width, 0.032f * width, 0.6f * width,
+            mBubbles.add(new DynamicCircleBubble(0.58f * width, -0.35f * width, -0.15f * width, 0.032f * width, 0.6f * width,
                     0.0100f, 0x45fffc9e));
-            mBubbles.add(new CircleBubble(0.9f * width, -0.19f * width, 0.08f * width, -0.015f * width, 0.44f * width,
+            mBubbles.add(new DynamicCircleBubble(0.9f * width, -0.19f * width, 0.08f * width, -0.015f * width, 0.44f * width,
                     0.0090f, 0x5096ff8f));
         }
     }
@@ -73,7 +73,7 @@ public class BubbleDrawer {
      */
     private void drawCircleBubble(Canvas canvas, float alpha) {
         //循环遍历所有设置的圆形气泡
-        for (CircleBubble bubble : this.mBubbles) {
+        for (DynamicCircleBubble bubble : this.mBubbles) {
             bubble.updateAndDraw(canvas, mPaint, alpha);
         }
     }

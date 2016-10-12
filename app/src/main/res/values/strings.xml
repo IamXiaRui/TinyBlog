@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">TinyBlog</string>
+    <string name="str_login_logo">TinyBlog</string>
+    <string name="str_login_slogan">一切 从好奇开始</string>
+    <string name="str_login_user">用户名</string>
+    <string name="str_login_pwd">密码</string>
+    <string name="str_login_login">登录</string>
 </resources>

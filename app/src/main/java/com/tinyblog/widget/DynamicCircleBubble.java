@@ -10,7 +10,7 @@ import android.graphics.Paint;
  * @description 圆形浮动气泡
  */
 
-class CircleBubble {
+class DynamicCircleBubble {
     private final float cx, cy;                 //圆心坐标
     private final float dx, dy;                 //圆心偏移距离
     private final float radius;                 //半径
@@ -19,7 +19,7 @@ class CircleBubble {
     private boolean isGrowing = true;           //根据此标志位判断左右移动
     private float curVariationOfFrame = 0f;     //当前帧变化量
 
-    CircleBubble(float cx, float cy, float dx, float dy, float radius, float variationOfFrame, int color) {
+    DynamicCircleBubble(float cx, float cy, float dx, float dy, float radius, float variationOfFrame, int color) {
         this.cx = cx;
         this.cy = cy;
         this.dx = dx;
