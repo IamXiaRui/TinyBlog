@@ -11,25 +11,26 @@ import com.tinyblog.base.BaseFragment;
 /**
  * @author xiarui
  * @date 2016/10/11 11:42
- * @desc 主页
+ * @desc 动态
  */
-public class HomeFragment extends BaseFragment {
+public class NewsFragment extends BaseFragment {
 
-    private SwipeRefreshLayout mHomeSRLayout;
+    //下拉刷新
+    private SwipeRefreshLayout mNewsSRLayout;
     private ListView mHomeLView;
 
     @Override
     public int getLayoutId() {
-        return R.layout.fragment_home;
+        return R.layout.fragment_news;
     }
 
     @Override
     public void initView() {
-        mHomeSRLayout = (SwipeRefreshLayout) findViewById(R.id.srl_home);
-        mHomeSRLayout.setColorSchemeResources(android.R.color.holo_purple, android.R.color.holo_blue_bright, android.R.color.holo_orange_light,
+        mNewsSRLayout = (SwipeRefreshLayout) findViewById(R.id.srl_news);
+        mNewsSRLayout.setColorSchemeResources(android.R.color.holo_purple, android.R.color.holo_blue_bright, android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
 
-        mHomeLView = (ListView) findViewById(R.id.lv_home);
+        mHomeLView = (ListView) findViewById(R.id.lv_news);
     }
 
     @Override
@@ -42,7 +43,7 @@ public class HomeFragment extends BaseFragment {
     @Override
     public void initEvents() {
 
-        mHomeSRLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        mNewsSRLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 new Thread(new Runnable() {
@@ -53,7 +54,7 @@ public class HomeFragment extends BaseFragment {
                             @Override
                             public void run() {
                                 //停止刷新操作
-                                mHomeSRLayout.setRefreshing(false);
+                                mNewsSRLayout.setRefreshing(false);
                                 showBaseToast("刷新完成！");
                             }
                         });

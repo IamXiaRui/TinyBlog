@@ -6,7 +6,7 @@
 
     <!-- 顶部搜索栏 -->
     <android.support.v7.widget.Toolbar
-        android:id="@+id/tb_home"
+        android:id="@+id/tb_news"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
@@ -26,13 +26,13 @@
 
     <!-- 下拉刷新 -->
     <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/srl_home"
+        android:id="@+id/srl_news"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <!-- 中间的博文列表 -->
         <ListView
-            android:id="@+id/lv_home"
+            android:id="@+id/lv_news"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scrollbars="none" />

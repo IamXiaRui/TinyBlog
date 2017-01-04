@@ -8,7 +8,7 @@ import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.tinyblog.R;
 import com.tinyblog.base.BaseActivity;
 import com.tinyblog.fragment.CategoryFragment;
-import com.tinyblog.fragment.HomeFragment;
+import com.tinyblog.fragment.NewsFragment;
 import com.tinyblog.fragment.MeFragment;
 import com.tinyblog.fragment.SearchFragment;
 
@@ -24,7 +24,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
 
     /*======== 数据相关 ========*/
     private Fragment mCurFragment;                  //当前显示的 Fragment
-    private HomeFragment homeFragment;              //主页
+    private NewsFragment newsFragment;              //主页
     private CategoryFragment categoryFragment;      //分类页
     private SearchFragment searchFragment;          //搜索页
     private MeFragment meFragment;                  //我的页面
@@ -45,7 +45,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
     @Override
     public void initData() {
         //设置底部导航栏
-        mBottomBar.addItem(new BottomNavigationItem(R.drawable.icon_home, "主页").setActiveColorResource(R.color.md_blue_400))
+        mBottomBar.addItem(new BottomNavigationItem(R.drawable.icon_news, "动态").setActiveColorResource(R.color.md_blue_400))
                 .addItem(new BottomNavigationItem(R.drawable.icon_category, "分类").setActiveColorResource(R.color.md_blue_400))
                 .addItem(new BottomNavigationItem(R.drawable.icon_search, "查找").setActiveColorResource(R.color.md_blue_400))
                 .addItem(new BottomNavigationItem(R.drawable.icon_me, "我的").setActiveColorResource(R.color.md_blue_400))
@@ -55,9 +55,9 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         //设置初始化 Fragment
         mFTransaction = getSupportFragmentManager().beginTransaction();
         //注意这里初始化的 Fragment 一定要跟上面的 setFirstSelectedPosition 中默认选中的标签一致
-        homeFragment = new HomeFragment();
-        mFTransaction.add(R.id.fl_fragment_content, homeFragment).commit();
-        mCurFragment = homeFragment;
+        newsFragment = new NewsFragment();
+        mFTransaction.add(R.id.fl_fragment_content, newsFragment).commit();
+        mCurFragment = newsFragment;
     }
 
     @Override
@@ -74,9 +74,9 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
     public void onTabSelected(int position) {
         switch (position) {
             case 0:
-                if (homeFragment == null)
-                    homeFragment = new HomeFragment();
-                switchFragmentContent(homeFragment);
+                if (newsFragment == null)
+                    newsFragment = new NewsFragment();
+                switchFragmentContent(newsFragment);
                 break;
             case 1:
                 if (categoryFragment == null)

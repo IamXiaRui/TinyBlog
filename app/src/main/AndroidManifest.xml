@@ -13,7 +13,7 @@
         tools:replace="android:icon"
         android:supportsRtl="true">
         <activity
-            android:name=".activity.splash.SplashActivity"
+            android:name="com.tinyblog.activity.splash.SplashActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,10 +22,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.login.LoginActivity"
+            android:name="com.tinyblog.activity.login.LoginActivity"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".activity.main.MainActivity"
+            android:name="com.tinyblog.activity.main.MainActivity"
             android:theme="@style/AppTheme" />
     </application>
 
