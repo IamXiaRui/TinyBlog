@@ -2,15 +2,17 @@ package com.tinyblog.activity.main;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.widget.Toast;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.tinyblog.R;
 import com.tinyblog.base.BaseActivity;
 import com.tinyblog.fragment.CategoryFragment;
-import com.tinyblog.fragment.NewsFragment;
 import com.tinyblog.fragment.MeFragment;
+import com.tinyblog.fragment.NewsFragment;
 import com.tinyblog.fragment.SearchFragment;
+import com.tinyblog.sys.Constants;
 
 /**
  * @author xiarui
@@ -123,5 +125,16 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
 
     @Override
     public void onTabReselected(int position) {
+    }
+
+    //再按一次退出程序
+    @Override
+    public void onBackPressed() {
+        if ((System.currentTimeMillis() - Constants.EXIT_TIME) > 2000) {
+            Toast.makeText(this, "再按一次退出应用", Toast.LENGTH_SHORT).show();
+            Constants.EXIT_TIME = System.currentTimeMillis();
+            return;
+        }
+        finish();
     }
 }
