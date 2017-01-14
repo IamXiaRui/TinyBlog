@@ -16,7 +16,7 @@
         tools:replace="android:icon"
         android:supportsRtl="true">
         <activity
-            android:name="com.tinyblog.activity.splash.SplashActivity"
+            android:name="com.tinyblog.activity.SplashActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,10 +25,16 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.tinyblog.activity.login.LoginActivity"
+            android:name="com.tinyblog.activity.MainActivity"
             android:theme="@style/AppTheme" />
         <activity
-            android:name="com.tinyblog.activity.main.MainActivity"
+            android:name="com.tinyblog.activity.PostDetailsActivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name="com.tinyblog.activity.SearchActivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name="com.tinyblog.activity.NewPostActivity"
             android:theme="@style/AppTheme" />
     </application>
 

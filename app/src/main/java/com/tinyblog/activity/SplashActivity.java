@@ -1,10 +1,8 @@
-package com.tinyblog.activity.splash;
+package com.tinyblog.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-
-import com.tinyblog.activity.main.MainActivity;
 
 /**
  * @author xiarui

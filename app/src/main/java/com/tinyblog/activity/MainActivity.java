@@ -1,4 +1,4 @@
-package com.tinyblog.activity.main;
+package com.tinyblog.activity;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -47,9 +47,9 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
     @Override
     public void initData() {
         //设置底部导航栏
-        mBottomBar.addItem(new BottomNavigationItem(R.drawable.icon_news, "动态").setActiveColorResource(R.color.md_blue_400))
+        mBottomBar.addItem(new BottomNavigationItem(R.drawable.icon_news, "最近").setActiveColorResource(R.color.md_blue_400))
                 .addItem(new BottomNavigationItem(R.drawable.icon_category, "分类").setActiveColorResource(R.color.md_blue_400))
-                .addItem(new BottomNavigationItem(R.drawable.icon_search, "查找").setActiveColorResource(R.color.md_blue_400))
+                .addItem(new BottomNavigationItem(R.drawable.icon_search, "搜索").setActiveColorResource(R.color.md_blue_400))
                 .addItem(new BottomNavigationItem(R.drawable.icon_me, "我的").setActiveColorResource(R.color.md_blue_400))
                 .setFirstSelectedPosition(0)
                 .initialise();

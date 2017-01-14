@@ -8,7 +8,7 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/tb_news"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="50dp"
         android:layout_gravity="start"
         android:background="@color/md_blue_400"
         android:elevation="5dp"
@@ -19,8 +19,29 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="这是ToolBar"
+            android:text="最近"
+            android:textSize="18sp"
             android:textColor="#ffffff" />
+
+        <ImageButton
+            android:id="@+id/ib_news_search"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="left|center_vertical"
+            android:layout_marginLeft="8dp"
+            android:background="@null"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_search" />
+
+        <ImageButton
+            android:id="@+id/ib_news_add"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="right|center_vertical"
+            android:layout_marginRight="8dp"
+            android:background="@null"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_add" />
 
     </android.support.v7.widget.Toolbar>
 

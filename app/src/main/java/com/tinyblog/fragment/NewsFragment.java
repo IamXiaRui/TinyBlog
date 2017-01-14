@@ -1,14 +1,18 @@
 package com.tinyblog.fragment;
 
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 import com.blankj.utilcode.utils.NetworkUtils;
 import com.google.gson.Gson;
 import com.tinyblog.R;
+import com.tinyblog.activity.SearchActivity;
 import com.tinyblog.adapter.NewsListAdapter;
 import com.tinyblog.base.BaseFragment;
 import com.tinyblog.bean.NewsListRootBean;
@@ -37,6 +41,8 @@ public class NewsFragment extends BaseFragment {
     private ListView mNewsLView;
     //顶部轮播 Bannner
     private Banner mHeaderBanner;
+    //搜索按钮，新增文章按钮
+    private ImageButton searchIButton, addIButton;
     //停止刷新操作
     private Handler mHandler = new Handler() {
         @Override
@@ -57,6 +63,9 @@ public class NewsFragment extends BaseFragment {
 
     @Override
     public void initView() {
+        searchIButton = (ImageButton) findViewById(R.id.ib_news_search);
+        addIButton = (ImageButton) findViewById(R.id.ib_news_add);
+        
         mNewsSRLayout = (SwipeRefreshLayout) findViewById(R.id.srl_news);
         mNewsSRLayout.setColorSchemeResources(android.R.color.holo_purple, android.R.color.holo_blue_bright, android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
@@ -71,11 +80,18 @@ public class NewsFragment extends BaseFragment {
     @Override
     public void initData() {
         //TODO 去掉注释
-        if (!NetworkUtils.isConnected()) {
+        /*if (!NetworkUtils.isConnected()) {
             showBaseToast("请检查网络");
-        }
+        }*/
         //加载网络数据
         loaderNetWorkData();
+        //开启自动刷新
+        mNewsSRLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                mNewsSRLayout.setRefreshing(true);
+            }
+        });
     }
 
     /**
@@ -118,6 +134,7 @@ public class NewsFragment extends BaseFragment {
 
     @Override
     public void initEvents() {
+        //下拉刷新监听
         mNewsSRLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -127,6 +144,27 @@ public class NewsFragment extends BaseFragment {
                         loaderNetWorkData();
                     }
                 }).start();
+            }
+        });
+        //列表点击监听
+        mNewsLView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                showBaseToast(String.valueOf(position));
+            }
+        });
+
+        searchIButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getContext().startActivity(new Intent().setClass(getContext(), SearchActivity.class));
+            }
+        });
+
+        addIButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showBaseToast("新增");
             }
         });
     }

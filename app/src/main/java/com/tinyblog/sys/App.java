@@ -18,7 +18,7 @@ import okhttp3.OkHttpClient;
 /**
  * @author xiarui
  * @date 2017/1/4 19:41
- * @description
+ * @desc Application 初始化类
  * @remark
  */
 
