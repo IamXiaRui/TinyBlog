@@ -11,5 +11,7 @@ public class Constants {
 
     //退出时间
     public static long EXIT_TIME = 0;
+    //刷新成功标记
+    public static int REFRESH_SUCCESS = 1;
 
 }

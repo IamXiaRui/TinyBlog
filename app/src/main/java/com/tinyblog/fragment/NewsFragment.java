@@ -1,19 +1,28 @@
 package com.tinyblog.fragment;
 
-import android.os.SystemClock;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.widget.ListView;
 
+import com.blankj.utilcode.utils.NetworkUtils;
+import com.google.gson.Gson;
 import com.tinyblog.R;
 import com.tinyblog.adapter.NewsListAdapter;
 import com.tinyblog.base.BaseFragment;
-import com.tinyblog.bean.NewsListBean;
+import com.tinyblog.bean.NewsListRootBean;
 import com.tinyblog.sys.App;
+import com.tinyblog.sys.Constants;
+import com.tinyblog.sys.Url;
 import com.tinyblog.utils.BannerImageLoaderUtil;
 import com.youth.banner.Banner;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
 
-import java.util.ArrayList;
+import java.util.List;
+
+import okhttp3.Call;
 
 /**
  * @author xiarui
@@ -28,9 +37,18 @@ public class NewsFragment extends BaseFragment {
     private ListView mNewsLView;
     //顶部轮播 Bannner
     private Banner mHeaderBanner;
-
-    private ArrayList<NewsListBean> mTestList = new ArrayList<>();
-    ;
+    //停止刷新操作
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if (msg.what == Constants.REFRESH_SUCCESS) {
+                if (mNewsSRLayout.isRefreshing()) {
+                    mNewsSRLayout.setRefreshing(false);//设置不刷新
+                }
+            }
+        }
+    };
 
     @Override
     public int getLayoutId() {
@@ -52,85 +70,61 @@ public class NewsFragment extends BaseFragment {
 
     @Override
     public void initData() {
-        //加载本地数据
-        loaderLocalData(mTestList);
-        //设置适配器
-        mNewsLView.setAdapter(new NewsListAdapter(getContext(), mTestList));
+        //TODO 去掉注释
+        if (!NetworkUtils.isConnected()) {
+            showBaseToast("请检查网络");
+        }
+        //加载网络数据
+        loaderNetWorkData();
     }
 
     /**
-     * 加载模拟本地数据
-     * TODO:需要删除
-     *
-     * @param mTestList 测试集合
+     * 加载网络数据
      */
-    private void loaderLocalData(ArrayList<NewsListBean> mTestList) {
+    private void loaderNetWorkData() {
+        OkHttpUtils
+                .get()
+                .url(Url.GET_RECENT_POSTS)
+                .build()
+                .execute(new NewsListCallBack());
+    }
 
-        NewsListBean mTestBean1 = new NewsListBean();
-        mTestBean1.setImageUrl("http://ww4.sinaimg.cn/large/006uZZy8jw1faic1xjab4j30ci08cjrv.jpg");
-        mTestBean1.setTitle("这是测试标题1");
-        mTestBean1.setBrief("这是测试简要1这是测试简要1这是测试简要1这是测试简要1这是测试简要1这是测试简要1这是测试简要1这是测试简要1这是测试简要1这是测试简要1这是测试简要1这是测试简要1");
-        mTestBean1.setReadNum("123");
-        mTestBean1.setLikeNum("23");
-        mTestBean1.setCommentNum("234");
-        mTestList.add(mTestBean1);
+    /**
+     * 获取最近文章回调
+     */
+    public class NewsListCallBack extends StringCallback {
 
-        NewsListBean mTestBean2 = new NewsListBean();
-        mTestBean2.setImageUrl("http://ww4.sinaimg.cn/large/006uZZy8jw1faic21363tj30ci08ct96.jpg");
-        mTestBean2.setTitle("这是测试标题2这是测试标题2这是测试标题2");
-        mTestBean2.setBrief("这是测试简要2这是测试简要2这是测试简要1这是测试简要2");
-        mTestBean2.setReadNum("12");
-        mTestBean2.setLikeNum("3445");
-        mTestBean2.setCommentNum("23");
-        mTestList.add(mTestBean2);
+        @Override
+        public void onError(Call call, Exception e, int id) {
+            if (!NetworkUtils.isConnected()) {
+                showBaseToast("刷新失败，请检查网络连接");
+            }
+        }
 
-        NewsListBean mTestBean3 = new NewsListBean();
-        mTestBean3.setImageUrl("http://ww4.sinaimg.cn/large/006uZZy8jw1faic259ohaj30ci08c74r.jpg");
-        mTestBean3.setTitle("这是测试标题3");
-        mTestBean3.setBrief("这是测试简要3这是测试简要3这是测试简要3这是测试简要3这是测试简要3这是测试简要3");
-        mTestBean3.setReadNum("23");
-        mTestBean3.setLikeNum("324");
-        mTestBean3.setCommentNum("78");
-        mTestList.add(mTestBean3);
-
-        NewsListBean mTestBean4 = new NewsListBean();
-        mTestBean4.setImageUrl("http://ww4.sinaimg.cn/large/006uZZy8jw1faic2b16zuj30ci08cwf4.jpg");
-        mTestBean4.setTitle("这是测试标题4这是测试标题4这是测试标题4这是测试标题4");
-        mTestBean4.setBrief("这是测试简要4");
-        mTestBean4.setReadNum("576");
-        mTestBean4.setLikeNum("45");
-        mTestBean4.setCommentNum("789");
-        mTestList.add(mTestBean4);
-
-        NewsListBean mTestBean5 = new NewsListBean();
-        mTestBean5.setImageUrl("http://ww4.sinaimg.cn/large/006uZZy8jw1faic2e7vsaj30ci08cglz.jpg");
-        mTestBean5.setTitle("这是测试标题5这是测试标题5这是测试标题5这是测试标题5这是测试标题5");
-        mTestBean5.setBrief("这是测试简要5这是测试简要5这是测试简要5这是测试简要5这是测试简要5这是测试简要5");
-        mTestBean5.setReadNum("57");
-        mTestBean5.setLikeNum("425");
-        mTestBean5.setCommentNum("89");
-        mTestList.add(mTestBean5);
-
+        @Override
+        public void onResponse(String response, int id) {
+            NewsListRootBean newsListRootBean = new Gson().fromJson(response, NewsListRootBean.class);
+            if (newsListRootBean.getStatus().equals("ok")) {
+                mHandler.sendEmptyMessage(Constants.REFRESH_SUCCESS);
+                List<NewsListRootBean.PostsBean> mNewsList = newsListRootBean.getPosts();
+                //设置适配器
+                mNewsLView.setAdapter(new NewsListAdapter(getContext(), mNewsList));
+                showBaseToast("刷新成功");
+            } else {
+                showBaseToast("数据异常，请重新刷新");
+            }
+        }
     }
 
     @Override
     public void initEvents() {
-
         mNewsSRLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        SystemClock.sleep(4200);
-                        getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                //停止刷新操作
-                                mNewsSRLayout.setRefreshing(false);
-                                showBaseToast("刷新完成！");
-                            }
-                        });
+                        loaderNetWorkData();
                     }
                 }).start();
             }

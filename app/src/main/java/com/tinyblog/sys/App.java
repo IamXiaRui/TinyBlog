@@ -4,11 +4,16 @@ import android.app.Application;
 import android.content.Context;
 import android.util.DisplayMetrics;
 
+import com.blankj.utilcode.utils.Utils;
 import com.tinyblog.R;
+import com.zhy.http.okhttp.OkHttpUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import okhttp3.OkHttpClient;
 
 /**
  * @author xiarui
@@ -34,6 +39,17 @@ public class App extends Application {
         testBannerImages = new ArrayList(list);
         List list1 = Arrays.asList(tips);
         testBannerTitles = new ArrayList(list1);
+
+        /*===== 配置 OkHttpUtils =====*/
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .connectTimeout(10000L, TimeUnit.MILLISECONDS)
+                .readTimeout(10000L, TimeUnit.MILLISECONDS)
+                //其他配置
+                .build();
+        OkHttpUtils.initClient(okHttpClient);
+
+        /*===== 初始化 Utils 工具类 =====*/
+        Utils.init(app);
     }
 
     public int getScreenH(Context aty) {

@@ -2,12 +2,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/iv_news_list_item_banner"
+    <com.lid.lib.LabelImageView
+        android:id="@+id/liv_news_list_item_banner"
         android:layout_width="match_parent"
-        android:layout_height="96dp" />
+        android:layout_height="120dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/pic_placeholder_image"
+        app:label_backgroundColor="@color/md_blue_400"
+        app:label_orientation="LEFT_TOP"
+        app:label_text="无分类"
+        app:label_textSize="15sp" />
 
     <TextView
         android:id="@+id/tv_news_list_item_title"
@@ -20,7 +27,7 @@
         android:textSize="18sp" />
 
     <TextView
-        android:id="@+id/tv_news_list_item_brief"
+        android:id="@+id/tv_news_list_item_excerpt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="6dp"

@@ -27,6 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
+            android:text="0"
             android:layout_toEndOf="@+id/iv_news_list_item_icon_read"
             android:textColor="#BFBFBF"
             android:textSize="12sp" />
@@ -52,6 +53,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
+            android:text="0"
             android:layout_toEndOf="@+id/iv_news_list_item_icon_like"
             android:textColor="#BFBFBF"
             android:textSize="12sp" />
@@ -71,6 +73,7 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="6dp"
+            android:text="0"
             android:textColor="#BFBFBF"
             android:textSize="12sp" />
 
