@@ -10,6 +10,7 @@ package com.tinyblog.sys;
 public class Url {
     /*====== WordPress Url =====*/
     public static String GET_RECENT_POSTS = "http://www.iamxiarui.com/xr-api/get_recent_posts/";
+    public static String GET_POST_DETAILS  = "http://www.iamxiarui.com/xr-api/get_post/?id=";
 
     /*====== DuoShuo Comment Url =====*/
 

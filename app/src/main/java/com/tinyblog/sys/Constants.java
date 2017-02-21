@@ -13,5 +13,6 @@ public class Constants {
     public static long EXIT_TIME = 0;
     //刷新成功标记
     public static int REFRESH_SUCCESS = 1;
-
+    //文章详情URL标记
+    public static String POST_DETAILS_ID = "POST_DETAILS_ID";
 }

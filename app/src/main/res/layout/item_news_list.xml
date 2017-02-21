@@ -20,9 +20,9 @@
         android:id="@+id/tv_news_list_item_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="6dp"
-        android:layout_marginRight="6dp"
-        android:layout_marginTop="6dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
         android:textColor="@color/md_black_1000"
         android:textSize="18sp" />
 
@@ -30,12 +30,12 @@
         android:id="@+id/tv_news_list_item_excerpt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="6dp"
-        android:layout_marginRight="6dp"
-        android:layout_marginTop="6dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
         android:ellipsize="end"
         android:maxLines="2"
-        android:textColor="@color/md_grey_700"
+        android:textColor="@color/md_grey_600"
         android:textSize="15sp" />
 
     <include layout="@layout/include_news_list_item" />

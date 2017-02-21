@@ -2,18 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@null"
     android:orientation="vertical">
 
     <!-- 顶部搜索栏 -->
     <android.support.v7.widget.Toolbar
-        android:id="@+id/tb_news"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_gravity="start"
         android:background="@color/md_blue_400"
-        android:elevation="5dp"
-        android:minHeight="?android:attr/actionBarSize"
-        android:transitionName="login">
+        android:elevation="5dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -49,7 +46,7 @@
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/srl_news"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <!-- 中间的博文列表 -->
         <ListView

@@ -3,7 +3,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="32dp"
-    android:layout_marginTop="6dp"
+    android:layout_marginTop="8dp"
     android:orientation="horizontal"
     android:weightSum="3">
 
@@ -18,7 +18,7 @@
             android:layout_width="16dp"
             android:layout_height="16dp"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="6dp"
+            android:layout_marginLeft="8dp"
             android:scaleType="centerCrop"
             android:src="@drawable/icon_read" />
 
@@ -27,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:text="0"
+            android:text="@string/str_default_num"
             android:layout_toEndOf="@+id/iv_news_list_item_icon_read"
             android:textColor="#BFBFBF"
             android:textSize="12sp" />
@@ -53,7 +53,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:text="0"
+            android:text="@string/str_default_num"
             android:layout_toEndOf="@+id/iv_news_list_item_icon_like"
             android:textColor="#BFBFBF"
             android:textSize="12sp" />
@@ -72,8 +72,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="6dp"
-            android:text="0"
+            android:layout_marginRight="8dp"
+            android:text="@string/str_default_num"
             android:textColor="#BFBFBF"
             android:textSize="12sp" />
 

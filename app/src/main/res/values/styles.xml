@@ -1,17 +1,22 @@
 <resources>
 
-    <!-- Base application theme. -->
+    <!--默认主题-->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="android:windowNoTitle">true</item>
-        <!-- Customize your theme here. -->
         <item name="colorPrimaryDark">@color/md_blue_500</item>
     </style>
 
     <!--启动闪屏页主题样式-->
     <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimaryDark">@color/md_blue_400</item>
+        <item name="android:windowFullscreen">true</item>
         <item name="android:windowBackground">@drawable/draw_splash</item>
     </style>
 
+    <style name="ToolbarTheme" parent="Theme.AppCompat.Light">
+        <item name="actionMenuTextColor">@android:color/white</item>
+        <item name="colorButtonNormal">@android:color/white</item>
+        <item name="colorControlNormal">@android:color/white</item>
+    </style>
 </resources>

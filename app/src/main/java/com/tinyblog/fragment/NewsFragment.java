@@ -12,6 +12,7 @@ import android.widget.ListView;
 import com.blankj.utilcode.utils.NetworkUtils;
 import com.google.gson.Gson;
 import com.tinyblog.R;
+import com.tinyblog.activity.PostDetailsActivity;
 import com.tinyblog.activity.SearchActivity;
 import com.tinyblog.adapter.NewsListAdapter;
 import com.tinyblog.base.BaseFragment;
@@ -75,6 +76,8 @@ public class NewsFragment extends BaseFragment {
         mNewsLView.addHeaderView(View.inflate(getActivity(), R.layout.header_news_list, null));
         mHeaderBanner = (Banner) findViewById(R.id.ban_news_list_header);
         mHeaderBanner.setImages(App.testBannerImages).setImageLoader(new BannerImageLoaderUtil()).start();
+        //添加底布局
+        mNewsLView.addFooterView(View.inflate(getActivity(), R.layout.footer_news_list, null));
     }
 
     @Override
@@ -146,11 +149,14 @@ public class NewsFragment extends BaseFragment {
                 }).start();
             }
         });
+
         //列表点击监听
         mNewsLView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                showBaseToast(String.valueOf(position));
+                NewsListRootBean.PostsBean postItemAtPosition = (NewsListRootBean.PostsBean) parent.getItemAtPosition(position);
+                Intent postIntent = new Intent().putExtra(Constants.POST_DETAILS_ID, String.valueOf(postItemAtPosition.getId())).setClass(getContext(), PostDetailsActivity.class);
+                getContext().startActivity(postIntent);
             }
         });
 
