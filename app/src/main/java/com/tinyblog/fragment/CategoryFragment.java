@@ -137,7 +137,7 @@ public class CategoryFragment extends BaseFragment {
                     .setDrawableConfiguration(new CardProvider.OnImageConfigListener() {
                         @Override
                         public void onImageConfigure(@NonNull final RequestCreator requestCreator) {
-                            requestCreator.resize(720, 180)
+                            requestCreator.resize(720, 216)
                                     .centerCrop();
                         }
                     })
