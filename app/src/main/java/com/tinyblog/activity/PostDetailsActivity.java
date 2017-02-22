@@ -6,6 +6,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -20,6 +21,10 @@ import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 import com.zzhoujay.richtext.RichText;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import me.next.tagview.TagCloudView;
 import okhttp3.Call;
 
 /**
@@ -35,6 +40,10 @@ public class PostDetailsActivity extends BaseActivity {
     private TextView mPostTimeText;
     private ProgressBar mPostPBar;
     private TextView mPostContentText;
+    private TagCloudView mPostCategoriesTCView;
+    private TagCloudView mPostLabelsTCView;
+    private PostDetailsBean.PostBean postBean;
+    private LinearLayout mPostCardsLLayout;
 
     //停止刷新操作
     private Handler mHandler = new Handler() {
@@ -42,7 +51,8 @@ public class PostDetailsActivity extends BaseActivity {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             if (msg.what == Constants.REFRESH_SUCCESS) {
-                mPostPBar.setVisibility(View.INVISIBLE);
+                //刷新完成更新UI
+                showUIAtRefreshDown();
             }
         }
     };
@@ -65,6 +75,9 @@ public class PostDetailsActivity extends BaseActivity {
         mPostTimeText = (TextView) findViewById(R.id.tv_post_details_time);
         mPostPBar = (ProgressBar) findViewById(R.id.pb_post_details);
         mPostContentText = (TextView) findViewById(R.id.tv_post_details_content);
+        mPostCategoriesTCView = (TagCloudView) findViewById(R.id.tcv_post_category);
+        mPostLabelsTCView = (TagCloudView) findViewById(R.id.tcv_post_label);
+        mPostCardsLLayout = (LinearLayout) findViewById(R.id.ll_post_details_cards);
     }
 
     @Override
@@ -93,22 +106,73 @@ public class PostDetailsActivity extends BaseActivity {
             PostDetailsBean postDetailsBean = new Gson().fromJson(response, PostDetailsBean.class);
             if (postDetailsBean.getStatus().equals("ok")) {
                 mHandler.sendEmptyMessage(Constants.REFRESH_SUCCESS);
-                PostDetailsBean.PostBean postBean = postDetailsBean.getPost();
-                mPostTitleText.setText(postBean.getTitle());
-                mPostTimeText.setText(postBean.getDate());
-                // 设置为Html
-                //TODO: 代码块无法分行 GIF无法播放
-                RichText.from(postBean.getContent()).into(mPostContentText);
+                updatePostUIFromNet(postDetailsBean);
             } else {
                 showBaseToast("数据异常，请重新刷新");
             }
         }
 
+        /**
+         * 从网络获取数据更新文章页UI
+         *
+         * @param postDetailsBean 文章详情
+         */
+        private void updatePostUIFromNet(PostDetailsBean postDetailsBean) {
+            postBean = postDetailsBean.getPost();
+            mPostTitleText.setText(postBean.getTitle());
+            mPostTimeText.setText(postBean.getDate());
+            //TODO: 代码块无法分行 GIF无法播放
+            RichText.from(postBean.getContent()).into(mPostContentText);
+            //添加文章分类
+            addPostCategory(postBean);
+            //添加文章标签
+            addPostLabel(postBean);
+        }
+
+        /**
+         * 添加文章分类
+         *
+         * @param postBean 文章Bean对象
+         */
+        private void addPostCategory(PostDetailsBean.PostBean postBean) {
+            List<PostDetailsBean.PostBean.CategoriesBean> categoriesBean = postBean.getCategories();
+            List<String> categoriesTags = new ArrayList<>();
+            for (int i = 0; i < categoriesBean.size(); i++) {
+                categoriesTags.add(categoriesBean.get(i).getTitle() + "(" + categoriesBean.get(i).getPost_count() + ")");
+            }
+            mPostCategoriesTCView.setTags(categoriesTags);
+        }
+
+        /**
+         * 添加文章标签
+         *
+         * @param postBean 文章Bean对象
+         */
+        private void addPostLabel(PostDetailsBean.PostBean postBean) {
+            List<PostDetailsBean.PostBean.TagsBean> labelBean = postBean.getTags();
+            List<String> labelTags = new ArrayList<>();
+            for (int i = 0; i < labelBean.size(); i++) {
+                labelTags.add(labelBean.get(i).getTitle() + "(" + labelBean.get(i).getPost_count() + ")");
+            }
+            mPostLabelsTCView.setTags(labelTags);
+        }
     }
 
     @Override
     public void initEvents() {
+        mPostCategoriesTCView.setOnTagClickListener(new TagCloudView.OnTagClickListener() {
+            @Override
+            public void onTagClick(int position) {
+                showBaseToast(" ID = " + postBean.getCategories().get(position).getId());
+            }
+        });
 
+        mPostLabelsTCView.setOnTagClickListener(new TagCloudView.OnTagClickListener() {
+            @Override
+            public void onTagClick(int position) {
+                showBaseToast(" ID = " + postBean.getTags().get(position).getId());
+            }
+        });
     }
 
     @Override
@@ -124,7 +188,7 @@ public class PostDetailsActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.menu_item_refresh:
-                mPostPBar.setVisibility(View.VISIBLE);
+                hideUIAtRefreshing();
                 initData();
                 return true;
             case R.id.menu_item_share:
@@ -135,5 +199,23 @@ public class PostDetailsActivity extends BaseActivity {
                 return true;
         }
         return true;
+    }
+
+    /**
+     * 在刷新的时候隐藏布局
+     */
+    private void hideUIAtRefreshing() {
+        mPostPBar.setVisibility(View.VISIBLE);
+        mPostContentText.setVisibility(View.INVISIBLE);
+        mPostCardsLLayout.setVisibility(View.INVISIBLE);
+    }
+
+    /**
+     * 在刷新完成的时候显示布局
+     */
+    private void showUIAtRefreshDown() {
+        mPostPBar.setVisibility(View.INVISIBLE);
+        mPostContentText.setVisibility(View.VISIBLE);
+        mPostCardsLLayout.setVisibility(View.VISIBLE);
     }
 }

@@ -2,13 +2,26 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@null"
     android:orientation="vertical">
 
-    <TextView
+    <!-- 顶部搜索栏 -->
+    <include layout="@layout/include_fragment_toolbar" />
+
+    <!-- 下拉刷新 -->
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/srl_category"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="Category"
-        />
+        android:layout_height="wrap_content">
+
+        <com.dexafree.materialList.view.MaterialListView
+            android:id="@+id/mlv_category_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:column_count="1" />
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
 
 </LinearLayout>

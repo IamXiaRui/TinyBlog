@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.blankj.utilcode.utils.NetworkUtils;
 import com.google.gson.Gson;
@@ -36,14 +37,15 @@ import okhttp3.Call;
  */
 public class NewsFragment extends BaseFragment {
 
-    //下拉刷新
-    private SwipeRefreshLayout mNewsSRLayout;
+    private TextView mToolbarText;
     //最新动态列表
     private ListView mNewsLView;
     //顶部轮播 Bannner
     private Banner mHeaderBanner;
     //搜索按钮，新增文章按钮
     private ImageButton searchIButton, addIButton;
+    //下拉刷新
+    private SwipeRefreshLayout mNewsSRLayout;
     //停止刷新操作
     private Handler mHandler = new Handler() {
         @Override
@@ -64,9 +66,11 @@ public class NewsFragment extends BaseFragment {
 
     @Override
     public void initView() {
+        mToolbarText = (TextView) findViewById(R.id.tv_fragment_header_toolbar);
+        mToolbarText.setText("最近");
         searchIButton = (ImageButton) findViewById(R.id.ib_news_search);
         addIButton = (ImageButton) findViewById(R.id.ib_news_add);
-        
+
         mNewsSRLayout = (SwipeRefreshLayout) findViewById(R.id.srl_news);
         mNewsSRLayout.setColorSchemeResources(android.R.color.holo_purple, android.R.color.holo_blue_bright, android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
@@ -157,6 +161,14 @@ public class NewsFragment extends BaseFragment {
                 NewsListRootBean.PostsBean postItemAtPosition = (NewsListRootBean.PostsBean) parent.getItemAtPosition(position);
                 Intent postIntent = new Intent().putExtra(Constants.POST_DETAILS_ID, String.valueOf(postItemAtPosition.getId())).setClass(getContext(), PostDetailsActivity.class);
                 getContext().startActivity(postIntent);
+            }
+        });
+
+        mNewsLView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                showBaseToast("在这里长按是毫无作用的——奥斯特洛夫斯基");
+                return true;
             }
         });
 
