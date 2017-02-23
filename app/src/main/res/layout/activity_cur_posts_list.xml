@@ -6,7 +6,6 @@
     android:background="@null"
     android:orientation="vertical">
 
-
     <android.support.v7.widget.Toolbar
         android:id="@+id/tb_cur_posts_list"
         android:layout_width="match_parent"

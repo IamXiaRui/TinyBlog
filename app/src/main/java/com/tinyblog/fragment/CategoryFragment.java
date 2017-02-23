@@ -73,8 +73,8 @@ public class CategoryFragment extends BaseFragment {
         mToolbarText.setText("分类");
         mCategoryLView = (MaterialListView) findViewById(R.id.mlv_category_list);
         mCategoryLView.setItemAnimator(new OvershootInLeftAnimator());
-        mCategoryLView.getItemAnimator().setAddDuration(500);
-        mCategoryLView.getItemAnimator().setRemoveDuration(500);
+        mCategoryLView.getItemAnimator().setAddDuration(400);
+        mCategoryLView.getItemAnimator().setRemoveDuration(400);
         mCategorySRLayout = (SwipeRefreshLayout) findViewById(R.id.srl_category);
         mCategorySRLayout.setColorSchemeResources(android.R.color.holo_purple, android.R.color.holo_blue_bright, android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);

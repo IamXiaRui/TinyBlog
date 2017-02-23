@@ -1,7 +1,6 @@
 package com.tinyblog.adapter;
 
 import android.content.Context;
-import android.text.Html;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -11,6 +10,7 @@ import com.bumptech.glide.Glide;
 import com.lid.lib.LabelImageView;
 import com.tinyblog.R;
 import com.tinyblog.bean.NewsListRootBean;
+import com.tinyblog.utils.AppUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,7 +66,8 @@ public class NewsListAdapter extends BaseAdapter {
         }
         viewHolder.itemBannerImage.setLabelText(postsBean.getCategories().get(0).getTitle());
         viewHolder.itemTitleText.setText(postsBean.getTitle());
-        viewHolder.itemExcerptText.setText(Html.fromHtml(postsBean.getExcerpt()).toString());
+        viewHolder.itemExcerptText.setText(AppUtil.fromHtml(postsBean.getExcerpt()).toString());
+        //阅读数 喜欢数 评论数
         viewHolder.itemReadNumText.setText(postsBean.getCustom_fields().getViews().get(0));
         if (postsBean.getCustom_fields().getKratos_love() != null) {
             viewHolder.itemLikeNumText.setText(postsBean.getCustom_fields().getKratos_love().get(0));

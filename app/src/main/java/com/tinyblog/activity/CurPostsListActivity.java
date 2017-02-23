@@ -5,18 +5,27 @@ import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.blankj.utilcode.utils.NetworkUtils;
+import com.google.gson.Gson;
 import com.tinyblog.R;
+import com.tinyblog.adapter.CurPostsListAdapter;
 import com.tinyblog.base.BaseActivity;
+import com.tinyblog.bean.PostListBean;
 import com.tinyblog.sys.Constants;
 import com.tinyblog.sys.Url;
+import com.tinyblog.utils.RVItemDecorationUtil;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
+import java.util.List;
+
+import it.gmariotti.recyclerview.adapter.ScaleInAnimatorAdapter;
 import okhttp3.Call;
 
 /**
@@ -29,6 +38,7 @@ import okhttp3.Call;
 public class CurPostsListActivity extends BaseActivity {
 
     private Toolbar mCurPostsListTBar;
+    private RecyclerView mPostsListRView;
     //下拉刷新
     private SwipeRefreshLayout mCurPostsListSRLayout;
     //停止刷新操作
@@ -62,13 +72,14 @@ public class CurPostsListActivity extends BaseActivity {
         mCurPostsListSRLayout = (SwipeRefreshLayout) findViewById(R.id.srl_cur_posts_list);
         mCurPostsListSRLayout.setColorSchemeResources(android.R.color.holo_purple, android.R.color.holo_blue_bright, android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
+
+        mPostsListRView = (RecyclerView) findViewById(R.id.rv_cur_posts_list);
+        mPostsListRView.addItemDecoration(new RVItemDecorationUtil(24));     //设置 item 间距
     }
 
     @Override
     public void initData() {
         mCurPostsListTBar.setTitle(getIntent().getStringExtra(Constants.CUR_CATEGORY_TITLE));
-        showBaseToast(getIntent().getStringExtra(Constants.CUR_CATEGORY_ID));
-
         //加载网络数据
         loaderNetWorkData();
         //开启自动刷新
@@ -86,7 +97,7 @@ public class CurPostsListActivity extends BaseActivity {
     private void loaderNetWorkData() {
         OkHttpUtils
                 .get()
-                .url(Url.GET_CATEGORY_POSTS)
+                .url(Url.GET_CATEGORY_POSTS + "?id=" + getIntent().getStringExtra(Constants.CUR_CATEGORY_ID) + "&page=1")
                 .build()
                 .execute(new CurCategoryListListCallBack());
     }
@@ -101,13 +112,31 @@ public class CurPostsListActivity extends BaseActivity {
 
         @Override
         public void onResponse(String response, int id) {
-
+            PostListBean postListBean = new Gson().fromJson(response, PostListBean.class);
+            if (postListBean.getStatus().equals("ok")) {
+                mHandler.sendEmptyMessage(Constants.REFRESH_SUCCESS);
+                List<PostListBean.PostsBean> postsBeanList = postListBean.getPosts();
+                CurPostsListAdapter adapter = new CurPostsListAdapter(getApplicationContext(), postsBeanList);
+                mPostsListRView.setAdapter(new ScaleInAnimatorAdapter(adapter,mPostsListRView));
+                mPostsListRView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+            }
         }
     }
 
     @Override
     public void initEvents() {
-
+        //下拉刷新监听
+        mCurPostsListSRLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        loaderNetWorkData();
+                    }
+                }).start();
+            }
+        });
     }
 
     @Override

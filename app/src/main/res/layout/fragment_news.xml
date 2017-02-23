@@ -19,7 +19,7 @@
             android:id="@+id/lv_news"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:divider="#e6e6e6"
+            android:divider="@color/md_grey_300"
             android:dividerHeight="8dp"
             android:scrollbars="none" />
 

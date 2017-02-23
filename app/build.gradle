@@ -56,4 +56,5 @@ dependencies {
     compile 'com.github.kingideayou:tagcloudview:1.0.2'
     compile 'com.github.dexafree:materiallist:3.2.1'
     compile 'jp.wasabeef:recyclerview-animators:2.2.5'
+    compile 'com.github.gabrielemariotti.recyclerview:recyclerview-animators:0.3.0-SNAPSHOT@aar'
 }
