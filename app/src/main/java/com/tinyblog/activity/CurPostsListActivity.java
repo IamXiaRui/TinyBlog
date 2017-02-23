@@ -137,6 +137,25 @@ public class CurPostsListActivity extends BaseActivity {
                 }).start();
             }
         });
+        mPostsListRView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView,
+                                             int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    mCurPostsListSRLayout.setRefreshing(true);
+                    // 此处在现实项目中，请换成网络请求数据代码，sendRequest .....
+
+                }
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                //lastVisibleItem = mLayoutManager.findLastVisibleItemPosition();
+            }
+        });
     }
 
     @Override
