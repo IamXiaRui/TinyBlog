@@ -13,8 +13,8 @@ public class Url {
     public static String GET_POST_DETAILS  = "http://www.iamxiarui.com/xr-api/get_post/?id=";
     public static String GET_CATEGORY_INDEX = "http://www.iamxiarui.com/xr-api/get_category_index/";
     public static String GET_TAG_INDEX = "http://www.iamxiarui.com/xr-api/get_tag_index/";
-
-
+    public static String GET_CATEGORY_POSTS = "http://www.iamxiarui.com/xr-api/get_category_posts/";
+    public static String GET_TAG_POSTS = "http://www.iamxiarui.com/xr-api/get_tag_posts/";
     /*====== DuoShuo Comment Url =====*/
 
 

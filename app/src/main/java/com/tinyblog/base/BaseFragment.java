@@ -58,5 +58,4 @@ public abstract class BaseFragment extends Fragment implements UIInterface {
         }
         mBaseToast.show();
     }
-
 }

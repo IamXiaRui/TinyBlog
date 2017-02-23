@@ -35,7 +35,7 @@ import okhttp3.Call;
  */
 
 public class PostDetailsActivity extends BaseActivity {
-    private Toolbar mToolbar;
+    private Toolbar mPostDetailsTBar;
     private TextView mPostTitleText;
     private TextView mPostTimeText;
     private ProgressBar mPostPBar;
@@ -64,8 +64,8 @@ public class PostDetailsActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        mToolbar = (Toolbar) findViewById(R.id.tb_post_details);
-        setSupportActionBar(mToolbar);
+        mPostDetailsTBar = (Toolbar) findViewById(R.id.tb_post_details);
+        setSupportActionBar(mPostDetailsTBar);
         //隐藏默认标题
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         //添加返回按钮

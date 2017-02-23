@@ -36,6 +36,9 @@
         <activity
             android:name="com.tinyblog.activity.SearchActivity"
             android:theme="@style/AppTheme" />
+        <activity
+            android:name="com.tinyblog.activity.CurPostsListActivity"
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>

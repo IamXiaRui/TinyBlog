@@ -1,5 +1,6 @@
 package com.tinyblog.fragment;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
@@ -17,6 +18,7 @@ import com.dexafree.materialList.view.MaterialListView;
 import com.google.gson.Gson;
 import com.squareup.picasso.RequestCreator;
 import com.tinyblog.R;
+import com.tinyblog.activity.CurPostsListActivity;
 import com.tinyblog.base.BaseFragment;
 import com.tinyblog.bean.CategoryBean;
 import com.tinyblog.sys.Constants;
@@ -126,7 +128,6 @@ public class CategoryFragment extends BaseFragment {
         private Card getCurrentCard(final int i) {
             final CardProvider provider = new Card.Builder(getContext())
                     .setTag("BIG_IMAGE_BUTTONS_CARD")
-                    .setDismissible()
                     .withProvider(new CardProvider())
                     .setLayout(R.layout.material_image_with_buttons_card)
                     .setTitle(categoriesList.get(i).getTitle())
@@ -168,7 +169,12 @@ public class CategoryFragment extends BaseFragment {
 
             @Override
             public void onItemClick(@NonNull Card card, int position) {
-                showBaseToast(" ID = " + categoriesList.get(position).getId());
+                CategoryBean.CategoriesBean itemCategoryBean = categoriesList.get(position);
+                Intent intent = new Intent()
+                        .putExtra(Constants.CUR_CATEGORY_TITLE, itemCategoryBean.getTitle())
+                        .putExtra(Constants.CUR_CATEGORY_ID, String.valueOf(itemCategoryBean.getId()))
+                        .setClass(getContext(), CurPostsListActivity.class);
+                startActivity(intent);
             }
 
             @Override

@@ -13,8 +13,12 @@ public class Constants {
     public static long EXIT_TIME = 0;
     //刷新成功标记
     public static int REFRESH_SUCCESS = 1;
-    //文章详情URL标记
+    //文章详情ID标记
     public static String POST_DETAILS_ID = "POST_DETAILS_ID";
+    //分类标题标记
+    public static String CUR_CATEGORY_TITLE = "CUR_CATEGORY_TITLE";
+    //分类ID标记
+    public static String CUR_CATEGORY_ID = "CUR_CATEGORY_ID";
     //Log日志标签
     public static String LOG_TAG = "TinyBlog Log";
 }
