@@ -137,6 +137,7 @@ public class CurPostsListActivity extends BaseActivity {
                 }).start();
             }
         });
+        //列表滚动事件监听
         mPostsListRView.addOnScrollListener(new RecyclerView.OnScrollListener() {
 
             @Override
