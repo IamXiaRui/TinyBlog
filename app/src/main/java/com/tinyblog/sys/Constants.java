@@ -16,9 +16,9 @@ public class Constants {
     //文章详情ID标记
     public static String POST_DETAILS_ID = "POST_DETAILS_ID";
     //分类标题标记
-    public static String CUR_CATEGORY_TITLE = "CUR_CATEGORY_TITLE";
+    public static String CUR_POSTS_TITLE = "CUR_POSTS_TITLE";
     //分类ID标记
-    public static String CUR_CATEGORY_ID = "CUR_CATEGORY_ID";
+    public static String CUR_POSTS_ID = "CUR_POSTS_ID";
     //Log日志标签
     public static String LOG_TAG = "TinyBlog Log";
 }

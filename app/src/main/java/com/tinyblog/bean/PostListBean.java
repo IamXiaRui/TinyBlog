@@ -13,6 +13,7 @@ public class PostListBean {
 
     private String status;
     private int count;
+    private int pages;
     private List<PostsBean> posts;
 
     public String getStatus() {
@@ -29,6 +30,14 @@ public class PostListBean {
 
     public void setCount(int count) {
         this.count = count;
+    }
+
+    public int getPages() {
+        return pages;
+    }
+
+    public void setPages(int pages) {
+        this.pages = pages;
     }
 
     public List<PostsBean> getPosts() {

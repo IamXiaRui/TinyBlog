@@ -171,8 +171,8 @@ public class CategoryFragment extends BaseFragment {
             public void onItemClick(@NonNull Card card, int position) {
                 CategoryBean.CategoriesBean itemCategoryBean = categoriesList.get(position);
                 Intent intent = new Intent()
-                        .putExtra(Constants.CUR_CATEGORY_TITLE, itemCategoryBean.getTitle())
-                        .putExtra(Constants.CUR_CATEGORY_ID, String.valueOf(itemCategoryBean.getId()))
+                        .putExtra(Constants.CUR_POSTS_TITLE, itemCategoryBean.getTitle())
+                        .putExtra(Constants.CUR_POSTS_ID, "" + itemCategoryBean.getId())
                         .setClass(getContext(), CurPostsListActivity.class);
                 startActivity(intent);
             }

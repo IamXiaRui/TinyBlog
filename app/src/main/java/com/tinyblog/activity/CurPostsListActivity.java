@@ -37,8 +37,17 @@ import okhttp3.Call;
 
 public class CurPostsListActivity extends BaseActivity {
 
+    private int mPostsListAllPage;
+    private int mCurPostsListPage = 1;
     private Toolbar mCurPostsListTBar;
     private RecyclerView mPostsListRView;
+    //列表中最后一个可见的Item
+    private int lastVisibleItem;
+    private LinearLayoutManager mLinearLayoutManager;
+    private CurPostsListAdapter mAdapter;
+    private List<PostListBean.PostsBean> mPostsBeanList;
+    //正在上拉加载标记
+    private boolean LOADING_MORE_TAG = false;
     //下拉刷新
     private SwipeRefreshLayout mCurPostsListSRLayout;
     //停止刷新操作
@@ -79,7 +88,7 @@ public class CurPostsListActivity extends BaseActivity {
 
     @Override
     public void initData() {
-        mCurPostsListTBar.setTitle(getIntent().getStringExtra(Constants.CUR_CATEGORY_TITLE));
+        mCurPostsListTBar.setTitle(getIntent().getStringExtra(Constants.CUR_POSTS_TITLE));
         //加载网络数据
         loaderNetWorkData();
         //开启自动刷新
@@ -97,12 +106,12 @@ public class CurPostsListActivity extends BaseActivity {
     private void loaderNetWorkData() {
         OkHttpUtils
                 .get()
-                .url(Url.GET_CATEGORY_POSTS + "?id=" + getIntent().getStringExtra(Constants.CUR_CATEGORY_ID) + "&page=1")
+                .url(Url.GET_CATEGORY_POSTS + "?id=" + getIntent().getStringExtra(Constants.CUR_POSTS_ID))
                 .build()
-                .execute(new CurCategoryListListCallBack());
+                .execute(new CurPostsListCallBack());
     }
 
-    private class CurCategoryListListCallBack extends StringCallback {
+    private class CurPostsListCallBack extends StringCallback {
         @Override
         public void onError(Call call, Exception e, int id) {
             if (!NetworkUtils.isConnected()) {
@@ -113,12 +122,15 @@ public class CurPostsListActivity extends BaseActivity {
         @Override
         public void onResponse(String response, int id) {
             PostListBean postListBean = new Gson().fromJson(response, PostListBean.class);
+            mPostsListAllPage = postListBean.getPages();
+            mCurPostsListPage += 1;
             if (postListBean.getStatus().equals("ok")) {
                 mHandler.sendEmptyMessage(Constants.REFRESH_SUCCESS);
-                List<PostListBean.PostsBean> postsBeanList = postListBean.getPosts();
-                CurPostsListAdapter adapter = new CurPostsListAdapter(getApplicationContext(), postsBeanList);
-                mPostsListRView.setAdapter(new ScaleInAnimatorAdapter(adapter,mPostsListRView));
-                mPostsListRView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                mPostsBeanList = postListBean.getPosts();
+                mAdapter = new CurPostsListAdapter(getApplicationContext(), mPostsBeanList);
+                mPostsListRView.setAdapter(new ScaleInAnimatorAdapter(mAdapter, mPostsListRView));
+                mLinearLayoutManager = new LinearLayoutManager(getApplicationContext());
+                mPostsListRView.setLayoutManager(mLinearLayoutManager);
             }
         }
     }
@@ -137,26 +149,57 @@ public class CurPostsListActivity extends BaseActivity {
                 }).start();
             }
         });
-        //列表滚动事件监听
         mPostsListRView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-
             @Override
-            public void onScrollStateChanged(RecyclerView recyclerView,
-                                             int newState) {
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
-                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    mCurPostsListSRLayout.setRefreshing(true);
-                    // 此处在现实项目中，请换成网络请求数据代码，sendRequest .....
-
+                if (newState == RecyclerView.SCROLL_STATE_IDLE && lastVisibleItem + 1 == mAdapter.getItemCount() && !LOADING_MORE_TAG) {
+                    //再次请求
+                    if (mCurPostsListPage <= mPostsListAllPage) {
+                        LOADING_MORE_TAG = true;
+                        mAdapter.changeLoadStatus(CurPostsListAdapter.LOADING_MORE);
+                        loadMoreDataFromNet(mCurPostsListPage);
+                    } else {
+                        mAdapter.changeLoadStatus(CurPostsListAdapter.NO_NEW_DATA);
+                    }
                 }
             }
 
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                //lastVisibleItem = mLayoutManager.findLastVisibleItemPosition();
+                lastVisibleItem = mLinearLayoutManager.findLastVisibleItemPosition();
             }
         });
+    }
+
+    private void loadMoreDataFromNet(int curPageNum) {
+        OkHttpUtils
+                .get()
+                .url(Url.GET_CATEGORY_POSTS + "?id=" + getIntent().getStringExtra(Constants.CUR_POSTS_ID) + "&page=" + curPageNum)
+                .build()
+                .execute(new LoadMorePostsListCallBack());
+    }
+
+    private class LoadMorePostsListCallBack extends StringCallback {
+        @Override
+        public void onError(Call call, Exception e, int id) {
+            if (!NetworkUtils.isConnected()) {
+                showBaseToast("刷新失败，请检查网络连接");
+            }
+        }
+
+        @Override
+        public void onResponse(String response, int id) {
+            PostListBean postListBean = new Gson().fromJson(response, PostListBean.class);
+            mPostsListAllPage = postListBean.getPages();
+            if (postListBean.getStatus().equals("ok")) {
+                mCurPostsListPage += 1;
+                mHandler.sendEmptyMessage(Constants.REFRESH_SUCCESS);
+                mAdapter.addMoreItem(postListBean.getPosts());
+                LOADING_MORE_TAG = false;
+            }
+        }
     }
 
     @Override

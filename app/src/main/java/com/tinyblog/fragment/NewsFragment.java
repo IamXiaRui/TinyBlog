@@ -132,7 +132,6 @@ public class NewsFragment extends BaseFragment {
                 List<NewsListRootBean.PostsBean> mNewsList = newsListRootBean.getPosts();
                 //设置适配器
                 mNewsLView.setAdapter(new NewsListAdapter(getContext(), mNewsList));
-                showBaseToast("刷新成功");
             } else {
                 showBaseToast("数据异常，请重新刷新");
             }
