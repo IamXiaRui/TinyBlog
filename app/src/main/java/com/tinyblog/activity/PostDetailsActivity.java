@@ -1,5 +1,6 @@
 package com.tinyblog.activity;
 
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.widget.Toolbar;
@@ -163,14 +164,26 @@ public class PostDetailsActivity extends BaseActivity {
         mPostCategoriesTCView.setOnTagClickListener(new TagCloudView.OnTagClickListener() {
             @Override
             public void onTagClick(int position) {
-                showBaseToast(" ID = " + postBean.getCategories().get(position).getId());
+                Intent intent = new Intent()
+                        .putExtra(Constants.CUR_POSTS_TITLE, postBean.getCategories().get(position).getTitle())
+                        .putExtra(Constants.CUR_POSTS_ID, "" + "" + postBean.getCategories().get(position).getId())
+                        .putExtra(Constants.CATEGORY_OR_TAG, Constants.IS_CATEGORY)
+                        .putExtra(Constants.CUR_POSTS_COUNT, "" + "" + postBean.getCategories().get(position).getPost_count())
+                        .setClass(PostDetailsActivity.this, CurPostsListActivity.class);
+                startActivity(intent);
             }
         });
 
         mPostLabelsTCView.setOnTagClickListener(new TagCloudView.OnTagClickListener() {
             @Override
             public void onTagClick(int position) {
-                showBaseToast(" ID = " + postBean.getTags().get(position).getId());
+                Intent intent = new Intent()
+                        .putExtra(Constants.CUR_POSTS_TITLE, postBean.getTags().get(position).getTitle())
+                        .putExtra(Constants.CUR_POSTS_ID, "" + "" + postBean.getTags().get(position).getId())
+                        .putExtra(Constants.CATEGORY_OR_TAG, Constants.IS_TAG)
+                        .putExtra(Constants.CUR_POSTS_COUNT, "" + "" + postBean.getTags().get(position).getPost_count())
+                        .setClass(PostDetailsActivity.this, CurPostsListActivity.class);
+                startActivity(intent);
             }
         });
     }

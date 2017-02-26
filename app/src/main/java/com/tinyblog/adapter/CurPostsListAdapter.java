@@ -1,6 +1,8 @@
 package com.tinyblog.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,11 +14,15 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.tinyblog.R;
+import com.tinyblog.activity.PostDetailsActivity;
 import com.tinyblog.bean.PostListBean;
+import com.tinyblog.sys.Constants;
 import com.tinyblog.utils.AppUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.blankj.utilcode.utils.Utils.getContext;
 
 /**
  * @author xiarui
@@ -25,7 +31,7 @@ import java.util.List;
  * @remark 1.0
  */
 
-public class CurPostsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class CurPostsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     private Context context;
     private List<PostListBean.PostsBean> postsBeanList = new ArrayList<>();
@@ -71,8 +77,8 @@ public class CurPostsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof ItemViewHolder) {
             PostListBean.PostsBean postBean = postsBeanList.get(position);
-            //设置 Banner　图片
             ItemViewHolder itemViewHolder = (ItemViewHolder) holder;
+            //设置 Banner　图片
             if (postBean.getAttachments().size() > 0) {
                 String itemBannerUrl = postBean.getAttachments().get(0).getUrl();
                 Glide.with(context).load(itemBannerUrl).into(itemViewHolder.itemPostImage);
@@ -81,6 +87,7 @@ public class CurPostsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             }
             itemViewHolder.itemPostTitleText.setText(postBean.getTitle());
             itemViewHolder.itemPostExcerptText.setText(AppUtil.fromHtml(postBean.getExcerpt()));
+            itemViewHolder.itemPostCView.setTag(""+postBean.getId());
             itemViewHolder.itemPostTimeText.setText(postBean.getDate());
             //阅读
             itemViewHolder.itemPostReadText.setText(postBean.getCustom_fields().getViews().get(0));
@@ -103,7 +110,7 @@ public class CurPostsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     //改变状态
-    public void changeLoadStatus(FooterViewHolder footerViewHolder, int loadStatus) {
+    private void changeLoadStatus(FooterViewHolder footerViewHolder, int loadStatus) {
         if (loadStatus == LOADING_MORE) {
             footerViewHolder.footerPBar.setVisibility(View.VISIBLE);
             footerViewHolder.footerText.setVisibility(View.INVISIBLE);
@@ -113,24 +120,25 @@ public class CurPostsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         }
     }
 
-    public class ItemViewHolder extends RecyclerView.ViewHolder {
+    private class ItemViewHolder extends RecyclerView.ViewHolder {
         ImageView itemPostImage;
         TextView itemPostTitleText;
         TextView itemPostExcerptText;
         TextView itemPostTimeText;
         TextView itemPostReadText;
+        CardView itemPostCView;
 
-        public ItemViewHolder(View itemView) {
+        private ItemViewHolder(View itemView) {
             super(itemView);
             //初始化View
             initView(itemView);
-            //点击事件
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(context, "点击 " + getAdapterPosition(), Toast.LENGTH_SHORT).show();
+                    gotoPostDetailsActivity((String)v.getTag());
                 }
             });
+            //点击事件
             itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
@@ -138,6 +146,15 @@ public class CurPostsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     return true;
                 }
             });
+        }
+
+        /**
+         * 跳转到文章详情页面
+         * @param itemPostId 点击项文章Id
+         */
+        private void gotoPostDetailsActivity(String itemPostId) {
+            Intent postIntent = new Intent().putExtra(Constants.POST_DETAILS_ID, itemPostId).setClass(getContext(), PostDetailsActivity.class);
+            getContext().startActivity(postIntent);
         }
 
         /**
@@ -150,14 +167,15 @@ public class CurPostsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             itemPostExcerptText = (TextView) itemView.findViewById(R.id.tv_cur_post_list_item_excerpt);
             itemPostTimeText = (TextView) itemView.findViewById(R.id.tv_cur_post_list_item_time);
             itemPostReadText = (TextView) itemView.findViewById(R.id.tv_cur_post_list_item_read);
+            itemPostCView = (CardView) itemView.findViewById(R.id.cv_cur_post_list_item);
         }
     }
 
-    public class FooterViewHolder extends RecyclerView.ViewHolder {
+    private class FooterViewHolder extends RecyclerView.ViewHolder {
         ProgressBar footerPBar;
         TextView footerText;
 
-        public FooterViewHolder(View itemView) {
+        private FooterViewHolder(View itemView) {
             super(itemView);
             footerPBar = (ProgressBar) itemView.findViewById(R.id.pb_footer_cur_posts_list);
             footerText = (TextView) itemView.findViewById(R.id.tv_footer_cur_posts_list);

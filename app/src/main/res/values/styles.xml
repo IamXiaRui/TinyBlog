@@ -19,4 +19,14 @@
         <item name="colorButtonNormal">@android:color/white</item>
         <item name="colorControlNormal">@android:color/white</item>
     </style>
+
+    <!--ToolBar 标题字体设置-->
+    <style name="Theme.ToolBar.Base.Title" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+    <style name="Theme.ToolBar.Base.Subtitle" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Subtitle">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
 </resources>

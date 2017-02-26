@@ -173,6 +173,8 @@ public class CategoryFragment extends BaseFragment {
                 Intent intent = new Intent()
                         .putExtra(Constants.CUR_POSTS_TITLE, itemCategoryBean.getTitle())
                         .putExtra(Constants.CUR_POSTS_ID, "" + itemCategoryBean.getId())
+                        .putExtra(Constants.CUR_POSTS_COUNT,""+""+itemCategoryBean.getPost_count())
+                        .putExtra(Constants.CATEGORY_OR_TAG,Constants.IS_CATEGORY)
                         .setClass(getContext(), CurPostsListActivity.class);
                 startActivity(intent);
             }

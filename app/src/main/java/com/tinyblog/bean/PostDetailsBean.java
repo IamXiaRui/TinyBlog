@@ -13,8 +13,6 @@ public class PostDetailsBean {
 
     private String status;
     private PostBean post;
-    private String previous_url;
-    private String next_url;
 
     public String getStatus() {
         return status;
@@ -30,22 +28,6 @@ public class PostDetailsBean {
 
     public void setPost(PostBean post) {
         this.post = post;
-    }
-
-    public String getPrevious_url() {
-        return previous_url;
-    }
-
-    public void setPrevious_url(String previous_url) {
-        this.previous_url = previous_url;
-    }
-
-    public String getNext_url() {
-        return next_url;
-    }
-
-    public void setNext_url(String next_url) {
-        this.next_url = next_url;
     }
 
     /**

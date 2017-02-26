@@ -15,10 +15,18 @@ public class Constants {
     public static int REFRESH_SUCCESS = 1;
     //文章详情ID标记
     public static String POST_DETAILS_ID = "POST_DETAILS_ID";
-    //分类标题标记
+    //当前文章列表标题
     public static String CUR_POSTS_TITLE = "CUR_POSTS_TITLE";
-    //分类ID标记
+    //当前文章列表ID
     public static String CUR_POSTS_ID = "CUR_POSTS_ID";
+    //当前文章列表数目
+    public static String CUR_POSTS_COUNT = "CUR_POSTS_COUNT";
     //Log日志标签
     public static String LOG_TAG = "TinyBlog Log";
+    //分类还是标签
+    public static String CATEGORY_OR_TAG = "CATEGORY_OR_TAG";
+    //分类
+    public static String IS_CATEGORY = "IS_CATEGORY";
+    //标签
+    public static String IS_TAG = "IS_TAG";
 }

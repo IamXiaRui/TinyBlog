@@ -25,6 +25,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:scrollbarThumbVertical="@drawable/shape_scroll_bar"
         android:layout_below="@+id/tb_post_details">
 
         <LinearLayout
@@ -93,8 +94,6 @@
 
                 <!--文章标签-->
                 <include layout="@layout/include_post_label_card" />
-
-                <!--上/下一篇-->
 
             </LinearLayout>
 
