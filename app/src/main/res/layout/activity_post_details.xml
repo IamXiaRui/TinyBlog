@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
     android:background="@null">
 
     <android.support.v7.widget.Toolbar
@@ -37,6 +38,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
+                android:elevation="5dp"
                 android:background="@color/md_blue_400"
                 android:orientation="vertical">
 
@@ -51,8 +53,6 @@
                     android:maxLines="2"
                     android:textColor="@color/md_white_1000"
                     android:textSize="20sp" />
-
-                <!---->
 
                 <TextView
                     android:id="@+id/tv_post_details_time"
@@ -97,9 +97,56 @@
 
             </LinearLayout>
 
-
         </LinearLayout>
 
     </ScrollView>
+
+    <com.github.clans.fab.FloatingActionMenu
+        android:id="@+id/fam_post_details"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:elevation="6dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="10dp"
+        fab:menu_backgroundColor="#88ffffff"
+        fab:menu_colorNormal="@color/md_blue_400"
+        fab:menu_colorPressed="@color/md_blue_500"
+        fab:menu_colorRipple="@color/md_blue_300"
+        fab:menu_fab_size="mini"
+        fab:menu_labels_ellipsize="end"
+        fab:menu_labels_singleLine="true">
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fab_post_details_refresh"
+            style="@style/MenuButtonsSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/svg_refresh"
+            fab:fab_label="没事别乱刷新"
+            fab:fab_size="mini" />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fab_post_details_comment"
+            style="@style/MenuButtonsSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/svg_comment"
+            fab:fab_label="慢着，我有话说"
+            fab:fab_size="mini" />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fab_post_details_share"
+            style="@style/MenuButtonsSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/svg_share"
+            fab:fab_label="好东西要分享"
+            fab:fab_size="mini" />
+
+    </com.github.clans.fab.FloatingActionMenu>
 
 </RelativeLayout>

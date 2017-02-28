@@ -221,7 +221,7 @@ public class CurPostsListActivity extends BaseActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_post_details, menu);
+        getMenuInflater().inflate(R.menu.menu_cur_posts_list, menu);
         return true;
     }
 
@@ -233,12 +233,6 @@ public class CurPostsListActivity extends BaseActivity {
                 break;
             case R.id.menu_item_refresh:
                 initData();
-                return true;
-            case R.id.menu_item_share:
-                showBaseToast("分享");
-                return true;
-            case R.id.menu_item_comment:
-                showBaseToast("评论");
                 return true;
         }
         return true;

@@ -12,6 +12,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.blankj.utilcode.utils.NetworkUtils;
+import com.github.clans.fab.FloatingActionButton;
+import com.github.clans.fab.FloatingActionMenu;
 import com.google.gson.Gson;
 import com.tinyblog.R;
 import com.tinyblog.base.BaseActivity;
@@ -37,14 +39,13 @@ import okhttp3.Call;
 
 public class PostDetailsActivity extends BaseActivity {
     private Toolbar mPostDetailsTBar;
-    private TextView mPostTitleText;
-    private TextView mPostTimeText;
     private ProgressBar mPostPBar;
-    private TextView mPostContentText;
-    private TagCloudView mPostCategoriesTCView;
-    private TagCloudView mPostLabelsTCView;
+    private TextView mPostTitleText, mPostTimeText, mPostContentText;
+    private TagCloudView mPostCategoriesTCView, mPostLabelsTCView;
     private PostDetailsBean.PostBean postBean;
     private LinearLayout mPostCardsLLayout;
+    private FloatingActionMenu mPostDetailsFAMenu;
+    private FloatingActionButton mRefreshFAButton, mCommentFAButton, mShareFAButton;
 
     //停止刷新操作
     private Handler mHandler = new Handler() {
@@ -79,6 +80,10 @@ public class PostDetailsActivity extends BaseActivity {
         mPostCategoriesTCView = (TagCloudView) findViewById(R.id.tcv_post_category);
         mPostLabelsTCView = (TagCloudView) findViewById(R.id.tcv_post_label);
         mPostCardsLLayout = (LinearLayout) findViewById(R.id.ll_post_details_cards);
+        mPostDetailsFAMenu = (FloatingActionMenu) findViewById(R.id.fam_post_details);
+        mRefreshFAButton = (FloatingActionButton) findViewById(R.id.fab_post_details_refresh);
+        mCommentFAButton = (FloatingActionButton) findViewById(R.id.fab_post_details_comment);
+        mShareFAButton = (FloatingActionButton) findViewById(R.id.fab_post_details_share);
     }
 
     @Override
@@ -107,6 +112,7 @@ public class PostDetailsActivity extends BaseActivity {
             PostDetailsBean postDetailsBean = new Gson().fromJson(response, PostDetailsBean.class);
             if (postDetailsBean.getStatus().equals("ok")) {
                 mHandler.sendEmptyMessage(Constants.REFRESH_SUCCESS);
+                //获得数据后更新UI
                 updatePostUIFromNet(postDetailsBean);
             } else {
                 showBaseToast("数据异常，请重新刷新");
@@ -186,7 +192,30 @@ public class PostDetailsActivity extends BaseActivity {
                 startActivity(intent);
             }
         });
+
+        mRefreshFAButton.setOnClickListener(fabClickListener);
+        mCommentFAButton.setOnClickListener(fabClickListener);
+        mShareFAButton.setOnClickListener(fabClickListener);
     }
+
+    private View.OnClickListener fabClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()) {
+                case R.id.fab_post_details_refresh:
+                    mPostDetailsFAMenu.close(true);
+                    hideUIAtRefreshing();
+                    initData();
+                    break;
+                case R.id.fab_post_details_comment:
+                    showBaseToast("评论");
+                    break;
+                case R.id.fab_post_details_share:
+                    showBaseToast("分享");
+                    break;
+            }
+        }
+    };
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

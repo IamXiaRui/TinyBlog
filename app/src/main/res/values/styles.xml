@@ -15,18 +15,42 @@
     </style>
 
     <style name="ToolbarTheme" parent="Theme.AppCompat.Light">
-        <item name="actionMenuTextColor">@android:color/white</item>
-        <item name="colorButtonNormal">@android:color/white</item>
-        <item name="colorControlNormal">@android:color/white</item>
+        <item name="actionMenuTextColor">@color/md_white_1000</item>
+        <item name="colorButtonNormal">@color/md_white_1000</item>
+        <item name="colorControlNormal">@color/md_white_1000</item>
     </style>
 
     <!--ToolBar 标题字体设置-->
     <style name="Theme.ToolBar.Base.Title" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Title">
         <item name="android:textSize">20sp</item>
-        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColor">@color/md_white_1000</item>
     </style>
     <style name="Theme.ToolBar.Base.Subtitle" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Subtitle">
         <item name="android:textSize">12sp</item>
-        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColor">@color/md_white_1000</item>
+    </style>
+
+    <style name="MenuLabelsStyle">
+        <item name="android:background">@drawable/fab_label_background</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="MenuButtonsStyle">
+        <item name="fab_size">mini</item>
+        <item name="fab_showAnimation">@anim/jump_from_down</item>
+        <item name="fab_hideAnimation">@anim/jump_to_down</item>
+        <item name="fab_shadowColor">#444</item>
+        <item name="fab_colorNormal">#FFB805</item>
+        <item name="fab_colorPressed">#F2AB00</item>
+        <item name="fab_colorRipple">#D99200</item>
+    </style>
+
+    <style name="MenuButtonsSmall">
+        <item name="fab_colorNormal">@color/md_blue_400</item>
+        <item name="fab_colorPressed">@color/md_blue_500</item>
+        <item name="fab_colorRipple">@color/md_blue_300</item>
     </style>
 </resources>

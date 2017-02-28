@@ -49,7 +49,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         //设置底部导航栏
         mBottomBar.addItem(new BottomNavigationItem(R.drawable.icon_news, "最近").setActiveColorResource(R.color.md_blue_400))
                 .addItem(new BottomNavigationItem(R.drawable.icon_category, "分类").setActiveColorResource(R.color.md_blue_400))
-                .addItem(new BottomNavigationItem(R.drawable.icon_search, "搜索").setActiveColorResource(R.color.md_blue_400))
+                .addItem(new BottomNavigationItem(R.drawable.icon_search, "发现").setActiveColorResource(R.color.md_blue_400))
                 .addItem(new BottomNavigationItem(R.drawable.icon_me, "我的").setActiveColorResource(R.color.md_blue_400))
                 .setFirstSelectedPosition(0)
                 .initialise();
