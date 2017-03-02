@@ -82,12 +82,13 @@ public class CategoryFragment extends BaseFragment {
 
     @Override
     public void initData() {
-        loaderNetWorkData();
         //开启自动刷新
         mCategorySRLayout.post(new Runnable() {
             @Override
             public void run() {
                 mCategorySRLayout.setRefreshing(true);
+                //加载网络数据
+                loaderNetWorkData();
             }
         });
     }

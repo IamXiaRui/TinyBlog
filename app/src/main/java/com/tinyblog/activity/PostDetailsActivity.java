@@ -46,6 +46,7 @@ public class PostDetailsActivity extends BaseActivity {
     private LinearLayout mPostCardsLLayout;
     private FloatingActionMenu mPostDetailsFAMenu;
     private FloatingActionButton mRefreshFAButton, mCommentFAButton, mShareFAButton;
+    private String mCurPostId;
 
     //停止刷新操作
     private Handler mHandler = new Handler() {
@@ -81,6 +82,7 @@ public class PostDetailsActivity extends BaseActivity {
         mPostLabelsTCView = (TagCloudView) findViewById(R.id.tcv_post_label);
         mPostCardsLLayout = (LinearLayout) findViewById(R.id.ll_post_details_cards);
         mPostDetailsFAMenu = (FloatingActionMenu) findViewById(R.id.fam_post_details);
+        mPostDetailsFAMenu.setClosedOnTouchOutside(true);
         mRefreshFAButton = (FloatingActionButton) findViewById(R.id.fab_post_details_refresh);
         mCommentFAButton = (FloatingActionButton) findViewById(R.id.fab_post_details_comment);
         mShareFAButton = (FloatingActionButton) findViewById(R.id.fab_post_details_share);
@@ -88,9 +90,10 @@ public class PostDetailsActivity extends BaseActivity {
 
     @Override
     public void initData() {
+        mCurPostId = getIntent().getStringExtra(Constants.POST_DETAILS_ID);
         OkHttpUtils
                 .get()
-                .url(Url.GET_POST_DETAILS + getIntent().getStringExtra(Constants.POST_DETAILS_ID))
+                .url(Url.GET_POST_DETAILS + mCurPostId)
                 .build()
                 .execute(new PostDetailsCallBack());
     }
@@ -172,9 +175,9 @@ public class PostDetailsActivity extends BaseActivity {
             public void onTagClick(int position) {
                 Intent intent = new Intent()
                         .putExtra(Constants.CUR_POSTS_TITLE, postBean.getCategories().get(position).getTitle())
-                        .putExtra(Constants.CUR_POSTS_ID, "" + "" + postBean.getCategories().get(position).getId())
+                        .putExtra(Constants.CUR_POSTS_ID, "" + postBean.getCategories().get(position).getId())
                         .putExtra(Constants.CATEGORY_OR_TAG, Constants.IS_CATEGORY)
-                        .putExtra(Constants.CUR_POSTS_COUNT, "" + "" + postBean.getCategories().get(position).getPost_count())
+                        .putExtra(Constants.CUR_POSTS_COUNT, "" + postBean.getCategories().get(position).getPost_count())
                         .setClass(PostDetailsActivity.this, CurPostsListActivity.class);
                 startActivity(intent);
             }
@@ -185,9 +188,9 @@ public class PostDetailsActivity extends BaseActivity {
             public void onTagClick(int position) {
                 Intent intent = new Intent()
                         .putExtra(Constants.CUR_POSTS_TITLE, postBean.getTags().get(position).getTitle())
-                        .putExtra(Constants.CUR_POSTS_ID, "" + "" + postBean.getTags().get(position).getId())
+                        .putExtra(Constants.CUR_POSTS_ID, "" + postBean.getTags().get(position).getId())
                         .putExtra(Constants.CATEGORY_OR_TAG, Constants.IS_TAG)
-                        .putExtra(Constants.CUR_POSTS_COUNT, "" + "" + postBean.getTags().get(position).getPost_count())
+                        .putExtra(Constants.CUR_POSTS_COUNT, "" + postBean.getTags().get(position).getPost_count())
                         .setClass(PostDetailsActivity.this, CurPostsListActivity.class);
                 startActivity(intent);
             }
@@ -201,14 +204,19 @@ public class PostDetailsActivity extends BaseActivity {
     private View.OnClickListener fabClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            //点击后都收起菜单
+            mPostDetailsFAMenu.close(true);
             switch (v.getId()) {
                 case R.id.fab_post_details_refresh:
-                    mPostDetailsFAMenu.close(true);
                     hideUIAtRefreshing();
                     initData();
                     break;
                 case R.id.fab_post_details_comment:
-                    showBaseToast("评论");
+                    Intent intent = new Intent()
+                            .putExtra(Constants.CUR_POSTS_ID, mCurPostId)
+                            .putExtra(Constants.CUR_POSTS_COUNT, "" + postBean.getComment_count())
+                            .setClass(PostDetailsActivity.this, PostCommentActivity.class);
+                    startActivity(intent);
                     break;
                 case R.id.fab_post_details_share:
                     showBaseToast("分享");

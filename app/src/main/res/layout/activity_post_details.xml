@@ -112,7 +112,7 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:paddingTop="10dp"
-        fab:menu_backgroundColor="#88ffffff"
+        fab:menu_backgroundColor="#66ffffff"
         fab:menu_colorNormal="@color/md_blue_400"
         fab:menu_colorPressed="@color/md_blue_500"
         fab:menu_colorRipple="@color/md_blue_300"

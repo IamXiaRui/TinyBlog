@@ -96,6 +96,8 @@ public class CurPostsListActivity extends BaseActivity {
             @Override
             public void run() {
                 mCurPostsListSRLayout.setRefreshing(true);
+                //加载网络数据
+                loaderNetWorkData();
             }
         });
     }
@@ -112,8 +114,6 @@ public class CurPostsListActivity extends BaseActivity {
         } else {
             showBaseToast("请求无效，请检查参数");
         }
-        //加载网络数据
-        loaderNetWorkData();
     }
 
     /**

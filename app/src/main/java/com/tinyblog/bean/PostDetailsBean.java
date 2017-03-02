@@ -43,7 +43,6 @@ public class PostDetailsBean {
         private CustomFieldsBean custom_fields;
         private List<CategoriesBean> categories;
         private List<TagsBean> tags;
-        private List<CommentsBean> comments;
 
         public String getTitle() {
             return title;
@@ -107,14 +106,6 @@ public class PostDetailsBean {
 
         public void setTags(List<TagsBean> tags) {
             this.tags = tags;
-        }
-
-        public List<CommentsBean> getComments() {
-            return comments;
-        }
-
-        public void setComments(List<CommentsBean> comments) {
-            this.comments = comments;
         }
 
         /**
@@ -224,58 +215,6 @@ public class PostDetailsBean {
 
             public void setPost_count(int post_count) {
                 this.post_count = post_count;
-            }
-        }
-
-        /**
-         * 文章评论
-         */
-        public static class CommentsBean {
-
-            private int id;
-            private String name;
-            private String date;
-            private String content;
-            private int parent;
-
-            public int getId() {
-                return id;
-            }
-
-            public void setId(int id) {
-                this.id = id;
-            }
-
-            public String getName() {
-                return name;
-            }
-
-            public void setName(String name) {
-                this.name = name;
-            }
-
-            public String getDate() {
-                return date;
-            }
-
-            public void setDate(String date) {
-                this.date = date;
-            }
-
-            public String getContent() {
-                return content;
-            }
-
-            public void setContent(String content) {
-                this.content = content;
-            }
-
-            public int getParent() {
-                return parent;
-            }
-
-            public void setParent(int parent) {
-                this.parent = parent;
             }
         }
     }

@@ -90,13 +90,13 @@ public class NewsFragment extends BaseFragment {
         /*if (!NetworkUtils.isConnected()) {
             showBaseToast("请检查网络");
         }*/
-        //加载网络数据
-        loaderNetWorkData();
         //开启自动刷新
         mNewsSRLayout.post(new Runnable() {
             @Override
             public void run() {
                 mNewsSRLayout.setRefreshing(true);
+                //加载网络数据
+                loaderNetWorkData();
             }
         });
     }
@@ -158,7 +158,9 @@ public class NewsFragment extends BaseFragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 NewsListRootBean.PostsBean postItemAtPosition = (NewsListRootBean.PostsBean) parent.getItemAtPosition(position);
-                Intent postIntent = new Intent().putExtra(Constants.POST_DETAILS_ID, String.valueOf(postItemAtPosition.getId())).setClass(getContext(), PostDetailsActivity.class);
+                Intent postIntent = new Intent()
+                        .putExtra(Constants.POST_DETAILS_ID, String.valueOf(postItemAtPosition.getId()))
+                        .setClass(getContext(), PostDetailsActivity.class);
                 getContext().startActivity(postIntent);
             }
         });
