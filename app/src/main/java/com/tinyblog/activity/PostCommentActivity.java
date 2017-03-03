@@ -6,16 +6,22 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
 import com.blankj.utilcode.utils.NetworkUtils;
 import com.google.gson.Gson;
 import com.tinyblog.R;
+import com.tinyblog.adapter.PostCommentAdapter;
 import com.tinyblog.base.BaseActivity;
 import com.tinyblog.bean.PostCommentBean;
 import com.tinyblog.sys.Constants;
 import com.tinyblog.sys.Url;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
+
+import java.util.List;
 
 import okhttp3.Call;
 
@@ -26,6 +32,7 @@ import okhttp3.Call;
  * @remark
  */
 public class PostCommentActivity extends BaseActivity {
+    private ListView mCommentLView;
     private Toolbar mCommentTBar;
     //下拉刷新
     private SwipeRefreshLayout mCommentSRLayout;
@@ -59,12 +66,14 @@ public class PostCommentActivity extends BaseActivity {
         mCommentSRLayout = (SwipeRefreshLayout) findViewById(R.id.srl_post_comment);
         mCommentSRLayout.setColorSchemeResources(android.R.color.holo_purple, android.R.color.holo_blue_bright, android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
+
+        mCommentLView = (ListView) findViewById(R.id.lv_post_comment);
     }
 
     @Override
     public void initData() {
-        mCommentTBar.setTitle(getIntent().getStringExtra(Constants.CUR_POSTS_ID));
-        mCommentTBar.setSubtitle(getIntent().getStringExtra(Constants.CUR_POSTS_COUNT) + " 条评论");
+        mCommentTBar.setTitle("评论");
+        mCommentTBar.setSubtitle(getIntent().getStringExtra(Constants.POST_COMMNET_COUNT) + " 条评论");
         //开启自动刷新
         mCommentSRLayout.post(new Runnable() {
             @Override
@@ -101,8 +110,11 @@ public class PostCommentActivity extends BaseActivity {
             if (postCommentBean.getStatus().equals("ok")) {
                 mHandler.sendEmptyMessage(Constants.REFRESH_SUCCESS);
                 //获得数据后更新UI
-                //updateUIFromNet(postDetailsBean);
-                showBaseToast("成功");
+                List<PostCommentBean.PostBean.CommentsBean> commentsBeanList = postCommentBean.getPost().getComments();
+                if (commentsBeanList.isEmpty()) {
+                    showBaseToast("抱歉，暂无评论");
+                }
+                mCommentLView.setAdapter(new PostCommentAdapter(PostCommentActivity.this, commentsBeanList));
             } else {
                 showBaseToast("数据异常，请重新刷新");
             }
@@ -111,7 +123,24 @@ public class PostCommentActivity extends BaseActivity {
 
     @Override
     public void initEvents() {
-
+        //下拉刷新监听
+        mCommentSRLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        loaderNetWorkData();
+                    }
+                }).start();
+            }
+        });
+        mCommentLView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                showBaseToast("点击有效");
+            }
+        });
     }
 
     @Override
@@ -127,7 +156,8 @@ public class PostCommentActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.menu_item_refresh:
-                showBaseToast("刷新是没有用的——老者");
+                mCommentSRLayout.setRefreshing(true);
+                loaderNetWorkData();
                 return true;
         }
         return true;

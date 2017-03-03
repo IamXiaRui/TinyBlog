@@ -29,4 +29,6 @@ public class Constants {
     public static String IS_CATEGORY = "IS_CATEGORY";
     //标签
     public static String IS_TAG = "IS_TAG";
+    //当前文章评论数
+    public static String POST_COMMNET_COUNT = "POST_COMMNET_COUNT";
 }

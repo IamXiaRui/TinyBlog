@@ -27,4 +27,9 @@ public class AppUtil {
         }
         return result;
     }
+
+    public static String replyString(String oldString) {
+        String newString = "@ " + oldString + " : ";
+        return newString;
+    }
 }

@@ -15,20 +15,22 @@
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:subtitleTextAppearance="@style/Theme.ToolBar.Base.Subtitle"
         app:theme="@style/ToolbarTheme"
+        android:elevation="5dp"
         app:titleTextAppearance="@style/Theme.ToolBar.Base.Title" />
 
-    !-- 下拉刷新 -->
-
+    <!-- 下拉刷新 -->
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/srl_post_comment"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
         <!--分类列表-->
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_post_comment"
+        <ListView
+            android:id="@+id/lv_post_comment"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
     </android.support.v4.widget.SwipeRefreshLayout>
+
 </LinearLayout>

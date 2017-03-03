@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 24
-    buildToolsVersion "24.0.1"
+    buildToolsVersion '25.0.0'
     defaultConfig {
         applicationId "xr.tinyblog"
         minSdkVersion 21
@@ -17,7 +17,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    tasks.whenTaskAdded { task ->
+   /* tasks.whenTaskAdded { task ->
         if (task.name.contains("lint")
                 || task.name.contains("Aidl")//如果项目中有用到aidl则不可以舍弃这个任务
                 || task.name.contains("mockableAndroidJar")//用不到测试的时候就可以先关闭
@@ -28,7 +28,7 @@ android {
         ) {
             task.enabled = false
         }
-    }
+    }*/
 }
 
 dependencies {

@@ -213,8 +213,8 @@ public class PostDetailsActivity extends BaseActivity {
                     break;
                 case R.id.fab_post_details_comment:
                     Intent intent = new Intent()
-                            .putExtra(Constants.CUR_POSTS_ID, mCurPostId)
-                            .putExtra(Constants.CUR_POSTS_COUNT, "" + postBean.getComment_count())
+                            .putExtra(Constants.POST_DETAILS_ID, mCurPostId)
+                            .putExtra(Constants.POST_COMMNET_COUNT, "" + postBean.getComment_count())
                             .setClass(PostDetailsActivity.this, PostCommentActivity.class);
                     startActivity(intent);
                     break;
