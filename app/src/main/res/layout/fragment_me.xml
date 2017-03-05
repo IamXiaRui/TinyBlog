@@ -1,13 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:background="@null">
 
-    <TextView
+    <View
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="Me" />
+        android:layout_height="180dp"
+        android:background="@color/md_blue_400" />
 
-</LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:background="@null"
+        android:elevation="3dp">
+
+        <ImageView
+            android:id="@+id/iv_me_header"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="18dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/icon_header_me" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv_me_header"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            android:text="在能驾驭的领域，做个自由的行者"
+            android:textColor="@color/md_white_1000"
+            android:textSize="14sp" />
+
+    </RelativeLayout>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cv_me_one"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="140dp"
+        android:background="@color/md_white_1000"
+        android:elevation="3dp">
+
+    </android.support.v7.widget.CardView>
+
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cv_me_two"
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:layout_below="@id/cv_me_one"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/md_white_1000"
+        android:elevation="3dp">
+
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cv_me_three"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_below="@id/cv_me_two"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/md_white_1000"
+        android:elevation="3dp">
+
+
+    </android.support.v7.widget.CardView>
+
+</RelativeLayout>
