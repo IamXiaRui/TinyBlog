@@ -15,7 +15,6 @@ import com.tinyblog.utils.AppUtil;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 /**
  * @author xiarui
@@ -79,8 +78,12 @@ public class PostCommentAdapter extends BaseAdapter {
             }
             // 得到一个ViewHolder
             ParentViewHolder parentHolder = ParentViewHolder.getViewHolder(convertView);
-            parentHolder.parentIconImage.setImageResource(headerIconList[new Random().nextInt(8)]);
             parentHolder.parentNameText.setText(replyName);
+            if(replyName.equals("我")){
+                parentHolder.parentIconImage.setImageResource(R.drawable.icon_header_me);
+            }else{
+                parentHolder.parentIconImage.setImageResource(headerIconList[position % 8]);
+            }
             parentHolder.parentTimeText.setText(commentsBean.getDate());
             parentHolder.parentContentText.setText(AppUtil.fromHtml(commentsBean.getContent()));
         } else if (getItemViewType(position) == CHILD_TYPE) {
@@ -89,8 +92,12 @@ public class PostCommentAdapter extends BaseAdapter {
             }
             // 得到一个ViewHolder
             ChildViewHolder childHolder = ChildViewHolder.getViewHolder(convertView);
-            childHolder.childIconImage.setImageResource(headerIconList[new Random().nextInt(8)]);
             childHolder.childNameText.setText(replyName);
+            if(replyName.equals("我")){
+                childHolder.childIconImage.setImageResource(R.drawable.icon_header_me);
+            }else{
+                childHolder.childIconImage.setImageResource(headerIconList[position % 8]);
+            }
             childHolder.childTimeText.setText(commentsBean.getDate());
             String responseName = mCommentsBeanList.get(position - 1).getName();
             responseName = checkNameString(responseName);

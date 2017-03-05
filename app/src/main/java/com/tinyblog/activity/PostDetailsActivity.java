@@ -105,6 +105,7 @@ public class PostDetailsActivity extends BaseActivity {
 
         @Override
         public void onError(Call call, Exception e, int id) {
+            mPostPBar.setVisibility(View.INVISIBLE);
             if (!NetworkUtils.isConnected()) {
                 showBaseToast("获取失败，请检查网络连接");
             }

@@ -119,6 +119,7 @@ public class NewsFragment extends BaseFragment {
 
         @Override
         public void onError(Call call, Exception e, int id) {
+            mNewsSRLayout.setRefreshing(false);//设置不刷新
             if (!NetworkUtils.isConnected()) {
                 showBaseToast("刷新失败，请检查网络连接");
             }

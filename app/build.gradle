@@ -17,18 +17,18 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-   /* tasks.whenTaskAdded { task ->
+   tasks.whenTaskAdded { task ->
         if (task.name.contains("lint")
                 || task.name.contains("Aidl")//如果项目中有用到aidl则不可以舍弃这个任务
-                || task.name.contains("mockableAndroidJar")//用不到测试的时候就可以先关闭
-                || task.name.contains("UnitTest")
+                || task.name.contains("mockableAndroidJar")
+                || task.name.contains("UnitTest")//用不到测试的时候就可以先关闭
                 || task.name.contains("AndroidTest")
                 || task.name.contains("Ndk")//用不到NDK和JNI的也关闭掉
                 || task.name.contains("Jni")
         ) {
             task.enabled = false
         }
-    }*/
+    }
 }
 
 dependencies {
@@ -46,8 +46,8 @@ dependencies {
     compile 'com.youth.banner:banner:1.4.8'
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'com.zhy:okhttputils:2.6.2'
+    compile 'com.squareup.okhttp3:okhttp:3.3.1'
     compile 'com.github.linger1216:labelview:v1.1.1'
-    compile 'com.squareup.okhttp3:okhttp:3.5.0'
     compile 'com.blankj:utilcode:1.3.5'
     compile files('libs/gson-2.8.0.jar')
     compile 'com.zzhoujay.richtext:richtext:2.4.0'

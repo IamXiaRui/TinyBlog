@@ -1,13 +1,18 @@
 package com.tinyblog.activity;
 
+import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.blankj.utilcode.utils.NetworkUtils;
@@ -15,6 +20,7 @@ import com.google.gson.Gson;
 import com.tinyblog.R;
 import com.tinyblog.adapter.PostCommentAdapter;
 import com.tinyblog.base.BaseActivity;
+import com.tinyblog.bean.CommentResponseBean;
 import com.tinyblog.bean.PostCommentBean;
 import com.tinyblog.sys.Constants;
 import com.tinyblog.sys.Url;
@@ -34,6 +40,9 @@ import okhttp3.Call;
 public class PostCommentActivity extends BaseActivity {
     private ListView mCommentLView;
     private Toolbar mCommentTBar;
+    private EditText mCommentInputEText;
+    private String mPostThreadId;  //文章评论Id
+    private ImageView mCommentSendImage;
     //下拉刷新
     private SwipeRefreshLayout mCommentSRLayout;
     //停止刷新操作
@@ -68,6 +77,8 @@ public class PostCommentActivity extends BaseActivity {
                 android.R.color.holo_red_light);
 
         mCommentLView = (ListView) findViewById(R.id.lv_post_comment);
+        mCommentInputEText = (EditText) findViewById(R.id.et_comment_input);
+        mCommentSendImage = (ImageView) findViewById(R.id.iv_comment_send);
     }
 
     @Override
@@ -99,6 +110,7 @@ public class PostCommentActivity extends BaseActivity {
     private class PostCommentCallBack extends StringCallback {
         @Override
         public void onError(Call call, Exception e, int id) {
+            mCommentSRLayout.setRefreshing(false);  //设置不刷新
             if (!NetworkUtils.isConnected()) {
                 showBaseToast("获取失败，请检查网络连接");
             }
@@ -109,11 +121,13 @@ public class PostCommentActivity extends BaseActivity {
             PostCommentBean postCommentBean = new Gson().fromJson(response, PostCommentBean.class);
             if (postCommentBean.getStatus().equals("ok")) {
                 mHandler.sendEmptyMessage(Constants.REFRESH_SUCCESS);
+                mPostThreadId = postCommentBean.getPost().getCustom_fields().getDuoshuo_thread_id().get(0);
                 //获得数据后更新UI
                 List<PostCommentBean.PostBean.CommentsBean> commentsBeanList = postCommentBean.getPost().getComments();
                 if (commentsBeanList.isEmpty()) {
                     showBaseToast("抱歉，暂无评论");
                 }
+                mCommentTBar.setSubtitle(commentsBeanList.size() + " 条评论");
                 mCommentLView.setAdapter(new PostCommentAdapter(PostCommentActivity.this, commentsBeanList));
             } else {
                 showBaseToast("数据异常，请重新刷新");
@@ -138,9 +152,96 @@ public class PostCommentActivity extends BaseActivity {
         mCommentLView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                showBaseToast("点击有效");
+                showSoftKeyboard();     //显示软键盘
             }
         });
+
+        //处理EditText输入法焦点问题
+        mCommentLView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                hideSoftKeyboard(); //隐藏软键盘
+                return false;
+            }
+        });
+
+        mCommentSendImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String msg = mCommentInputEText.getText().toString();
+                if (msg.equals("") || msg == null) {
+                    showBaseToast("请输入评论内容");
+                } else {
+                    hideSoftKeyboard(); //隐藏软键盘
+                    mCommentInputEText.setText("");
+                    mCommentInputEText.setHint("写下你的评论");
+                    showBaseToast("正在发送...");
+                    sendCommentWithNet(mPostThreadId, msg);
+                }
+            }
+        });
+
+    }
+
+    private void sendCommentWithNet(String threadId, String msg) {
+        OkHttpUtils
+                .post()
+                .url(Url.SEND_COMMENT)
+                .addParams("short_name", "iamxiarui")
+                .addParams("secret", "733356696f6b8ccb1c2d9afd147bd330")
+                .addParams("thread_id", threadId)
+                .addParams("message", msg)
+                .addParams("author_name", "我")
+                .build()
+                .execute(new SendCommentCallBack());
+    }
+
+    private class SendCommentCallBack extends StringCallback {
+        @Override
+        public void onError(Call call, Exception e, int id) {
+            if (!NetworkUtils.isConnected()) {
+                showBaseToast("评论失败，请检查网络连接");
+            }
+        }
+
+        @Override
+        public void onResponse(String response, int id) {
+            CommentResponseBean commentResponseBean = new Gson().fromJson(response, CommentResponseBean.class);
+            if (commentResponseBean.getCode() == 0) {
+                mCommentSRLayout.setRefreshing(true);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        showBaseToast("评论成功！正在刷新...");
+                        loaderNetWorkData();
+                    }
+                }, 8000);
+            } else {
+                showBaseToast("评论失败");
+            }
+        }
+    }
+
+    /**
+     * 显示软键盘
+     */
+    private void showSoftKeyboard() {
+        mCommentInputEText.setFocusable(true);
+        mCommentInputEText.setFocusableInTouchMode(true);
+        mCommentInputEText.requestFocus();
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
+    }
+
+    /**
+     * 隐藏软键盘
+     */
+    private void hideSoftKeyboard() {
+        mCommentLView.setFocusable(true);
+        mCommentLView.setFocusableInTouchMode(true);
+        mCommentLView.requestFocus();
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(mCommentInputEText.getWindowToken(), 0);
     }
 
     @Override

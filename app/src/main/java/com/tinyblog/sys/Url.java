@@ -18,6 +18,6 @@ public class Url {
     public static String GET_POST_COMMENT = "http://www.iamxiarui.com/xr-api/get_post/?id=";
 
     /*====== DuoShuo Comment Url =====*/
-
+    public static String SEND_COMMENT = "http://api.duoshuo.com/posts/create.json";
 
 }

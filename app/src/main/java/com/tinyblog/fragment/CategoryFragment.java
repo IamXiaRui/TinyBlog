@@ -107,6 +107,7 @@ public class CategoryFragment extends BaseFragment {
     private class CategoryCallBack extends StringCallback {
         @Override
         public void onError(Call call, Exception e, int id) {
+            mCategorySRLayout.setRefreshing(false);//设置不刷新
             if (!NetworkUtils.isConnected()) {
                 showBaseToast("获取失败，请检查网络连接");
             }

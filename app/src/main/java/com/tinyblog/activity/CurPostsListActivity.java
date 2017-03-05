@@ -130,6 +130,7 @@ public class CurPostsListActivity extends BaseActivity {
     private class CurPostsListCallBack extends StringCallback {
         @Override
         public void onError(Call call, Exception e, int id) {
+            mCurPostsListSRLayout.setRefreshing(false); //设置不刷新
             if (!NetworkUtils.isConnected()) {
                 showBaseToast("刷新失败，请检查网络连接");
             }
