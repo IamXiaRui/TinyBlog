@@ -153,6 +153,9 @@ public class PostCommentActivity extends BaseActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 showSoftKeyboard();     //显示软键盘
+                PostCommentBean.PostBean.CommentsBean itemCommentBean = (PostCommentBean.PostBean.CommentsBean) parent.getItemAtPosition(position);
+                mCommentInputEText.setText("@" + itemCommentBean.getName() + ": ");
+                mCommentInputEText.setSelection(mCommentInputEText.getText().length());
             }
         });
 
