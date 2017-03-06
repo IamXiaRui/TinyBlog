@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/tb_tags_cloud"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/md_blue_400"
+        android:elevation="5dp"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:subtitleTextAppearance="@style/Theme.ToolBar.Base.Subtitle"
+        app:theme="@style/ToolbarTheme"
+        app:titleTextAppearance="@style/Theme.ToolBar.Base.Title" />
+
+    <com.moxun.tagcloudlib.view.TagCloudView
+        android:id="@+id/tcv_tags_cloud"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:autoScrollMode="uniform"
+        app:darkColor="@color/md_blue_300"
+        app:lightColor="@color/md_blue_600"
+        app:radiusPercent="0.75"
+        app:scrollSpeed="3" />
+
+</RelativeLayout>

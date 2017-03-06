@@ -14,7 +14,6 @@ import com.blankj.utilcode.utils.NetworkUtils;
 import com.google.gson.Gson;
 import com.tinyblog.R;
 import com.tinyblog.activity.PostDetailsActivity;
-import com.tinyblog.activity.SearchActivity;
 import com.tinyblog.adapter.NewsListAdapter;
 import com.tinyblog.base.BaseFragment;
 import com.tinyblog.bean.NewsListRootBean;
@@ -43,7 +42,7 @@ public class NewsFragment extends BaseFragment {
     //顶部轮播 Bannner
     private Banner mHeaderBanner;
     //搜索按钮，新增文章按钮
-    private ImageButton searchIButton, addIButton;
+    private ImageButton logoIButton, addIButton;
     //下拉刷新
     private SwipeRefreshLayout mNewsSRLayout;
     //停止刷新操作
@@ -68,7 +67,8 @@ public class NewsFragment extends BaseFragment {
     public void initView() {
         mToolbarText = (TextView) findViewById(R.id.tv_fragment_header_toolbar);
         mToolbarText.setText("最近");
-        searchIButton = (ImageButton) findViewById(R.id.ib_news_search);
+        logoIButton = (ImageButton) findViewById(R.id.ib_news_search);
+        logoIButton.setImageResource(R.drawable.svg_logo);
         addIButton = (ImageButton) findViewById(R.id.ib_news_add);
 
         mNewsSRLayout = (SwipeRefreshLayout) findViewById(R.id.srl_news);
@@ -174,10 +174,10 @@ public class NewsFragment extends BaseFragment {
             }
         });
 
-        searchIButton.setOnClickListener(new View.OnClickListener() {
+        logoIButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getContext().startActivity(new Intent().setClass(getContext(), SearchActivity.class));
+                showBaseToast("我是一个 Logo 而已");
             }
         });
 

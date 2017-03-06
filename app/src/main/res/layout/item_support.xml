@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_item_lib_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="6dp"
+        android:text="名字"
+        android:textColor="@color/md_grey_800"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tv_item_lib_author"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="6dp"
+        android:text="作者"
+        android:textColor="@color/md_grey_500"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/tv_item_lib_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="6dp"
+        android:text="开源库介绍"
+        android:textColor="@color/md_grey_700"
+        android:textSize="16sp" />
+
+</LinearLayout>

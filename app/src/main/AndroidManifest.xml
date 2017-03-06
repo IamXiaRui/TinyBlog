@@ -34,14 +34,24 @@
             android:name=".activity.PostDetailsActivity"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".activity.SearchActivity"
+            android:name=".activity.TagsCloudActivity"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".activity.CurPostsListActivity"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".activity.PostCommentActivity"
+            android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden|stateUnchanged"
+            tools:targetApi="cupcake" />
+        <activity
+            android:name=".activity.PersonResumeActivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".activity.AboutActivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".activity.SupportActivity"
             android:theme="@style/AppTheme" />
     </application>
 

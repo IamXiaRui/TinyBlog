@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@null">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/tb_about"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/md_blue_400"
+        android:elevation="5dp"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:subtitleTextAppearance="@style/Theme.ToolBar.Base.Subtitle"
+        app:theme="@style/ToolbarTheme"
+        app:titleTextAppearance="@style/Theme.ToolBar.Base.Title" />
+
+    <ImageView
+        android:id="@+id/iv_about_logo"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_below="@id/tb_about"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:src="@mipmap/icon_logo" />
+
+    <TextView
+        android:id="@+id/tv_about_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/iv_about_logo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:text="TinyBlog"
+        android:textColor="@color/md_black_1000"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/tv_about_version"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_about_name"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp"
+        android:text="轻博客 - 1.0.2"
+        android:textColor="@color/md_grey_600"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/tv_about_myweb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_about_version"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="48dp"
+        android:autoLink="web"
+        android:textColor="@color/md_grey_600"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tv_about_appweb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_about_myweb"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="48dp"
+        android:autoLink="web"
+        android:textColor="@color/md_grey_600"
+        android:textSize="16sp" />
+
+</RelativeLayout>

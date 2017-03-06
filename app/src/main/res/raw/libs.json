@@ -1,0 +1,106 @@
+{
+  "libs":[
+  	{
+        "name": "BottomNavigation",
+        "author": "Ashok-Varma",
+        "url": "https://github.com/Ashok-Varma/BottomNavigation",
+        "desc":"This Library helps users to use Bottom Navigation Bar (A new pattern from google) with ease and allows ton of customizations."
+    },
+    {
+        "name": "MaterialEditText",
+        "author": "rengwuxian",
+        "url": "https://github.com/rengwuxian/MaterialEditText",
+        "desc":"EditText in Material Design."
+    },
+    {
+        "name": "banner",
+        "author": "youth5201314",
+        "url": "https://github.com/youth5201314/banner",
+        "desc":"Android广告图片轮播控件，支持无限循环和多种主题，可以灵活设置轮播样式、动画、轮播和切换时间、位置、图片加载框架等！"
+    },
+    {
+        "name": "glide",
+        "author": "bumptech",
+        "url": "https://github.com/bumptech/glide",
+        "desc":"An image loading and caching library for Android focused on smooth scrolling."
+    },
+    {
+        "name": "okhttputils",
+        "author": "hongyangAndroid",
+        "url": "https://github.com/hongyangAndroid/okhttputils",
+        "desc":"okhttp的辅助类."
+    },
+    {
+        "name": "okhttp",
+        "author": "square",
+        "url": "https://github.com/square/okhttp",
+        "desc":"An HTTP+HTTP/2 client for Android and Java applications."
+    },   
+    {
+        "name": "labelview",
+        "author": "linger1216",
+        "url": "https://github.com/linger1216/labelview",
+        "desc":"Sometimes, we need to show a label above an ImageView or any other views. Well, LabelView will be able to help you. It's easy to implement as well!"
+    },   
+    {
+        "name": "AndroidUtilCode",
+        "author": "Blankj",
+        "url": "https://github.com/Blankj/AndroidUtilCode",
+        "desc":"Android developers should collect the following utils(updating)."
+    },   
+    {
+        "name": "Richtext",
+        "author": "zzhoujay",
+        "url": "https://github.com/zzhoujay/RichText",
+        "desc":"Android平台下的富文本解析器，支持Html和Markdown。"
+    },   
+    {
+        "name": "TagCloudView",
+        "author": "kingideayou",
+        "url": "https://github.com/kingideayou/TagCloudView",
+        "desc":"支持 SingleLine 模式的标签云效果。"
+    },   
+    {
+        "name": "MaterialList",
+        "author": "dexafree",
+        "url": "https://github.com/dexafree/MaterialList",
+        "desc":"An Android library aimed to get the beautiful CardViews that Google shows at its official design specifications."
+    },   
+    {
+        "name": "recyclerview-animators",
+        "author": "wasabeef",
+        "url": "https://github.com/wasabeef/recyclerview-animators",
+        "desc":"An Android Animation library which easily add itemanimator to RecyclerView items."
+    },   
+    {
+        "name": "RecyclerViewItemAnimators",
+        "author": "gabrielemariotti",
+        "url": "https://github.com/gabrielemariotti/RecyclerViewItemAnimators",
+        "desc":"An Android library which provides simple Item animations to RecyclerView items."
+    },   
+    {
+        "name": "Android-AdvancedWebView",
+        "author": "delight-im",
+        "url": "https://github.com/delight-im/Android-AdvancedWebView",
+        "desc":"Enhanced WebView component for Android that works as intended out of the box."
+    },   
+    {
+        "name": "FloatingActionButton",
+        "author": "Clans",
+        "url": "https://github.com/Clans/FloatingActionButton",
+        "desc":"Android Floating Action Button based on Material Design specification."
+    },  
+    {
+        "name": "3dTagCloudAndroid",
+        "author": "misakuo",
+        "url": "https://github.com/misakuo/3dTagCloudAndroid",
+        "desc":"Tagcloud component for android."
+    },   
+    {
+        "name": "material-dialogs",
+        "author": "afollestad",
+        "url": "https://github.com/afollestad/material-dialogs",
+        "desc":"A beautiful, fluid, and customizable dialogs API."
+    }
+ ]
+}

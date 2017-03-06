@@ -20,4 +20,8 @@ public class Url {
     /*====== DuoShuo Comment Url =====*/
     public static String SEND_COMMENT = "http://api.duoshuo.com/posts/create.json";
 
+
+    //天气URL
+    public static String NOW_WEATHER = "http://wthrcdn.etouch.cn/weather_mini?city=";
+
 }

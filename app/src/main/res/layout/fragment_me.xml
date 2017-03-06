@@ -16,6 +16,17 @@
         android:elevation="3dp">
 
         <ImageView
+            android:id="@+id/iv_me_refresh"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="18dp"
+            android:layout_marginRight="8dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/svg_refresh" />
+
+
+        <ImageView
             android:id="@+id/iv_me_header"
             android:layout_width="72dp"
             android:layout_height="72dp"
@@ -25,6 +36,7 @@
             android:src="@drawable/icon_header_me" />
 
         <TextView
+            android:id="@+id/tv_me_slogan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/iv_me_header"
@@ -36,45 +48,13 @@
 
     </RelativeLayout>
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/cv_me_one"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="140dp"
-        android:background="@color/md_white_1000"
-        android:elevation="3dp">
+    <!--第一个卡片-->
+    <include layout="@layout/include_me_card1" />
 
-    </android.support.v7.widget.CardView>
+    <!--第二个卡片-->
+    <include layout="@layout/include_me_card2" />
 
-
-    <android.support.v7.widget.CardView
-        android:id="@+id/cv_me_two"
-        android:layout_width="match_parent"
-        android:layout_height="140dp"
-        android:layout_below="@id/cv_me_one"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="16dp"
-        android:background="@color/md_white_1000"
-        android:elevation="3dp">
-
-
-    </android.support.v7.widget.CardView>
-
-    <android.support.v7.widget.CardView
-        android:id="@+id/cv_me_three"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_below="@id/cv_me_two"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="16dp"
-        android:background="@color/md_white_1000"
-        android:elevation="3dp">
-
-
-    </android.support.v7.widget.CardView>
+    <!--第三个卡片-->
+    <include layout="@layout/include_me_card3" />
 
 </RelativeLayout>

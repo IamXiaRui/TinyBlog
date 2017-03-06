@@ -7,6 +7,8 @@ import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.Gravity;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.blankj.utilcode.utils.NetworkUtils;
@@ -19,6 +21,7 @@ import com.google.gson.Gson;
 import com.squareup.picasso.RequestCreator;
 import com.tinyblog.R;
 import com.tinyblog.activity.CurPostsListActivity;
+import com.tinyblog.activity.TagsCloudActivity;
 import com.tinyblog.base.BaseFragment;
 import com.tinyblog.bean.CategoryBean;
 import com.tinyblog.sys.Constants;
@@ -41,6 +44,7 @@ import okhttp3.Call;
 public class CategoryFragment extends BaseFragment {
 
     private TextView mToolbarText;
+    private ImageButton mTagsIButton;
     private MaterialListView mCategoryLView;
     private List<CategoryBean.CategoriesBean> categoriesList;
     //图片集合
@@ -71,6 +75,8 @@ public class CategoryFragment extends BaseFragment {
     public void initView() {
         mToolbarText = (TextView) findViewById(R.id.tv_fragment_header_toolbar);
         mToolbarText.setText("分类");
+        mTagsIButton = (ImageButton) findViewById(R.id.ib_news_search);
+        mTagsIButton.setImageResource(R.drawable.svg_tag);
         mCategoryLView = (MaterialListView) findViewById(R.id.mlv_category_list);
         mCategoryLView.setItemAnimator(new OvershootInLeftAnimator());
         mCategoryLView.getItemAnimator().setAddDuration(400);
@@ -165,6 +171,12 @@ public class CategoryFragment extends BaseFragment {
                         loaderNetWorkData();
                     }
                 }).start();
+            }
+        });
+        mTagsIButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), TagsCloudActivity.class));
             }
         });
         mCategoryLView.addOnItemTouchListener(new RecyclerItemClickListener.OnItemClickListener() {
