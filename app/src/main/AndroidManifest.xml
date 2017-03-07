@@ -54,13 +54,16 @@
             android:name=".activity.SupportActivity"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".activity.FindPostsListActivity"
+            android:name=".activity.ZhihuPostsListActivity"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".activity.ZhihuPostDetailActivity"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".activity.CollectPostListActivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".activity.GithubTrendingActivity"
             android:theme="@style/AppTheme" />
     </application>
 

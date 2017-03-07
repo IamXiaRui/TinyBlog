@@ -39,7 +39,7 @@ import okhttp3.Call;
  * @remark
  */
 
-public class FindPostsListActivity extends BaseActivity {
+public class ZhihuPostsListActivity extends BaseActivity {
     private ImageView mPostBackImage;
     private Toolbar mFindListTBar;
     private ListView mPostsListView;
@@ -49,7 +49,7 @@ public class FindPostsListActivity extends BaseActivity {
 
     @Override
     public int getLayoutId() {
-        return R.layout.activity_find_posts;
+        return R.layout.activity_zhihu_posts;
     }
 
     @Override
@@ -83,6 +83,7 @@ public class FindPostsListActivity extends BaseActivity {
     private void loadDataFromNet() {
         OkHttpUtils
                 .get()
+                .tag(this)
                 .url(Url.ZHIHU_RECENT)
                 .build()
                 .execute(new ZhihuRecentCallBack());
@@ -93,23 +94,22 @@ public class FindPostsListActivity extends BaseActivity {
         @Override
         public void onError(Call call, Exception e, int id) {
             if (!NetworkUtils.isConnected()) {
-                Toast.makeText(FindPostsListActivity.this, "刷新失败，请检查网络连接", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ZhihuPostsListActivity.this, "刷新失败，请检查网络连接", Toast.LENGTH_SHORT).show();
             }
         }
 
         @Override
         public void onResponse(String response, int id) {
-            Toast.makeText(FindPostsListActivity.this, "刷新成功", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ZhihuPostsListActivity.this, "刷新成功", Toast.LENGTH_SHORT).show();
             ZhihuRootBean zhihuRootBean = new Gson().fromJson(response, ZhihuRootBean.class);
             mFindListTBar.setTitle(zhihuRootBean.getDate().substring(0, 4)
                     + "-" + zhihuRootBean.getDate().substring(4, 6)
                     + "-" + zhihuRootBean.getDate().substring(6, 8));
             List<ZhihuPostBean> zhihuPostBean = handleNetData(zhihuRootBean);
-            mPostsListView.setAdapter(new ZhihuListAdapter(FindPostsListActivity.this, zhihuPostBean));
+            mPostsListView.setAdapter(new ZhihuListAdapter(ZhihuPostsListActivity.this, zhihuPostBean));
             setListViewHeightBasedOnChildren(mPostsListView);
         }
     }
-
     /**
      * 处理网络数据
      */
@@ -156,11 +156,17 @@ public class FindPostsListActivity extends BaseActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ZhihuPostBean itemZhihuPostBean = (ZhihuPostBean) parent.getItemAtPosition(position);
-                Intent intent = new Intent(FindPostsListActivity.this, ZhihuPostDetailActivity.class)
+                Intent intent = new Intent(ZhihuPostsListActivity.this, ZhihuPostDetailActivity.class)
                         .putExtra(Constants.ZHIHU_POST_ID, "" + itemZhihuPostBean.getPostId());
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        OkHttpUtils.getInstance().cancelTag(this);
     }
 
     @Override

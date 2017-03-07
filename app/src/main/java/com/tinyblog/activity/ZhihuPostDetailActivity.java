@@ -9,7 +9,6 @@ import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
@@ -188,6 +187,12 @@ public class ZhihuPostDetailActivity extends BaseActivity {
                 }
             }
         });
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        OkHttpUtils.getInstance().cancelTag(this);
     }
 
     @Override

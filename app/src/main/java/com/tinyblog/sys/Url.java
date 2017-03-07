@@ -27,4 +27,6 @@ public class Url {
     public static String ZHIHU_RECENT = "http://news-at.zhihu.com/api/4/news/latest";
     //知乎详情 Url
     public static String ZHIHU_POST_DETAIL = "http://news-at.zhihu.com/api/4/news/";
+    //Github Trending Url
+    public static String GITHUB_TRENDING = "http://anly.leanapp.cn/api/github/trending/java?since=daily";
 }

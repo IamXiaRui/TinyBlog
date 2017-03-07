@@ -11,7 +11,8 @@ import android.widget.TextView;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.bumptech.glide.Glide;
 import com.tinyblog.R;
-import com.tinyblog.activity.FindPostsListActivity;
+import com.tinyblog.activity.GithubTrendingActivity;
+import com.tinyblog.activity.ZhihuPostsListActivity;
 import com.tinyblog.base.BaseFragment;
 
 /**
@@ -22,8 +23,8 @@ import com.tinyblog.base.BaseFragment;
 public class FindFragment extends BaseFragment {
     private ImageButton mRightRefreshIButton;
     private TextView mMidTitleText;
-    private ImageView mZhiHuImage, mOtherImage;
-    private CardView mZhiHuCView;
+    private ImageView mZhiHuImage, mGithubImage, mOtherImage;
+    private CardView mZhiHuCView, mGithubCView;
 
     @Override
     public int getLayoutId() {
@@ -35,8 +36,10 @@ public class FindFragment extends BaseFragment {
         mRightRefreshIButton = (ImageButton) findViewById(R.id.ib_find_ask);
         mMidTitleText = (TextView) findViewById(R.id.tv_find_header);
         mZhiHuImage = (ImageView) findViewById(R.id.iv_find_zhihu);
+        mGithubImage = (ImageView) findViewById(R.id.iv_find_github);
         mOtherImage = (ImageView) findViewById(R.id.iv_find_other);
         mZhiHuCView = (CardView) findViewById(R.id.cv_find_zhihu);
+        mGithubCView = (CardView) findViewById(R.id.cv_find_github);
 
     }
 
@@ -44,6 +47,7 @@ public class FindFragment extends BaseFragment {
     public void initData() {
         mMidTitleText.setText("发现");
         Glide.with(getContext()).load(R.drawable.heng_1).into(mZhiHuImage);
+        Glide.with(getContext()).load(R.drawable.heng_5).into(mGithubImage);
         Glide.with(getContext()).load(R.drawable.heng_3).into(mOtherImage);
     }
 
@@ -53,7 +57,13 @@ public class FindFragment extends BaseFragment {
         mZhiHuCView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getContext(), FindPostsListActivity.class), ActivityOptions.makeSceneTransitionAnimation(getActivity(), mZhiHuCView, "zhihu").toBundle());
+                startActivity(new Intent(getContext(), ZhihuPostsListActivity.class), ActivityOptions.makeSceneTransitionAnimation(getActivity(), mZhiHuCView, "zhihu").toBundle());
+            }
+        });
+        mGithubCView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), GithubTrendingActivity.class), ActivityOptions.makeSceneTransitionAnimation(getActivity(), mGithubCView, "github").toBundle());
             }
         });
         mRightRefreshIButton.setOnClickListener(new View.OnClickListener() {
