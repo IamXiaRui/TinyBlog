@@ -23,5 +23,8 @@ public class Url {
 
     //天气URL
     public static String NOW_WEATHER = "http://wthrcdn.etouch.cn/weather_mini?city=";
-
+    //知乎Url
+    public static String ZHIHU_RECENT = "http://news-at.zhihu.com/api/4/news/latest";
+    //知乎详情 Url
+    public static String ZHIHU_POST_DETAIL = "http://news-at.zhihu.com/api/4/news/";
 }

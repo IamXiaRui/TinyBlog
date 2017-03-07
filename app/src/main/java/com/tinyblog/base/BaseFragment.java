@@ -26,11 +26,11 @@ public abstract class BaseFragment extends Fragment implements UIInterface {
         //初始化View
         initView();
 
-        //绑定监听器与适配器
-        initEvents();
-
         //初始化界面数据
         initData();
+
+        //绑定监听器与适配器
+        initEvents();
 
         return baseView;
     }

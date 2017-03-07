@@ -65,11 +65,11 @@ public class NewsFragment extends BaseFragment {
 
     @Override
     public void initView() {
-        mToolbarText = (TextView) findViewById(R.id.tv_fragment_header_toolbar);
+        mToolbarText = (TextView) findViewById(R.id.tv_find_header);
         mToolbarText.setText("最近");
-        logoIButton = (ImageButton) findViewById(R.id.ib_news_search);
+        logoIButton = (ImageButton) findViewById(R.id.ib_find_ask);
         logoIButton.setImageResource(R.drawable.svg_logo);
-        addIButton = (ImageButton) findViewById(R.id.ib_news_add);
+        addIButton = (ImageButton) findViewById(R.id.ib_find_refresh);
 
         mNewsSRLayout = (SwipeRefreshLayout) findViewById(R.id.srl_news);
         mNewsSRLayout.setColorSchemeResources(android.R.color.holo_purple, android.R.color.holo_blue_bright, android.R.color.holo_orange_light,

@@ -73,9 +73,9 @@ public class CategoryFragment extends BaseFragment {
 
     @Override
     public void initView() {
-        mToolbarText = (TextView) findViewById(R.id.tv_fragment_header_toolbar);
+        mToolbarText = (TextView) findViewById(R.id.tv_find_header);
         mToolbarText.setText("分类");
-        mTagsIButton = (ImageButton) findViewById(R.id.ib_news_search);
+        mTagsIButton = (ImageButton) findViewById(R.id.ib_find_ask);
         mTagsIButton.setImageResource(R.drawable.svg_tag);
         mCategoryLView = (MaterialListView) findViewById(R.id.mlv_category_list);
         mCategoryLView.setItemAnimator(new OvershootInLeftAnimator());

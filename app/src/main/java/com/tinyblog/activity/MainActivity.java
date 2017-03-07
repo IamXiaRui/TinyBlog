@@ -11,7 +11,7 @@ import com.tinyblog.base.BaseActivity;
 import com.tinyblog.fragment.CategoryFragment;
 import com.tinyblog.fragment.MeFragment;
 import com.tinyblog.fragment.NewsFragment;
-import com.tinyblog.fragment.SearchFragment;
+import com.tinyblog.fragment.FindFragment;
 import com.tinyblog.sys.Constants;
 
 /**
@@ -28,7 +28,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
     private Fragment mCurFragment;                  //当前显示的 Fragment
     private NewsFragment newsFragment;              //主页
     private CategoryFragment categoryFragment;      //分类页
-    private SearchFragment searchFragment;          //搜索页
+    private FindFragment findFragment;          //搜索页
     private MeFragment meFragment;                  //我的页面
     private FragmentTransaction mFTransaction;      //事务
 
@@ -86,9 +86,9 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
                 switchFragmentContent(categoryFragment);
                 break;
             case 2:
-                if (searchFragment == null)
-                    searchFragment = new SearchFragment();
-                switchFragmentContent(searchFragment);
+                if (findFragment == null)
+                    findFragment = new FindFragment();
+                switchFragmentContent(findFragment);
                 break;
             case 3:
                 if (meFragment == null)

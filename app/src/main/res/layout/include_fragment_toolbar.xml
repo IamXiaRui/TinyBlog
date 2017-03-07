@@ -6,7 +6,7 @@
     android:elevation="5dp">
 
     <TextView
-        android:id="@+id/tv_fragment_header_toolbar"
+        android:id="@+id/tv_find_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -14,7 +14,7 @@
         android:textSize="18sp" />
 
     <ImageButton
-        android:id="@+id/ib_news_search"
+        android:id="@+id/ib_find_ask"
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_gravity="left|center_vertical"
@@ -23,7 +23,7 @@
         android:scaleType="centerCrop" />
 
     <ImageButton
-        android:id="@+id/ib_news_add"
+        android:id="@+id/ib_find_refresh"
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_gravity="right|center_vertical"

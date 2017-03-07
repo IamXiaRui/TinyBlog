@@ -53,6 +53,15 @@
         <activity
             android:name=".activity.SupportActivity"
             android:theme="@style/AppTheme" />
+        <activity
+            android:name=".activity.FindPostsListActivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".activity.ZhihuPostDetailActivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".activity.CollectPostListActivity"
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>

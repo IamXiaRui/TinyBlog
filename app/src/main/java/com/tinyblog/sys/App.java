@@ -5,6 +5,7 @@ import android.content.Context;
 import android.util.DisplayMetrics;
 
 import com.blankj.utilcode.utils.Utils;
+import com.raizlabs.android.dbflow.config.FlowManager;
 import com.tinyblog.R;
 import com.zhy.http.okhttp.OkHttpUtils;
 
@@ -50,6 +51,9 @@ public class App extends Application {
 
         /*===== 初始化 Utils 工具类 =====*/
         Utils.init(app);
+
+        /*===== 初始化 DBFlow =====*/
+        FlowManager.init(this);
     }
 
     public int getScreenH(Context aty) {

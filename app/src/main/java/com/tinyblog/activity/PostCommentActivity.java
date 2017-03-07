@@ -84,7 +84,7 @@ public class PostCommentActivity extends BaseActivity {
     @Override
     public void initData() {
         mCommentTBar.setTitle("评论");
-        mCommentTBar.setSubtitle(getIntent().getStringExtra(Constants.POST_COMMNET_COUNT) + " 条评论");
+        mCommentTBar.setSubtitle(getIntent().getStringExtra(Constants.POST_COMMENT_COUNT) + " 条评论");
         //开启自动刷新
         mCommentSRLayout.post(new Runnable() {
             @Override

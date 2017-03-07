@@ -13,12 +13,15 @@ import android.widget.TextView;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.blankj.utilcode.utils.NetworkUtils;
 import com.google.gson.Gson;
+import com.raizlabs.android.dbflow.sql.language.Select;
 import com.tinyblog.R;
 import com.tinyblog.activity.AboutActivity;
+import com.tinyblog.activity.CollectPostListActivity;
 import com.tinyblog.activity.PersonResumeActivity;
 import com.tinyblog.activity.SupportActivity;
 import com.tinyblog.base.BaseFragment;
 import com.tinyblog.bean.WeatherBean;
+import com.tinyblog.db.CollectModel;
 import com.tinyblog.sys.Url;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -50,6 +53,7 @@ public class MeFragment extends BaseFragment {
     private TextView mBuildWebTime;
     private TextView mSloganText;
     private ImageView mHeaderImage;
+    private TextView mCollectText;
 
     @Override
     public int getLayoutId() {
@@ -61,6 +65,7 @@ public class MeFragment extends BaseFragment {
 
         mSloganText = (TextView) findViewById(R.id.tv_me_slogan);
         mHeaderImage = (ImageView) findViewById(R.id.iv_me_header);
+        mCollectText = (TextView)findViewById(R.id.tv_me_collect);
 
         mRefreshImage = (ImageView) findViewById(R.id.iv_me_refresh);
         mResumeRLayout = (RelativeLayout) findViewById(R.id.rl_me_resume);
@@ -91,6 +96,19 @@ public class MeFragment extends BaseFragment {
         String sloganStr = readSP.getString("MY_SLOGAN", "在能驾驭的领域，做个自由的行者");
         mSloganText.setText(sloganStr);
         loadWeatherFromNet();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mCollectText.setText(queryHowManyCollectFromDB());
+    }
+
+    /**
+     * 从数据库查询有几篇收藏
+     */
+    private String queryHowManyCollectFromDB() {
+        return String.valueOf(new Select().from(CollectModel.class).queryList().size());
     }
 
     /**
@@ -249,7 +267,7 @@ public class MeFragment extends BaseFragment {
         mCollectRLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showBaseToast("暂无收藏");
+                startActivity(new Intent(getContext(),CollectPostListActivity.class));
             }
         });
 

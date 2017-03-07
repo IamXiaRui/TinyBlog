@@ -70,7 +70,7 @@ public class CurPostsListActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        mCurPostsListTBar = (Toolbar) findViewById(R.id.tb_cur_posts_list);
+        mCurPostsListTBar = (Toolbar) findViewById(R.id.tb_zhihu_list);
         setSupportActionBar(mCurPostsListTBar);
         //隐藏默认标题
         getSupportActionBar().setDisplayShowTitleEnabled(false);

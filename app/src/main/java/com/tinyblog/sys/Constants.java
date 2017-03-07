@@ -30,5 +30,7 @@ public class Constants {
     //标签
     public static String IS_TAG = "IS_TAG";
     //当前文章评论数
-    public static String POST_COMMNET_COUNT = "POST_COMMNET_COUNT";
+    public static String POST_COMMENT_COUNT = "POST_COMMENT_COUNT";
+
+    public static String  ZHIHU_POST_ID = "ZHIHU_POST_ID";
 }
