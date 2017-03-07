@@ -6,6 +6,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,9 +26,9 @@ import com.tinyblog.db.CollectModel;
 import com.tinyblog.db.CollectModel_Table;
 import com.tinyblog.sys.Constants;
 import com.tinyblog.sys.Url;
+import com.tinyblog.utils.HtmlUtil;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
-import com.zzhoujay.richtext.RichText;
 
 import java.util.List;
 
@@ -42,12 +44,12 @@ import okhttp3.Call;
 public class ZhihuPostDetailActivity extends BaseActivity {
     private Toolbar mZhihuDetailTBar;
     private ImageView mZhihuBackImage;
-    private TextView mZhihuDetailText;
     private FloatingActionButton mLoveFAButton;
     private ZhihuPostDetailBean mZhihuPostDetailBean;
     private String mCurPostId;
     //是否被收藏标志位
     private boolean IS_COLLECT;
+    private WebView mPostDetailWView;
 
     @Override
     public int getLayoutId() {
@@ -63,9 +65,15 @@ public class ZhihuPostDetailActivity extends BaseActivity {
         //添加返回按钮
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mZhihuBackImage = (ImageView) findViewById(R.id.iv_zhihu_detail_back);
-        mZhihuDetailText = (TextView) findViewById(R.id.tv_zhihu_detail);
 
         mLoveFAButton = (FloatingActionButton) findViewById(R.id.fab_zhihu_detail_love);
+        mPostDetailWView = (WebView) findViewById(R.id.wv_zhihu_detail);
+        mPostDetailWView.setOverScrollMode(View.OVER_SCROLL_NEVER);
+        mPostDetailWView.getSettings().setLoadsImagesAutomatically(true);
+        //设置 缓存模式
+        mPostDetailWView.getSettings().setCacheMode(WebSettings.LOAD_DEFAULT);
+        // 开启 DOM storage API 功能
+        mPostDetailWView.getSettings().setDomStorageEnabled(true);
     }
 
     @Override
@@ -120,7 +128,8 @@ public class ZhihuPostDetailActivity extends BaseActivity {
             mZhihuPostDetailBean = new Gson().fromJson(response, ZhihuPostDetailBean.class);
             mZhihuDetailTBar.setTitle(mZhihuPostDetailBean.getTitle());
             Glide.with(ZhihuPostDetailActivity.this).load(mZhihuPostDetailBean.getImage()).into(mZhihuBackImage);
-            RichText.from(mZhihuPostDetailBean.getBody()).into(mZhihuDetailText);
+            String htmlData = HtmlUtil.createHtmlData(mZhihuPostDetailBean);
+            mPostDetailWView.loadData(htmlData, HtmlUtil.MIME_TYPE, HtmlUtil.ENCODING);
         }
     }
 
