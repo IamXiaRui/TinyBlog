@@ -1,7 +1,6 @@
 package com.tinyblog.activity;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.view.MenuItem;
@@ -10,6 +9,7 @@ import android.widget.TextView;
 
 import com.tinyblog.R;
 import com.tinyblog.base.BaseActivity;
+import com.tinyblog.sys.Constants;
 
 /**
  * 关于页面
@@ -49,30 +49,16 @@ public class AboutActivity extends BaseActivity {
         mWebText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                gotoBrowser("http://www.iamxiarui.com/");
+                startActivity(new Intent(AboutActivity.this,WebActivity.class).putExtra(Constants.WEB_URL,"http://www.iamxiarui.com/"));
             }
         });
         mAppWebText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                gotoBrowser("https://github.com/IamXiaRui/TinyBlog");
+                startActivity(new Intent(AboutActivity.this,WebActivity.class).putExtra(Constants.WEB_URL,"https://github.com/IamXiaRui/TinyBlog"));
             }
         });
     }
-
-    /**
-     * 跳转到浏览器界面
-     *
-     * @param urlStr 网址
-     */
-    private void gotoBrowser(String urlStr) {
-        Intent intent = new Intent();
-        intent.setAction("android.intent.action.VIEW");
-        Uri content_url = Uri.parse(urlStr);
-        intent.setData(content_url);
-        startActivity(intent);
-    }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

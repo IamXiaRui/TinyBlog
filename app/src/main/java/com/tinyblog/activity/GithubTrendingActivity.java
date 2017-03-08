@@ -1,7 +1,6 @@
 package com.tinyblog.activity;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -24,6 +23,7 @@ import com.tinyblog.R;
 import com.tinyblog.adapter.GithubListAdapter;
 import com.tinyblog.base.BaseActivity;
 import com.tinyblog.bean.GithubBean;
+import com.tinyblog.sys.Constants;
 import com.tinyblog.sys.Url;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -47,6 +47,7 @@ public class GithubTrendingActivity extends BaseActivity {
     private ImageView mGithubBackImage;
     private Toolbar mGithubListTBar;
     private ListView mGithubLView;
+    private MaterialDialog mTipsDialog;
 
     @Override
     public int getLayoutId() {
@@ -73,11 +74,15 @@ public class GithubTrendingActivity extends BaseActivity {
         Date curDate = new Date(System.currentTimeMillis());
         mGithubListTBar.setTitle(formatter.format(curDate));
         Glide.with(this).load(R.drawable.heng_5).into(mGithubBackImage);
+        mTipsDialog = new MaterialDialog.Builder(this)
+                .title("提示")
+                .content("此链接不稳定，请求时间较长，请耐心等待")
+                .progress(true, 0)
+                .show();
         loadDataFromNet();
     }
 
     private void loadDataFromNet() {
-        showBaseToast("正在请求...");
         OkHttpUtils
                 .get()
                 .url(Url.GITHUB_TRENDING)
@@ -112,6 +117,7 @@ public class GithubTrendingActivity extends BaseActivity {
                         .canceledOnTouchOutside(true)
                         .show();
             } else {
+                mTipsDialog.dismiss();
                 showBaseToast("请求成功");
                 JsonParser parser = new JsonParser();
                 JsonArray jsonArray = parser.parse(response).getAsJsonArray();
@@ -133,11 +139,7 @@ public class GithubTrendingActivity extends BaseActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 GithubBean itemGithubBean = (GithubBean) parent.getItemAtPosition(position);
-                Intent intent = new Intent();
-                intent.setAction("android.intent.action.VIEW");
-                Uri content_url = Uri.parse(itemGithubBean.getLink());
-                intent.setData(content_url);
-                startActivity(intent);
+                startActivity(new Intent(GithubTrendingActivity.this,WebActivity.class).putExtra(Constants.WEB_URL,itemGithubBean.getLink()));
             }
         });
     }

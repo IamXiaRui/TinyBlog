@@ -33,4 +33,6 @@ public class Constants {
     public static String POST_COMMENT_COUNT = "POST_COMMENT_COUNT";
 
     public static String  ZHIHU_POST_ID = "ZHIHU_POST_ID";
+
+    public static String  WEB_URL = "WEB_URL";
 }
