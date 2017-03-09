@@ -7,7 +7,7 @@
         android:title="刷新"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/menu_item_share"
-        android:title="分享"
+        android:id="@+id/menu_item_comment"
+        android:title="评论"
         app:showAsAction="never" />
 </menu>

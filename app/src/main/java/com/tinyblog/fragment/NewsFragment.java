@@ -16,6 +16,7 @@ import com.tinyblog.R;
 import com.tinyblog.activity.AboutActivity;
 import com.tinyblog.activity.AddNewPostActivity;
 import com.tinyblog.activity.PostDetailsActivity;
+import com.tinyblog.activity.WebActivity;
 import com.tinyblog.adapter.NewsListAdapter;
 import com.tinyblog.base.BaseFragment;
 import com.tinyblog.bean.NewsListRootBean;
@@ -24,6 +25,8 @@ import com.tinyblog.sys.Constants;
 import com.tinyblog.sys.Url;
 import com.tinyblog.utils.BannerImageLoaderUtil;
 import com.youth.banner.Banner;
+import com.youth.banner.BannerConfig;
+import com.youth.banner.listener.OnBannerListener;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -81,17 +84,20 @@ public class NewsFragment extends BaseFragment {
         //添加动态 Banner 头布局
         mNewsLView.addHeaderView(View.inflate(getActivity(), R.layout.header_news_list, null));
         mHeaderBanner = (Banner) findViewById(R.id.ban_news_list_header);
-        mHeaderBanner.setImages(App.testBannerImages).setImageLoader(new BannerImageLoaderUtil()).start();
+        mHeaderBanner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR_TITLE_INSIDE)
+                .setBannerTitles(App.testBannerTitles)
+                .setImages(App.testBannerImages)
+                .setImageLoader(new BannerImageLoaderUtil())
+                .start();
         //添加底布局
         mNewsLView.addFooterView(View.inflate(getActivity(), R.layout.footer_news_list, null));
     }
 
     @Override
     public void initData() {
-        //TODO 去掉注释
-        /*if (!NetworkUtils.isConnected()) {
+        if (!NetworkUtils.isConnected()) {
             showBaseToast("请检查网络");
-        }*/
+        }
         //开启自动刷新
         mNewsSRLayout.post(new Runnable() {
             @Override
@@ -187,6 +193,23 @@ public class NewsFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getContext(),AddNewPostActivity.class).putExtra(Constants.IS_FROM_DRAFT,"false"));
+            }
+        });
+
+        mHeaderBanner.setOnBannerListener(new OnBannerListener() {
+            @Override
+            public void OnBannerClick(int position) {
+                switch (position){
+                    case 0:
+                        startActivity(new Intent(getContext(), WebActivity.class).putExtra(Constants.WEB_URL,"https://www.zhihu.com/people/xia-rui-51-73"));
+                        break;
+                    case 1:
+                        startActivity(new Intent(getContext(), WebActivity.class).putExtra(Constants.WEB_URL,"http://www.jianshu.com/u/86f25f8b198b"));
+                        break;
+                    case 2:
+                        startActivity(new Intent(getContext(), WebActivity.class).putExtra(Constants.WEB_URL,"http://xiasuhuei321.com/"));
+                        break;
+                }
             }
         });
     }

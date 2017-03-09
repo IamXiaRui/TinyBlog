@@ -7,7 +7,7 @@
     <com.youth.banner.Banner
         android:id="@+id/ban_news_list_header"
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="128dp"
         app:delay_time="3000"
         app:scroll_time="1000" />
 

@@ -45,7 +45,7 @@ public class PostDetailsActivity extends BaseActivity {
     private PostDetailsBean.PostBean postBean;
     private LinearLayout mPostCardsLLayout;
     private FloatingActionMenu mPostDetailsFAMenu;
-    private FloatingActionButton mRefreshFAButton, mCommentFAButton, mShareFAButton;
+    private FloatingActionButton mRefreshFAButton, mCommentFAButton;
     private String mCurPostId;
 
     //停止刷新操作
@@ -85,7 +85,6 @@ public class PostDetailsActivity extends BaseActivity {
         mPostDetailsFAMenu.setClosedOnTouchOutside(true);
         mRefreshFAButton = (FloatingActionButton) findViewById(R.id.fab_post_details_refresh);
         mCommentFAButton = (FloatingActionButton) findViewById(R.id.fab_post_details_comment);
-        mShareFAButton = (FloatingActionButton) findViewById(R.id.fab_post_details_share);
     }
 
     @Override
@@ -199,7 +198,6 @@ public class PostDetailsActivity extends BaseActivity {
 
         mRefreshFAButton.setOnClickListener(fabClickListener);
         mCommentFAButton.setOnClickListener(fabClickListener);
-        mShareFAButton.setOnClickListener(fabClickListener);
     }
 
     private View.OnClickListener fabClickListener = new View.OnClickListener() {
@@ -218,9 +216,6 @@ public class PostDetailsActivity extends BaseActivity {
                             .putExtra(Constants.POST_COMMENT_COUNT, "" + postBean.getComment_count())
                             .setClass(PostDetailsActivity.this, PostCommentActivity.class);
                     startActivity(intent);
-                    break;
-                case R.id.fab_post_details_share:
-                    showBaseToast("分享");
                     break;
             }
         }
