@@ -13,6 +13,8 @@ import android.widget.TextView;
 import com.blankj.utilcode.utils.NetworkUtils;
 import com.google.gson.Gson;
 import com.tinyblog.R;
+import com.tinyblog.activity.AboutActivity;
+import com.tinyblog.activity.AddNewPostActivity;
 import com.tinyblog.activity.PostDetailsActivity;
 import com.tinyblog.adapter.NewsListAdapter;
 import com.tinyblog.base.BaseFragment;
@@ -177,14 +179,14 @@ public class NewsFragment extends BaseFragment {
         logoIButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showBaseToast("我是一个 Logo 而已");
+                startActivity(new Intent(getContext(), AboutActivity.class));
             }
         });
 
         addIButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showBaseToast("新增");
+                startActivity(new Intent(getContext(),AddNewPostActivity.class));
             }
         });
     }

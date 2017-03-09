@@ -35,6 +35,7 @@ public class PostDetailsBean {
      */
     public static class PostBean {
 
+        private int id;
         private String title;
         private String content;
         private String excerpt;
@@ -43,6 +44,14 @@ public class PostDetailsBean {
         private CustomFieldsBean custom_fields;
         private List<CategoriesBean> categories;
         private List<TagsBean> tags;
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
 
         public String getTitle() {
             return title;

@@ -20,6 +20,7 @@ import com.dexafree.materialList.view.MaterialListView;
 import com.google.gson.Gson;
 import com.squareup.picasso.RequestCreator;
 import com.tinyblog.R;
+import com.tinyblog.activity.AddNewPostActivity;
 import com.tinyblog.activity.CurPostsListActivity;
 import com.tinyblog.activity.TagsCloudActivity;
 import com.tinyblog.base.BaseFragment;
@@ -44,7 +45,7 @@ import okhttp3.Call;
 public class CategoryFragment extends BaseFragment {
 
     private TextView mToolbarText;
-    private ImageButton mTagsIButton;
+    private ImageButton mTagsIButton,mAddIButton;
     private MaterialListView mCategoryLView;
     private List<CategoryBean.CategoriesBean> categoriesList;
     //图片集合
@@ -77,6 +78,7 @@ public class CategoryFragment extends BaseFragment {
         mToolbarText.setText("分类");
         mTagsIButton = (ImageButton) findViewById(R.id.ib_find_ask);
         mTagsIButton.setImageResource(R.drawable.svg_tag);
+        mAddIButton = (ImageButton) findViewById(R.id.ib_find_refresh);
         mCategoryLView = (MaterialListView) findViewById(R.id.mlv_category_list);
         mCategoryLView.setItemAnimator(new OvershootInLeftAnimator());
         mCategoryLView.getItemAnimator().setAddDuration(400);
@@ -196,6 +198,12 @@ public class CategoryFragment extends BaseFragment {
             @Override
             public void onItemLongClick(@NonNull Card card, int position) {
                 showBaseToast("长按是没有用的——鲁迅");
+            }
+        });
+        mAddIButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(),AddNewPostActivity.class));
             }
         });
     }

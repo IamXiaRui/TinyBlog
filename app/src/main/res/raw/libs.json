@@ -107,6 +107,12 @@
       "author": "Raizlabs",
       "url": "https://github.com/Raizlabs/DBFlow",
       "desc":"A blazing fast, powerful, and very simple ORM android database library that writes database code for you."
+    },
+    {
+      "name": "icarus-android",
+      "author": "mr5",
+      "url": "https://github.com/mr5/icarus-android",
+      "desc":"The best rich text editor for android platform, which includes more completely features. 安卓富文本编辑器"
     }
  ]
 }

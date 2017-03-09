@@ -2,7 +2,6 @@ package com.tinyblog.activity;
 
 import android.content.Intent;
 import android.content.res.Resources;
-import android.net.Uri;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
@@ -13,6 +12,7 @@ import com.tinyblog.R;
 import com.tinyblog.adapter.SupportAdapter;
 import com.tinyblog.base.BaseActivity;
 import com.tinyblog.bean.SupportBean;
+import com.tinyblog.sys.Constants;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -78,11 +78,7 @@ public class SupportActivity extends BaseActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 SupportBean.LibsBean itemLibBean = (SupportBean.LibsBean) parent.getItemAtPosition(position);
-                Intent intent = new Intent();
-                intent.setAction("android.intent.action.VIEW");
-                Uri content_url = Uri.parse(itemLibBean.getUrl());
-                intent.setData(content_url);
-                startActivity(intent);
+                startActivity(new Intent(SupportActivity.this,WebActivity.class).putExtra(Constants.WEB_URL,itemLibBean.getUrl()));
             }
         });
     }

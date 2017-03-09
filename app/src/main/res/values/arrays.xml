@@ -68,4 +68,10 @@
         <item>CENTER</item>
         <item>RIGHT</item>
     </string-array>
+    <string-array name="categories">
+        <item>Android坑</item>
+        <item>Java坑</item>
+        <item>可圈可点</item>
+        <item>随笔</item>
+    </string-array>
 </resources>

@@ -68,15 +68,20 @@ public class NewsListAdapter extends BaseAdapter {
         viewHolder.itemTitleText.setText(postsBean.getTitle());
         viewHolder.itemExcerptText.setText(AppUtil.fromHtml(postsBean.getExcerpt()).toString());
         //阅读数 喜欢数 评论数
-        viewHolder.itemReadNumText.setText(postsBean.getCustom_fields().getViews().get(0));
-        if (postsBean.getCustom_fields().getKratos_love() != null) {
-            viewHolder.itemLikeNumText.setText(postsBean.getCustom_fields().getKratos_love().get(0));
+        if (postsBean.getCustom_fields().getViews() == null || postsBean.getCustom_fields().getViews().isEmpty()) {
+            viewHolder.itemReadNumText.setText("0");
+            viewHolder.itemLikeNumText.setText("0");
+            viewHolder.itemCommentNumText.setText("0");
+        } else {
+            viewHolder.itemReadNumText.setText(postsBean.getCustom_fields().getViews().get(0));
+            if (postsBean.getCustom_fields().getKratos_love() != null) {
+                viewHolder.itemLikeNumText.setText(postsBean.getCustom_fields().getKratos_love().get(0));
+            }
+            if (postsBean.getCustom_fields().getSpecs_zan() != null) {
+                viewHolder.itemLikeNumText.setText(postsBean.getCustom_fields().getSpecs_zan().get(0));
+            }
+            viewHolder.itemCommentNumText.setText(String.valueOf(postsBean.getComment_count()));
         }
-        if (postsBean.getCustom_fields().getSpecs_zan() != null) {
-            viewHolder.itemLikeNumText.setText(postsBean.getCustom_fields().getSpecs_zan().get(0));
-        }
-        viewHolder.itemCommentNumText.setText(String.valueOf(postsBean.getComment_count()));
-
         return convertView;
     }
 
