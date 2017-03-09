@@ -84,7 +84,7 @@ public class NewsFragment extends BaseFragment {
         //添加动态 Banner 头布局
         mNewsLView.addHeaderView(View.inflate(getActivity(), R.layout.header_news_list, null));
         mHeaderBanner = (Banner) findViewById(R.id.ban_news_list_header);
-        mHeaderBanner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR_TITLE_INSIDE)
+        mHeaderBanner.setBannerStyle(BannerConfig.NUM_INDICATOR_TITLE)
                 .setBannerTitles(App.testBannerTitles)
                 .setImages(App.testBannerImages)
                 .setImageLoader(new BannerImageLoaderUtil())
