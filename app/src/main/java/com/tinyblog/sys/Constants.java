@@ -35,4 +35,10 @@ public class Constants {
     public static String  ZHIHU_POST_ID = "ZHIHU_POST_ID";
 
     public static String  WEB_URL = "WEB_URL";
+
+    public static String DRAFT_TITLE = "DRAFT_TITLE";
+
+    public static String DRAFT_CONTENT = "DRAFT_CONTENT";
+
+    public static String IS_FROM_DRAFT = "IS_FROM_DRAFT";
 }

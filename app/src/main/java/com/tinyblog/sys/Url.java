@@ -18,6 +18,7 @@ public class Url {
     public static String GET_POST_COMMENT = "http://www.iamxiarui.com/xr-api/get_post/?id=";
     public static String CREATE_POST_ISSUE = "http://www.iamxiarui.com/xr-api/posts/create_post/?nonce=e4b749f30e&status=publish";
     public static String CREATE_POST_SAVE = "http://www.iamxiarui.com/xr-api/posts/create_post/?nonce=e4b749f30e&status=draft";
+    public static String GET_ADMIN = "http://www.iamxiarui.com/xr-api/get_author_index/";
 
     /*====== DuoShuo Comment Url =====*/
     public static String SEND_COMMENT = "http://api.duoshuo.com/posts/create.json";

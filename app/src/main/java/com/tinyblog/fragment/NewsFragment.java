@@ -186,7 +186,7 @@ public class NewsFragment extends BaseFragment {
         addIButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getContext(),AddNewPostActivity.class));
+                startActivity(new Intent(getContext(),AddNewPostActivity.class).putExtra(Constants.IS_FROM_DRAFT,"false"));
             }
         });
     }

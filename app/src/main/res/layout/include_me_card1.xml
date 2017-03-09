@@ -52,27 +52,27 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/rl_me_sign_in"
+            android:id="@+id/rl_me_admin"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1">
 
             <ImageView
-                android:id="@+id/iv_me_sign_in"
+                android:id="@+id/iv_me_admin"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="6dp"
-                android:src="@drawable/svg_sign_in" />
+                android:src="@drawable/svg_admin" />
 
             <TextView
-                android:id="@+id/tv_me_sign_in"
+                android:id="@+id/tv_me_admin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/iv_me_sign_in"
+                android:layout_below="@id/iv_me_admin"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="8dp"
-                android:text="1天"
+                android:text="1人"
                 android:textColor="@color/md_grey_900"
                 android:textSize="16sp" />
 
@@ -82,7 +82,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
                 android:layout_marginBottom="4dp"
-                android:text="签到"
+                android:text="管理员"
                 android:textColor="@color/md_grey_500"
                 android:textSize="12sp" />
 

@@ -14,5 +14,5 @@ public class AppDataBase {
     //数据库名称
     public static final String NAME = "AppDataBase";
     //数据库版本号
-    public static final int VERSION = 1;
+    public static final int VERSION = 2;
 }

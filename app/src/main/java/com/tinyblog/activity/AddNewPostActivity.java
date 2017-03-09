@@ -3,7 +3,6 @@ package com.tinyblog.activity;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.annotation.NonNull;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,12 +13,14 @@ import android.widget.TextView;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.blankj.utilcode.utils.NetworkUtils;
+import com.github.mr5.icarus.Callback;
 import com.github.mr5.icarus.Icarus;
 import com.github.mr5.icarus.TextViewToolbar;
 import com.github.mr5.icarus.Toolbar;
 import com.github.mr5.icarus.button.Button;
 import com.github.mr5.icarus.button.FontScaleButton;
 import com.github.mr5.icarus.button.TextViewButton;
+import com.github.mr5.icarus.entity.Html;
 import com.github.mr5.icarus.entity.Options;
 import com.github.mr5.icarus.popover.FontScalePopoverImpl;
 import com.github.mr5.icarus.popover.HtmlPopoverImpl;
@@ -28,13 +29,17 @@ import com.google.gson.Gson;
 import com.tinyblog.R;
 import com.tinyblog.base.BaseActivity;
 import com.tinyblog.bean.IssuePostBean;
+import com.tinyblog.db.NewPostModel;
 import com.tinyblog.sys.Constants;
 import com.tinyblog.sys.Url;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 
 import okhttp3.Call;
 
@@ -53,6 +58,7 @@ public class AddNewPostActivity extends BaseActivity {
     private String mCategoryStr, mTagStr;
     private TextViewToolbar mAddTVTBar = new TextViewToolbar();
     private MaterialDialog issuePostDialog;
+    private String mPostContentText;
 
     @Override
     public int getLayoutId() {
@@ -83,6 +89,11 @@ public class AddNewPostActivity extends BaseActivity {
         mAddIcarus.loadCSS("file:///android_asset/editor.css");
         mAddIcarus.loadJs("file:///android_asset/test.js");
         mAddIcarus.render();
+
+        if ((getIntent().getStringExtra(Constants.IS_FROM_DRAFT)).equals("true")) {
+            mAddTitleEText.setText(getIntent().getStringExtra(Constants.DRAFT_TITLE));
+            mAddIcarus.setContent(getIntent().getStringExtra(Constants.DRAFT_CONTENT));
+        }
     }
 
     private Toolbar prepareToolbar(TextViewToolbar toolbar, Icarus icarus) {
@@ -160,7 +171,7 @@ public class AddNewPostActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.menu_item_save:
-                showBaseToast("保存");
+                confirmSavePost();
                 return true;
             case R.id.menu_item_issue:
                 if (mAddTitleEText.getText().toString() == null || mAddTitleEText.getText().toString().equals("")) {
@@ -172,6 +183,62 @@ public class AddNewPostActivity extends BaseActivity {
                 return true;
         }
         return true;
+    }
+
+    /**
+     * 确定保存文章
+     */
+    private void confirmSavePost() {
+        mAddIcarus.getContent(new Callback() {
+            @Override
+            public void run(String s) {
+                Html html = new Gson().fromJson(s, Html.class);
+                mPostContentText = html.getContent();
+            }
+        });
+        new MaterialDialog.Builder(AddNewPostActivity.this)
+                .title("提示")
+                .content("是否保存当前文章")
+                .positiveText("确认")
+                .onPositive(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
+                        //存入数据库
+                        NewPostModel newPostModel = new NewPostModel();
+                        newPostModel.title = mAddTitleEText.getText().toString();
+                        newPostModel.content = mPostContentText;
+                        newPostModel.time = getCurrentTime();
+                        newPostModel.save();
+                        showSaveSuccess();
+                    }
+                })
+                .negativeText("取消")
+                .show();
+    }
+
+    /**
+     * 保存成功
+     */
+    private void showSaveSuccess() {
+        new MaterialDialog.Builder(AddNewPostActivity.this)
+                .title("提示")
+                .content("保存成功！是否查看草稿")
+                .positiveText("查看")
+                .onPositive(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
+                        //跳转到草稿箱
+                        startActivity(new Intent(AddNewPostActivity.this, DraftActivity.class));
+                    }
+                })
+                .negativeText("取消")
+                .onNegative(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
+                        finish();
+                    }
+                })
+                .show();
     }
 
     /**
@@ -256,7 +323,6 @@ public class AddNewPostActivity extends BaseActivity {
                 .url(Url.CREATE_POST_ISSUE + "&title=" + titleStr + "&categories=" + handleCategoryStr(categoryStr) + "&tags=" + tagStr)
                 .build()
                 .execute(new IssuePostCallBack());
-        Log.e(Constants.LOG_TAG,Url.CREATE_POST_ISSUE + "&title=" + titleStr + "&categories=" + handleCategoryStr(categoryStr) + "&tags=" + tagStr);
     }
 
     private class IssuePostCallBack extends StringCallback {
@@ -322,5 +388,15 @@ public class AddNewPostActivity extends BaseActivity {
         super.onDestroy();
     }
 
+    /**
+     * 获得当前系统时间
+     *
+     * @return 系统时间
+     */
+    private String getCurrentTime() {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+        Date curDate = new Date(System.currentTimeMillis());
+        return formatter.format(curDate);
+    }
 
 }

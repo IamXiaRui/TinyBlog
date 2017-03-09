@@ -17,11 +17,14 @@ import com.raizlabs.android.dbflow.sql.language.Select;
 import com.tinyblog.R;
 import com.tinyblog.activity.AboutActivity;
 import com.tinyblog.activity.CollectPostListActivity;
+import com.tinyblog.activity.DraftActivity;
 import com.tinyblog.activity.PersonResumeActivity;
 import com.tinyblog.activity.SupportActivity;
 import com.tinyblog.base.BaseFragment;
+import com.tinyblog.bean.AdminBean;
 import com.tinyblog.bean.WeatherBean;
 import com.tinyblog.db.CollectModel;
+import com.tinyblog.db.NewPostModel;
 import com.tinyblog.sys.Url;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -43,7 +46,7 @@ public class MeFragment extends BaseFragment {
     private RelativeLayout mAboutRLayout;
     private RelativeLayout mSupportRLayout;
     private RelativeLayout mWebRLayout;
-    private RelativeLayout mSignInRLayout;
+    private RelativeLayout mAdminRLayout;
     private RelativeLayout mCollectRLayout;
     private RelativeLayout mDraftRLayout;
     private ImageView mNowWeatherImage, mTomWeatherImage;
@@ -54,6 +57,9 @@ public class MeFragment extends BaseFragment {
     private TextView mSloganText;
     private ImageView mHeaderImage;
     private TextView mCollectText;
+    private TextView mAdminText;
+    private AdminBean mAdminBean;
+    private TextView mDraftText;
 
     @Override
     public int getLayoutId() {
@@ -73,7 +79,7 @@ public class MeFragment extends BaseFragment {
         mSupportRLayout = (RelativeLayout) findViewById(R.id.rl_me_support);
 
         mWebRLayout = (RelativeLayout) findViewById(R.id.rl_me_web);
-        mSignInRLayout = (RelativeLayout) findViewById(R.id.rl_me_sign_in);
+        mAdminRLayout = (RelativeLayout) findViewById(R.id.rl_me_admin);
         mCollectRLayout = (RelativeLayout) findViewById(R.id.rl_me_collect);
         mDraftRLayout = (RelativeLayout) findViewById(R.id.rl_me_draft);
 
@@ -86,7 +92,8 @@ public class MeFragment extends BaseFragment {
         mWindText = (TextView) findViewById(R.id.tv_weather_wind);
         mWindPowerText = (TextView) findViewById(R.id.tv_weather_power);
         mBuildWebTime = (TextView) findViewById(R.id.tv_me_web_time);
-
+        mAdminText = (TextView) findViewById(R.id.tv_me_admin);
+        mDraftText = (TextView) findViewById(R.id.tv_me_draft);
     }
 
     @Override
@@ -95,13 +102,14 @@ public class MeFragment extends BaseFragment {
         SharedPreferences readSP = getContext().getSharedPreferences("person_slogan", Context.MODE_PRIVATE);
         String sloganStr = readSP.getString("MY_SLOGAN", "在能驾驭的领域，做个自由的行者");
         mSloganText.setText(sloganStr);
-        loadWeatherFromNet();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        mCollectText.setText(queryHowManyCollectFromDB());
+        mCollectText.setText(queryHowManyCollectFromDB() + "篇");
+        mDraftText.setText(queryHowManyDraftFromDB() + "篇");
+        loadAdminFromNet();
     }
 
     /**
@@ -109,6 +117,36 @@ public class MeFragment extends BaseFragment {
      */
     private String queryHowManyCollectFromDB() {
         return String.valueOf(new Select().from(CollectModel.class).queryList().size());
+    }
+
+    private String queryHowManyDraftFromDB() {
+        return String.valueOf(new Select().from(NewPostModel.class).queryList().size());
+    }
+
+    private void loadAdminFromNet() {
+        OkHttpUtils
+                .get()
+                .url(Url.GET_ADMIN)
+                .build()
+                .execute(new AdminCallBack());
+    }
+
+    private class AdminCallBack extends StringCallback {
+        @Override
+        public void onError(Call call, Exception e, int id) {
+            if (!NetworkUtils.isConnected()) {
+                showBaseToast("刷新失败，请检查网络连接");
+            }
+        }
+
+        @Override
+        public void onResponse(String response, int id) {
+            mAdminBean = new Gson().fromJson(response, AdminBean.class);
+            if (mAdminBean.getStatus().equals("ok")) {
+                mAdminText.setText(mAdminBean.getCount() + "人");
+            }
+            loadWeatherFromNet();
+        }
     }
 
     /**
@@ -257,10 +295,16 @@ public class MeFragment extends BaseFragment {
             }
         });
 
-        mSignInRLayout.setOnClickListener(new View.OnClickListener() {
+        mAdminRLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showBaseToast("功能暂未开放");
+                new MaterialDialog.Builder(getContext())
+                        .title("管理员")
+                        .content("身份：" + mAdminBean.getAuthors().get(0).getSlug()
+                                + "\n" + "昵称：" + mAdminBean.getAuthors().get(0).getNickname()
+                                + "\n" + "说明：" + mAdminBean.getAuthors().get(0).getDescription())
+                        .positiveText("知道了")
+                        .show();
             }
         });
 
@@ -274,7 +318,7 @@ public class MeFragment extends BaseFragment {
         mDraftRLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showBaseToast("暂无草稿");
+                startActivity(new Intent(getContext(),DraftActivity.class));
             }
         });
 
