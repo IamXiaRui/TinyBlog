@@ -8,7 +8,7 @@ import com.raizlabs.android.dbflow.structure.BaseModel;
 /**
  * @author xiarui
  * @date 2017/3/9 17:26
- * @description
+ * @description 新建文章数据表
  * @remark
  */
 @Table(database = AppDataBase.class)

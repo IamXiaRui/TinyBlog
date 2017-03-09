@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * @author xiarui
  * @date 2017/3/7 12:47
- * @description 知乎文章列表适配器
+ * @description 草稿箱列表适配器
  * @remark
  */
 

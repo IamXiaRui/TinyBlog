@@ -242,9 +242,6 @@ public class PostDetailsActivity extends BaseActivity {
                 hideUIAtRefreshing();
                 initData();
                 return true;
-            case R.id.menu_item_share:
-                showBaseToast("分享");
-                return true;
             case R.id.menu_item_comment:
                 showBaseToast("评论");
                 return true;

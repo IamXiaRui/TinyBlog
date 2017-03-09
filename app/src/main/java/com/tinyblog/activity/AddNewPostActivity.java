@@ -96,6 +96,9 @@ public class AddNewPostActivity extends BaseActivity {
         }
     }
 
+    /**
+     * 富文本编辑器
+     */
     private Toolbar prepareToolbar(TextViewToolbar toolbar, Icarus icarus) {
         Typeface iconfont = Typeface.createFromAsset(getAssets(), "Simditor.ttf");
         HashMap<String, Integer> generalButtons = new HashMap<>();

@@ -3,7 +3,7 @@ package com.tinyblog.bean;
 /**
  * @author xiarui
  * @date 2017/3/9 18:09
- * @description
+ * @description 草稿数据 Bean
  * @remark
  */
 

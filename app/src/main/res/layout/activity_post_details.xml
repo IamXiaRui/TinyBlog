@@ -138,15 +138,6 @@
             fab:fab_label="慢着，我有话说"
             fab:fab_size="mini" />
 
-        <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/fab_post_details_share"
-            style="@style/MenuButtonsSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/svg_share"
-            fab:fab_label="好东西要分享"
-            fab:fab_size="mini" />
-
     </com.github.clans.fab.FloatingActionMenu>
 
 </RelativeLayout>
