@@ -323,7 +323,7 @@ public class AddNewPostActivity extends BaseActivity {
     public void issuePostToNet(String titleStr, String categoryStr, String tagStr) {
         OkHttpUtils
                 .get()
-                .url(Url.CREATE_POST_ISSUE + "&title=" + titleStr + "&categories=" + handleCategoryStr(categoryStr) + "&tags=" + tagStr)
+                .url(Url.CREATE_POST_ISSUE + "?nonce=e4b749f30e&status=publish&title=" + titleStr + "&categories=" + handleCategoryStr(categoryStr) + "&tags=" + tagStr)
                 .build()
                 .execute(new IssuePostCallBack());
     }

@@ -9,27 +9,34 @@ package com.tinyblog.sys;
 
 public class Url {
     /*====== WordPress Url =====*/
+    //获取最近文章列表
     public static String GET_RECENT_POSTS = "http://www.iamxiarui.com/xr-api/get_recent_posts/";
+    //获取文章详情 需要文章 ID
     public static String GET_POST_DETAILS  = "http://www.iamxiarui.com/xr-api/get_post/?id=";
+    //得到全部分类列表
     public static String GET_CATEGORY_INDEX = "http://www.iamxiarui.com/xr-api/get_category_index/";
+    //得到全部标签列表
     public static String GET_TAG_INDEX = "http://www.iamxiarui.com/xr-api/get_tag_index/";
+    //获取分类下的所有文章 需要分类 ID
     public static String GET_CATEGORY_POSTS = "http://www.iamxiarui.com/xr-api/get_category_posts/";
+    //获取标签下的所有文章 需要标签 ID
     public static String GET_TAG_POSTS = "http://www.iamxiarui.com/xr-api/get_tag_posts/";
+    //获取文章评论 需要文章 ID
     public static String GET_POST_COMMENT = "http://www.iamxiarui.com/xr-api/get_post/?id=";
-    public static String CREATE_POST_ISSUE = "http://www.iamxiarui.com/xr-api/posts/create_post/?nonce=e4b749f30e&status=publish";
-    public static String CREATE_POST_SAVE = "http://www.iamxiarui.com/xr-api/posts/create_post/?nonce=e4b749f30e&status=draft";
+    //发表文章 需要设备序列 文章状态 标题 内容等参数
+    public static String CREATE_POST_ISSUE = "http://www.iamxiarui.com/xr-api/posts/create_post/";
+    //获取系统管理员信息
     public static String GET_ADMIN = "http://www.iamxiarui.com/xr-api/get_author_index/";
 
-    /*====== DuoShuo Comment Url =====*/
+    /*====== 其他 Url =====*/
+    //多说发表评论
     public static String SEND_COMMENT = "http://api.duoshuo.com/posts/create.json";
-
-
-    //天气URL
+    //获取实时天气
     public static String NOW_WEATHER = "http://wthrcdn.etouch.cn/weather_mini?city=";
-    //知乎Url
+    //获取知乎日报每日内容
     public static String ZHIHU_RECENT = "http://news-at.zhihu.com/api/4/news/latest";
-    //知乎详情 Url
+    //获取日报文章详情 需要文章 ID
     public static String ZHIHU_POST_DETAIL = "http://news-at.zhihu.com/api/4/news/";
-    //Github Trending Url
-    public static String GITHUB_TRENDING = "http://anly.leanapp.cn/api/github/trending/java?since=daily";
+    //获取 Github Trending
+    public static String GITHUB_TRENDING = "http://anly.leanapp.cn/api/github/trending/";
 }

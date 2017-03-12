@@ -85,7 +85,7 @@ public class GithubTrendingActivity extends BaseActivity {
     private void loadDataFromNet() {
         OkHttpUtils
                 .get()
-                .url(Url.GITHUB_TRENDING)
+                .url(Url.GITHUB_TRENDING+"java?since=daily")
                 .build()
                 .execute(new GithubCallBack());
     }
