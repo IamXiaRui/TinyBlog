@@ -10,19 +10,6 @@
         <item>我的简书</item>
         <item>友情链接</item>
     </array>
-    <string-array name="style">
-        <item>NOT_INDICATOR</item>
-        <item>CIRCLE_INDICATOR</item>
-        <item>NUM_INDICATOR</item>
-        <item>NUM_INDICATOR_TITLE</item>
-        <item>CIRCLE_INDICATOR_TITLE</item>
-        <item>CIRCLE_INDICATOR_TITLE_INSIDE</item>
-    </string-array>
-    <string-array name="indicator">
-        <item>LEFT</item>
-        <item>CENTER</item>
-        <item>RIGHT</item>
-    </string-array>
     <string-array name="categories">
         <item>Android坑</item>
         <item>Java坑</item>

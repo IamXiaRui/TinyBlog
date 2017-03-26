@@ -37,7 +37,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:maxLines="2"
-                android:text="文章标题"
                 android:textColor="@color/md_black_1000"
                 android:textSize="18sp" />
 
@@ -48,7 +47,6 @@
                 android:layout_marginTop="8dp"
                 android:ellipsize="end"
                 android:maxLines="2"
-                android:text="文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容"
                 android:textColor="@color/md_grey_500"
                 android:textSize="14sp" />
 
@@ -63,7 +61,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
-                    android:text="2017-2-17 12:56:00"
                     android:textColor="@color/md_grey_500"
                     android:textSize="12sp" />
 
@@ -79,7 +76,6 @@
                     android:textSize="12sp" />
 
                 <ImageView
-                    android:id="@+id/iv_cur_post_list_item_read"
                     android:layout_width="16dp"
                     android:layout_height="16dp"
                     android:layout_marginRight="2dp"

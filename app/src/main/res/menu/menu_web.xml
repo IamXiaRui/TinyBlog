@@ -4,12 +4,12 @@
     <item
         android:id="@+id/menu_item_refresh"
         android:icon="@drawable/svg_refresh"
-        android:title="刷新"
+        android:title="@string/str_menu_refresh"
         app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/menu_item_browser"
         android:icon="@drawable/svg_browser"
-        android:title="系统浏览器"
+        android:title="@string/str_menu_sys_browse"
         app:showAsAction="ifRoom" />
 </menu>

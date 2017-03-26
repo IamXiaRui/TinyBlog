@@ -42,7 +42,7 @@
             android:layout_below="@id/iv_me_header"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="16dp"
-            android:text="在能驾驭的领域，做个自由的行者"
+            android:text="@string/str_me_slogan"
             android:textColor="@color/md_white_1000"
             android:textSize="14sp" />
 

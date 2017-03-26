@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/menu_item_save"
-        android:title="保存"
+        android:title="@string/str_menu_save"
         android:icon="@drawable/svg_save"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/menu_item_issue"
-        android:title="发布"
+        android:title="@string/str_menu_send"
         android:icon="@drawable/svg_issue"
         app:showAsAction="ifRoom" />
 </menu>

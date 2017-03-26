@@ -22,7 +22,7 @@
         android:layout_height="36dp"
         android:background="@null"
         android:layout_margin="5dp"
-        android:hint="请输入标题..." />
+        android:hint="@string/str_input_title" />
 
     <View
         android:layout_width="match_parent"

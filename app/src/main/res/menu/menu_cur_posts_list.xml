@@ -4,6 +4,6 @@
     <item
         android:id="@+id/menu_item_refresh"
         android:icon="@drawable/svg_refresh"
-        android:title="刷新"
+        android:title="@string/str_menu_refresh"
         app:showAsAction="ifRoom" />
 </menu>

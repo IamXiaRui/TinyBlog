@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="6dp"
-        android:text="————我可是有底线的————"
+        android:text="@string/str_i_have_down"
         android:textColor="@color/md_grey_500" />
 
 </LinearLayout>

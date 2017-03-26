@@ -102,6 +102,7 @@ public class MeFragment extends BaseFragment {
         SharedPreferences readSP = getContext().getSharedPreferences("person_slogan", Context.MODE_PRIVATE);
         String sloganStr = readSP.getString("MY_SLOGAN", "在能驾驭的领域，做个自由的行者");
         mSloganText.setText(sloganStr);
+        loadWeatherFromNet();
     }
 
     @Override
@@ -335,7 +336,7 @@ public class MeFragment extends BaseFragment {
                                 SharedPreferences.Editor editor = getContext().getSharedPreferences("person_slogan", Context.MODE_PRIVATE).edit();
                                 editor.putString("MY_SLOGAN", input.toString());
                                 editor.apply();
-                                initData();
+                                loadWeatherFromNet();
                             }
                         })
                         .canceledOnTouchOutside(true)

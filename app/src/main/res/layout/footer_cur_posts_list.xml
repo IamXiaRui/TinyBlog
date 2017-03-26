@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:indeterminateTint="@color/md_grey_400"
-        android:text="————我可是有底线的————"
+        android:text="@string/str_i_have_down"
         android:visibility="visible" />
 
 </RelativeLayout>

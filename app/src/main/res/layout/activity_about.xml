@@ -32,7 +32,7 @@
         android:layout_below="@id/iv_about_logo"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="24dp"
-        android:text="TinyBlog"
+        android:text="@string/str_app_name"
         android:textColor="@color/md_black_1000"
         android:textSize="24sp" />
 
@@ -43,7 +43,7 @@
         android:layout_below="@id/tv_about_name"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="32dp"
-        android:text="轻博客 - 1.0.2"
+        android:text="@string/str_app_version"
         android:textColor="@color/md_grey_600"
         android:textSize="14sp" />
 

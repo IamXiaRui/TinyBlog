@@ -6,16 +6,20 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import com.tinyblog.R;
 import com.tinyblog.base.BaseActivity;
 import com.tinyblog.sys.Constants;
+
+import static android.view.KeyEvent.KEYCODE_BACK;
 
 /**
  * @author xiarui
@@ -71,7 +75,7 @@ public class WebActivity extends BaseActivity {
 
     @Override
     public void initData() {
-        mWebTBar.setTitle("内部浏览器");
+        mWebTBar.setTitle("内置浏览器");
         mCurUrl = getIntent().getStringExtra(Constants.WEB_URL);
         mWebSRLayout.post(new Runnable() {
             @Override
@@ -105,6 +109,13 @@ public class WebActivity extends BaseActivity {
                     mHandler.sendEmptyMessage(Constants.REFRESH_SUCCESS);
                 }
                 super.onProgressChanged(view, newProgress);
+            }
+        });
+        //点击内部链接不跳转系统浏览器
+        mWebWView.setWebViewClient(new WebViewClient(){
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url){
+                return false;
             }
         });
     }
@@ -142,5 +153,16 @@ public class WebActivity extends BaseActivity {
         Uri content_url = Uri.parse(urlStr);
         intent.setData(content_url);
         startActivity(intent);
+    }
+
+    /**
+     * 消费返回事件 让网页回退
+     */
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KEYCODE_BACK) && mWebWView.canGoBack()) {
+            mWebWView.goBack();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

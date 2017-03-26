@@ -34,7 +34,6 @@
                 android:id="@+id/tv_comment_child_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="姓名"
                 android:textColor="@color/md_grey_700"
                 android:textSize="14sp" />
 
@@ -43,7 +42,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="2016.23.56 14:00:34"
                 android:textColor="@color/md_grey_400"
                 android:textSize="12sp" />
 

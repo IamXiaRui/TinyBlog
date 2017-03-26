@@ -3,6 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/menu_item_cancel"
-        android:title="全部取消收藏"
+        android:title="@string/str_menu_all_nocollect"
         app:showAsAction="never" />
 </menu>

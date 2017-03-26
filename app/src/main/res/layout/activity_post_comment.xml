@@ -48,7 +48,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="写下你的评论"
+            android:hint="@string/str_input_comment"
             android:maxLines="5" />
 
         <ImageView

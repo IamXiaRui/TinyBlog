@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/cv_me_three"
     android:layout_width="match_parent"
     android:layout_height="150dp"
     android:layout_below="@id/cv_me_two"
@@ -36,7 +35,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="5dp"
                 android:layout_toEndOf="@id/iv_me_person"
-                android:text="个人简历"
+                android:text="@string/str_me_resume"
                 android:textColor="@color/md_grey_800"
                 android:textSize="16sp" />
 
@@ -78,7 +77,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="5dp"
                 android:layout_toEndOf="@id/iv_me_thank"
-                android:text="开源支持"
+                android:text="@string/str_support"
                 android:textColor="@color/md_grey_800"
                 android:textSize="16sp" />
 
@@ -120,7 +119,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="5dp"
                 android:layout_toEndOf="@id/iv_me_about"
-                android:text="关于软件"
+                android:text="@string/str_about_app"
                 android:textColor="@color/md_grey_800"
                 android:textSize="16sp" />
 

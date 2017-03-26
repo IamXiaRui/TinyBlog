@@ -9,7 +9,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="6dp"
-        android:text="名字"
         android:textColor="@color/md_grey_800"
         android:textSize="16sp" />
 
@@ -18,7 +17,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="6dp"
-        android:text="作者"
         android:textColor="@color/md_grey_500"
         android:textSize="12sp" />
 
@@ -27,7 +25,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="6dp"
-        android:text="开源库介绍"
         android:textColor="@color/md_grey_700"
         android:textSize="16sp" />
 

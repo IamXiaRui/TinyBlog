@@ -211,11 +211,8 @@ public class PostDetailsActivity extends BaseActivity {
                     initData();
                     break;
                 case R.id.fab_post_details_comment:
-                    Intent intent = new Intent()
-                            .putExtra(Constants.POST_DETAILS_ID, mCurPostId)
-                            .putExtra(Constants.POST_COMMENT_COUNT, "" + postBean.getComment_count())
-                            .setClass(PostDetailsActivity.this, PostCommentActivity.class);
-                    startActivity(intent);
+                    //转到评论页
+                    gotoCommentPage();
                     break;
             }
         }
@@ -238,10 +235,22 @@ public class PostDetailsActivity extends BaseActivity {
                 initData();
                 return true;
             case R.id.menu_item_comment:
-                showBaseToast("评论");
+                //转到评论页
+                gotoCommentPage();
                 return true;
         }
         return true;
+    }
+
+    /**
+     * 转到评论页面
+     */
+    private void gotoCommentPage() {
+        Intent intent = new Intent()
+                .putExtra(Constants.POST_DETAILS_ID, mCurPostId)
+                .putExtra(Constants.POST_COMMENT_COUNT, "" + postBean.getComment_count())
+                .setClass(PostDetailsActivity.this, PostCommentActivity.class);
+        startActivity(intent);
     }
 
     /**
