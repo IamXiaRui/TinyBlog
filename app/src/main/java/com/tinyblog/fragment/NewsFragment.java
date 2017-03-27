@@ -201,12 +201,15 @@ public class NewsFragment extends BaseFragment {
             public void OnBannerClick(int position) {
                 switch (position){
                     case 0:
+                    startActivity(new Intent(getContext(), WebActivity.class).putExtra(Constants.WEB_URL,"http://www.iamxiarui.com/"));
+                    break;
+                    case 1:
                         startActivity(new Intent(getContext(), WebActivity.class).putExtra(Constants.WEB_URL,"https://www.zhihu.com/people/xia-rui-51-73"));
                         break;
-                    case 1:
+                    case 2:
                         startActivity(new Intent(getContext(), WebActivity.class).putExtra(Constants.WEB_URL,"http://www.jianshu.com/u/86f25f8b198b"));
                         break;
-                    case 2:
+                    case 3:
                         startActivity(new Intent(getContext(), WebActivity.class).putExtra(Constants.WEB_URL,"http://xiasuhuei321.com/"));
                         break;
                 }
@@ -228,5 +231,6 @@ public class NewsFragment extends BaseFragment {
         super.onStop();
         //结束轮播
         mHeaderBanner.stopAutoPlay();
+        OkHttpUtils.getInstance().cancelTag(this);
     }
 }

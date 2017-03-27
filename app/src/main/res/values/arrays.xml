@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <array name="url">
+        <item>http://www.iamxiarui.com/wp-content/uploads/2017/03/myblog.png</item>
         <item>http://www.iamxiarui.com/wp-content/uploads/2017/03/%E7%9F%A5%E4%B9%8E.jpg</item>
         <item>http://www.iamxiarui.com/wp-content/uploads/2017/03/timg.jpg</item>
         <item>http://www.iamxiarui.com/wp-content/uploads/2017/03/xiasuhuei.jpg</item>
     </array>
     <array name="title">
+        <item>我的博客</item>
         <item>我的知乎</item>
         <item>我的简书</item>
         <item>友情链接</item>

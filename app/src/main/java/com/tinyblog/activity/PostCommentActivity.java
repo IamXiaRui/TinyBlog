@@ -266,4 +266,10 @@ public class PostCommentActivity extends BaseActivity {
         }
         return true;
     }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        OkHttpUtils.getInstance().cancelTag(this);
+    }
 }

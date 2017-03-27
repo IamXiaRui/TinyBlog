@@ -386,4 +386,10 @@ public class MeFragment extends BaseFragment {
             }
         });
     }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        OkHttpUtils.getInstance().cancelTag(this);
+    }
 }

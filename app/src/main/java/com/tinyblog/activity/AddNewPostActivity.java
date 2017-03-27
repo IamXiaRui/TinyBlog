@@ -402,4 +402,10 @@ public class AddNewPostActivity extends BaseActivity {
         return formatter.format(curDate);
     }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        OkHttpUtils.getInstance().cancelTag(this);
+    }
+
 }

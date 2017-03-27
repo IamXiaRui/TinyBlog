@@ -14,6 +14,7 @@ import com.tinyblog.R;
 import com.tinyblog.activity.GithubTrendingActivity;
 import com.tinyblog.activity.ZhihuPostsListActivity;
 import com.tinyblog.base.BaseFragment;
+import com.zhy.http.okhttp.OkHttpUtils;
 
 /**
  * @author xiarui
@@ -77,5 +78,11 @@ public class FindFragment extends BaseFragment {
                         .show();
             }
         });
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        OkHttpUtils.getInstance().cancelTag(this);
     }
 }

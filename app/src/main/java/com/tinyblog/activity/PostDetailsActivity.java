@@ -270,4 +270,10 @@ public class PostDetailsActivity extends BaseActivity {
         mPostContentText.setVisibility(View.VISIBLE);
         mPostCardsLLayout.setVisibility(View.VISIBLE);
     }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        OkHttpUtils.getInstance().cancelTag(this);
+    }
 }

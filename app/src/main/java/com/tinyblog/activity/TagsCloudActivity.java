@@ -99,4 +99,10 @@ public class TagsCloudActivity extends BaseActivity {
         }
         return true;
     }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        OkHttpUtils.getInstance().cancelTag(this);
+    }
 }
