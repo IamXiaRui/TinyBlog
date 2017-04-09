@@ -1,215 +1,250 @@
 package com.tinyblog.bean;
 
-import java.util.List;
-
 /**
  * @author xiarui
  * @date 2017/3/6 20:22
- * @description
+ * @desc 实时天气 Bean　对象
  * @remark
  */
 
 public class WeatherBean {
 
-    private String desc;
-    private int status;
-    private DataBean data;
+    private String success;
+    private ResultBean result;
 
-    public String getDesc() {
-        return desc;
+    public String getSuccess() {
+        return success;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setSuccess(String success) {
+        this.success = success;
     }
 
-    public int getStatus() {
-        return status;
+    public ResultBean getResult() {
+        return result;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public void setResult(ResultBean result) {
+        this.result = result;
     }
 
-    public DataBean getData() {
-        return data;
-    }
+    public static class ResultBean {
 
-    public void setData(DataBean data) {
-        this.data = data;
-    }
+        private String weaid;
+        private String days;
+        private String week;
+        private String cityno;
+        private String citynm;
+        private String cityid;
+        private String temperature;
+        private String temperature_curr;
+        private String humidity;
+        private String weather;
+        private String weather_curr;
+        private String weather_icon;
+        private String weather_icon1;
+        private String wind;
+        private String winp;
+        private String temp_high;
+        private String temp_low;
+        private String temp_curr;
+        private String humi_high;
+        private String humi_low;
+        private String weatid;
+        private String weatid1;
+        private String windid;
+        private String winpid;
 
-    public static class DataBean {
-
-        private String wendu;
-        private String ganmao;
-        private YesterdayBean yesterday;
-        private String aqi;
-        private String city;
-        private List<ForecastBean> forecast;
-
-        public String getWendu() {
-            return wendu;
+        public String getWeaid() {
+            return weaid;
         }
 
-        public void setWendu(String wendu) {
-            this.wendu = wendu;
+        public void setWeaid(String weaid) {
+            this.weaid = weaid;
         }
 
-        public String getGanmao() {
-            return ganmao;
+        public String getDays() {
+            return days;
         }
 
-        public void setGanmao(String ganmao) {
-            this.ganmao = ganmao;
+        public void setDays(String days) {
+            this.days = days;
         }
 
-        public YesterdayBean getYesterday() {
-            return yesterday;
+        public String getWeek() {
+            return week;
         }
 
-        public void setYesterday(YesterdayBean yesterday) {
-            this.yesterday = yesterday;
+        public void setWeek(String week) {
+            this.week = week;
         }
 
-        public String getAqi() {
-            return aqi;
+        public String getCityno() {
+            return cityno;
         }
 
-        public void setAqi(String aqi) {
-            this.aqi = aqi;
+        public void setCityno(String cityno) {
+            this.cityno = cityno;
         }
 
-        public String getCity() {
-            return city;
+        public String getCitynm() {
+            return citynm;
         }
 
-        public void setCity(String city) {
-            this.city = city;
+        public void setCitynm(String citynm) {
+            this.citynm = citynm;
         }
 
-        public List<ForecastBean> getForecast() {
-            return forecast;
+        public String getCityid() {
+            return cityid;
         }
 
-        public void setForecast(List<ForecastBean> forecast) {
-            this.forecast = forecast;
+        public void setCityid(String cityid) {
+            this.cityid = cityid;
         }
 
-        public static class YesterdayBean {
-
-            private String fl;
-            private String fx;
-            private String high;
-            private String type;
-            private String low;
-            private String date;
-
-            public String getFl() {
-                return fl;
-            }
-
-            public void setFl(String fl) {
-                this.fl = fl;
-            }
-
-            public String getFx() {
-                return fx;
-            }
-
-            public void setFx(String fx) {
-                this.fx = fx;
-            }
-
-            public String getHigh() {
-                return high;
-            }
-
-            public void setHigh(String high) {
-                this.high = high;
-            }
-
-            public String getType() {
-                return type;
-            }
-
-            public void setType(String type) {
-                this.type = type;
-            }
-
-            public String getLow() {
-                return low;
-            }
-
-            public void setLow(String low) {
-                this.low = low;
-            }
-
-            public String getDate() {
-                return date;
-            }
-
-            public void setDate(String date) {
-                this.date = date;
-            }
+        public String getTemperature() {
+            return temperature;
         }
 
-        public static class ForecastBean {
+        public void setTemperature(String temperature) {
+            this.temperature = temperature;
+        }
 
-            private String fengxiang;
-            private String fengli;
-            private String high;
-            private String type;
-            private String low;
-            private String date;
+        public String getTemperature_curr() {
+            return temperature_curr;
+        }
 
-            public String getFengxiang() {
-                return fengxiang;
-            }
+        public void setTemperature_curr(String temperature_curr) {
+            this.temperature_curr = temperature_curr;
+        }
 
-            public void setFengxiang(String fengxiang) {
-                this.fengxiang = fengxiang;
-            }
+        public String getHumidity() {
+            return humidity;
+        }
 
-            public String getFengli() {
-                return fengli;
-            }
+        public void setHumidity(String humidity) {
+            this.humidity = humidity;
+        }
 
-            public void setFengli(String fengli) {
-                this.fengli = fengli;
-            }
+        public String getWeather() {
+            return weather;
+        }
 
-            public String getHigh() {
-                return high;
-            }
+        public void setWeather(String weather) {
+            this.weather = weather;
+        }
 
-            public void setHigh(String high) {
-                this.high = high;
-            }
+        public String getWeather_curr() {
+            return weather_curr;
+        }
 
-            public String getType() {
-                return type;
-            }
+        public void setWeather_curr(String weather_curr) {
+            this.weather_curr = weather_curr;
+        }
 
-            public void setType(String type) {
-                this.type = type;
-            }
+        public String getWeather_icon() {
+            return weather_icon;
+        }
 
-            public String getLow() {
-                return low;
-            }
+        public void setWeather_icon(String weather_icon) {
+            this.weather_icon = weather_icon;
+        }
 
-            public void setLow(String low) {
-                this.low = low;
-            }
+        public String getWeather_icon1() {
+            return weather_icon1;
+        }
 
-            public String getDate() {
-                return date;
-            }
+        public void setWeather_icon1(String weather_icon1) {
+            this.weather_icon1 = weather_icon1;
+        }
 
-            public void setDate(String date) {
-                this.date = date;
-            }
+        public String getWind() {
+            return wind;
+        }
+
+        public void setWind(String wind) {
+            this.wind = wind;
+        }
+
+        public String getWinp() {
+            return winp;
+        }
+
+        public void setWinp(String winp) {
+            this.winp = winp;
+        }
+
+        public String getTemp_high() {
+            return temp_high;
+        }
+
+        public void setTemp_high(String temp_high) {
+            this.temp_high = temp_high;
+        }
+
+        public String getTemp_low() {
+            return temp_low;
+        }
+
+        public void setTemp_low(String temp_low) {
+            this.temp_low = temp_low;
+        }
+
+        public String getTemp_curr() {
+            return temp_curr;
+        }
+
+        public void setTemp_curr(String temp_curr) {
+            this.temp_curr = temp_curr;
+        }
+
+        public String getHumi_high() {
+            return humi_high;
+        }
+
+        public void setHumi_high(String humi_high) {
+            this.humi_high = humi_high;
+        }
+
+        public String getHumi_low() {
+            return humi_low;
+        }
+
+        public void setHumi_low(String humi_low) {
+            this.humi_low = humi_low;
+        }
+
+        public String getWeatid() {
+            return weatid;
+        }
+
+        public void setWeatid(String weatid) {
+            this.weatid = weatid;
+        }
+
+        public String getWeatid1() {
+            return weatid1;
+        }
+
+        public void setWeatid1(String weatid1) {
+            this.weatid1 = weatid1;
+        }
+
+        public String getWindid() {
+            return windid;
+        }
+
+        public void setWindid(String windid) {
+            this.windid = windid;
+        }
+
+        public String getWinpid() {
+            return winpid;
+        }
+
+        public void setWinpid(String winpid) {
+            this.winpid = winpid;
         }
     }
 }

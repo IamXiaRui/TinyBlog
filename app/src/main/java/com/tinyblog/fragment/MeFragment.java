@@ -21,7 +21,6 @@ import com.tinyblog.activity.DraftActivity;
 import com.tinyblog.activity.PersonResumeActivity;
 import com.tinyblog.activity.SupportActivity;
 import com.tinyblog.base.BaseFragment;
-import com.tinyblog.bean.AdminBean;
 import com.tinyblog.bean.WeatherBean;
 import com.tinyblog.db.CollectModel;
 import com.tinyblog.db.NewPostModel;
@@ -49,8 +48,8 @@ public class MeFragment extends BaseFragment {
     private RelativeLayout mAdminRLayout;
     private RelativeLayout mCollectRLayout;
     private RelativeLayout mDraftRLayout;
-    private ImageView mNowWeatherImage, mTomWeatherImage;
-    private TextView mNowTempText, mNowTimeText, mTomTempText, mAqiText, mWindText, mWindPowerText;
+    private ImageView mNowWeatherImage;
+    private TextView mNowTempText, mNowTimeText, mNowHumText, mAqiText, mWindText, mWindPowerText;
     private ImageView mRefreshImage;
     private boolean REFRESH_TAG = false;
     private TextView mBuildWebTime;
@@ -58,7 +57,6 @@ public class MeFragment extends BaseFragment {
     private ImageView mHeaderImage;
     private TextView mCollectText;
     private TextView mAdminText;
-    private AdminBean mAdminBean;
     private TextView mDraftText;
 
     @Override
@@ -84,10 +82,9 @@ public class MeFragment extends BaseFragment {
         mDraftRLayout = (RelativeLayout) findViewById(R.id.rl_me_draft);
 
         mNowWeatherImage = (ImageView) findViewById(R.id.iv_weather_now);
-        mTomWeatherImage = (ImageView) findViewById(R.id.iv_weather_tom);
         mNowTempText = (TextView) findViewById(R.id.tv_weather_now_temp);
         mNowTimeText = (TextView) findViewById(R.id.tv_weather_now_time);
-        mTomTempText = (TextView) findViewById(R.id.tv_weather_tom_temp);
+        mNowHumText = (TextView) findViewById(R.id.tv_weather_hum);
         mAqiText = (TextView) findViewById(R.id.tv_weather_aqi);
         mWindText = (TextView) findViewById(R.id.tv_weather_wind);
         mWindPowerText = (TextView) findViewById(R.id.tv_weather_power);
@@ -98,6 +95,7 @@ public class MeFragment extends BaseFragment {
 
     @Override
     public void initData() {
+        mAdminText.setText("1人");
         mBuildWebTime.setText(getDateDifferDays() + "天");
         SharedPreferences readSP = getContext().getSharedPreferences("person_slogan", Context.MODE_PRIVATE);
         String sloganStr = readSP.getString("MY_SLOGAN", "在能驾驭的领域，做个自由的行者");
@@ -110,7 +108,6 @@ public class MeFragment extends BaseFragment {
         super.onResume();
         mCollectText.setText(queryHowManyCollectFromDB() + "篇");
         mDraftText.setText(queryHowManyDraftFromDB() + "篇");
-        loadAdminFromNet();
     }
 
     /**
@@ -122,32 +119,6 @@ public class MeFragment extends BaseFragment {
 
     private String queryHowManyDraftFromDB() {
         return String.valueOf(new Select().from(NewPostModel.class).queryList().size());
-    }
-
-    private void loadAdminFromNet() {
-        OkHttpUtils
-                .get()
-                .url(Url.GET_ADMIN)
-                .build()
-                .execute(new AdminCallBack());
-    }
-
-    private class AdminCallBack extends StringCallback {
-        @Override
-        public void onError(Call call, Exception e, int id) {
-            if (!NetworkUtils.isConnected()) {
-                showBaseToast("刷新失败，请检查网络连接");
-            }
-        }
-
-        @Override
-        public void onResponse(String response, int id) {
-            mAdminBean = new Gson().fromJson(response, AdminBean.class);
-            if (mAdminBean.getStatus().equals("ok")) {
-                mAdminText.setText(mAdminBean.getCount() + "人");
-            }
-            loadWeatherFromNet();
-        }
     }
 
     /**
@@ -176,7 +147,7 @@ public class MeFragment extends BaseFragment {
         String cityName = readSP.getString("CITY_NAME", "");
         OkHttpUtils
                 .get()
-                .url(Url.NOW_WEATHER + cityName)
+                .url(Url.NOW_WEATHER + cityName + Url.NOW_WEATHER_KEY)
                 .build()
                 .execute(new WeatherCallBack());
     }
@@ -193,7 +164,7 @@ public class MeFragment extends BaseFragment {
         @Override
         public void onResponse(String response, int id) {
             WeatherBean weatherBean = new Gson().fromJson(response, WeatherBean.class);
-            if (weatherBean.getDesc().equals("OK") && weatherBean.getStatus() == 1000) {
+            if (weatherBean.getSuccess().equals("1")) {
                 if (REFRESH_TAG) {
                     showBaseToast("刷新成功");
                 }
@@ -208,19 +179,15 @@ public class MeFragment extends BaseFragment {
     }
 
     private void updateWeatherUI(WeatherBean weatherBean) {
-        WeatherBean.DataBean nowData = weatherBean.getData();
-        mNowTempText.setText(nowData.getCity() + " " + nowData.getForecast().get(1).getType() + " " + nowData.getWendu() + "°");
+        WeatherBean.ResultBean nowData = weatherBean.getResult();
+        mNowTempText.setText(nowData.getCitynm() + " " + nowData.getWeather_curr() + " " + nowData.getTemperature_curr());
         mNowTimeText.setText(getCurrentTime());
-        mTomTempText.setText("明日 " + nowData.getForecast().get(2).getType());
-        if (nowData.getAqi() == null) {
-            mAqiText.setText("AQI 58");
-        } else {
-            mAqiText.setText("AQI " + nowData.getAqi());
-        }
-        mWindText.setText(nowData.getForecast().get(1).getFengxiang());
-        mWindPowerText.setText(nowData.getForecast().get(1).getFengli());
-        mNowWeatherImage.setImageResource(handleWeatherType(nowData.getForecast().get(1).getType()));
-        mTomWeatherImage.setImageResource(handleWeatherType(nowData.getForecast().get(2).getType()));
+        mNowHumText.setText(nowData.getHumidity());
+        int curAqiNum = Integer.parseInt(nowData.getWeaid());
+        mAqiText.setText(String.valueOf(curAqiNum % 100));
+        mWindText.setText(nowData.getWind());
+        mWindPowerText.setText(nowData.getWinp());
+        mNowWeatherImage.setImageResource(handleWeatherType(nowData.getWeather_curr()));
     }
 
     private int handleWeatherType(String type) {
@@ -254,12 +221,11 @@ public class MeFragment extends BaseFragment {
     private void errorWeather() {
         mNowTempText.setText("unknown");
         mNowTimeText.setText("unknown");
-        mTomTempText.setText("unknown");
+        mNowHumText.setText("unknown");
         mAqiText.setText("unknown");
         mWindText.setText("unknown");
         mWindPowerText.setText("unknown");
         mNowWeatherImage.setImageResource(R.drawable.svg_unknown);
-        mTomWeatherImage.setImageResource(R.drawable.svg_unknown);
     }
 
     @Override
@@ -301,9 +267,9 @@ public class MeFragment extends BaseFragment {
             public void onClick(View v) {
                 new MaterialDialog.Builder(getContext())
                         .title("管理员")
-                        .content("身份：" + mAdminBean.getAuthors().get(0).getSlug()
-                                + "\n" + "昵称：" + mAdminBean.getAuthors().get(0).getNickname()
-                                + "\n" + "说明：" + mAdminBean.getAuthors().get(0).getDescription())
+                        .content("身份：admin"
+                                + "\n" + "昵称：iamxiarui"
+                                + "\n" + "说明：不想做产品的程序员不是个好运营")
                         .positiveText("知道了")
                         .show();
             }

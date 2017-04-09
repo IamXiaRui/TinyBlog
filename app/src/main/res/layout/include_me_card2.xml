@@ -72,37 +72,6 @@
                 android:layout_weight="1"
                 android:orientation="horizontal">
 
-                <!--明日-->
-                <RelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1">
-
-                    <ImageView
-                        android:id="@+id/iv_weather_tom"
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="8dp" />
-
-                    <TextView
-                        android:id="@+id/tv_weather_tom_temp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/iv_weather_tom"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="12dp"
-                        android:textColor="@color/md_grey_700"
-                        android:textSize="12sp" />
-
-                </RelativeLayout>
-
-
-                <View
-                    android:layout_width="0.5dp"
-                    android:layout_height="match_parent"
-                    android:background="@color/md_grey_300" />
-
                 <!--空气-->
                 <RelativeLayout
                     android:layout_width="0dp"
@@ -122,6 +91,37 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/iv_weather_aqi"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="12dp"
+                        android:textColor="@color/md_grey_700"
+                        android:textSize="12sp" />
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="0.5dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/md_grey_300" />
+
+                <!--湿度-->
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/iv_weather_hum"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_centerHorizontal="true"
+                        android:src="@drawable/svg_hum"
+                        android:layout_marginTop="8dp" />
+
+                    <TextView
+                        android:id="@+id/tv_weather_hum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/iv_weather_hum"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="12dp"
                         android:textColor="@color/md_grey_700"

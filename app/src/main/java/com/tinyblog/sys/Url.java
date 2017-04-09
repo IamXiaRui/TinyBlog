@@ -25,14 +25,14 @@ public class Url {
     public static String GET_POST_COMMENT = "http://www.iamxiarui.com/xr-api/get_post/?id=";
     //发表文章 需要设备序列 文章状态 标题 内容等参数
     public static String CREATE_POST_ISSUE = "http://www.iamxiarui.com/xr-api/posts/create_post/";
-    //获取系统管理员信息
-    public static String GET_ADMIN = "http://www.iamxiarui.com/xr-api/get_author_index/";
 
     /*====== 其他 Url =====*/
     //多说发表评论
     public static String SEND_COMMENT = "http://api.duoshuo.com/posts/create.json";
     //获取实时天气
-    public static String NOW_WEATHER = "http://wthrcdn.etouch.cn/weather_mini?city=";
+    public static String NOW_WEATHER = "http://api.k780.com:88/?app=weather.today&weaid=";
+    //实时天气 Key
+    public static String NOW_WEATHER_KEY = "&appkey=24558&sign=b3c35c3f390287fe5dc70e8d008ef1b5&format=json";
     //获取知乎日报每日内容
     public static String ZHIHU_RECENT = "http://news-at.zhihu.com/api/4/news/latest";
     //获取日报文章详情 需要文章 ID
