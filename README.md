@@ -38,9 +38,9 @@
 
 ![主页面](http://www.iamxiarui.com/wp-content/uploads/2017/05/main.gif)
 
-![分类](http://www.iamxiarui.com/wp-content/uploads/2017/05/cate.gif)
-
 ![发现](http://www.iamxiarui.com/wp-content/uploads/2017/05/find.gif)
+
+![分类](http://www.iamxiarui.com/wp-content/uploads/2017/05/cate.gif)
 
 ![新建](http://www.iamxiarui.com/wp-content/uploads/2017/05/save.gif)
 
